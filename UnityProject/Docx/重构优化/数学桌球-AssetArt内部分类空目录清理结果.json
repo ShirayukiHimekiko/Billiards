@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command delete_asset",
+  "data": {
+    "command": "delete_asset",
+    "parameters": {
+      "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards",
+      "confirm": "true"
+    },
+    "result": {
+      "globalId": "GlobalObjectId_V1-1-5a5e9402cbeb10d4ca2ed65b46994527-102900000-0",
+      "assetPath": "Assets/AssetArt/UIRaw/Raw/MathBilliards",
+      "guid": "5a5e9402cbeb10d4ca2ed65b46994527",
+      "fileId": 102900000,
+      "instanceId": null,
+      "hierarchyPath": null,
+      "type": "DefaultAsset"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

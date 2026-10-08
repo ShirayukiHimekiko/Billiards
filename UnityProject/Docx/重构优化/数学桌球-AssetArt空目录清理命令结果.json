@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "command": "command batch",
+  "data": {
+    "command": "batch",
+    "parameters": {
+      "operations": "[{\"params\":{\"asset\":\"Assets/AssetArt/Actor/Billiards\",\"confirm\":true},\"command\":\"delete_asset\"},{\"params\":{\"asset\":\"Assets/AssetArt/Materials/Billiards\",\"confirm\":true},\"command\":\"delete_asset\"},{\"params\":{\"asset\":\"Assets/AssetArt/Shaders/Billiards\",\"confirm\":true},\"command\":\"delete_asset\"},{\"params\":{\"asset\":\"Assets/AssetArt/Actor\",\"confirm\":true},\"command\":\"delete_asset\"}]",
+      "transactional": "false",
+      "on_error": "abort"
+    },
+    "result": {
+      "results": [
+        {
+          "command": "delete_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-bb4452a844c387d48a9a9783fd8a433d-102900000-0",
+            "assetPath": "Assets/AssetArt/Actor/Billiards",
+            "guid": "bb4452a844c387d48a9a9783fd8a433d",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "delete_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-d1008c008c21146439d87c8ba6097434-102900000-0",
+            "assetPath": "Assets/AssetArt/Materials/Billiards",
+            "guid": "d1008c008c21146439d87c8ba6097434",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "delete_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e656f47084006ee46acf47550c6a3b41-102900000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Billiards",
+            "guid": "e656f47084006ee46acf47550c6a3b41",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "delete_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-cbe493aada633ad409d48dcb974174f8-102900000-0",
+            "assetPath": "Assets/AssetArt/Actor",
+            "guid": "cbe493aada633ad409d48dcb974174f8",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        }
+      ],
+      "applied": 4,
+      "reverted": false,
+      "transactional": false,
+      "onError": "abort",
+      "undoGroup": 38
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

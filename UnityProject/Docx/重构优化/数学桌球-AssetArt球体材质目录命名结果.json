@@ -1,0 +1,12 @@
+{
+  "success": false,
+  "command": "unity command rename_asset",
+  "data": null,
+  "errors": [
+    {
+      "code": "COMMAND_FAILED",
+      "message": "Pipeline server returned 400 Bad Request: Parameter Validation Failed. An asset already exists at 'Assets/AssetArt/Materials/Balls'."
+    }
+  ],
+  "warnings": []
+}

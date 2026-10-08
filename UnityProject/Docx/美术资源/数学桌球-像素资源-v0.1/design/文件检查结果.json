@@ -1,0 +1,266 @@
+{
+  "asset_count": 20,
+  "transparent_assets": 17,
+  "opaque_ui_rectangles": 2,
+  "backgrounds": 1,
+  "checks": [
+    {
+      "id": "board_background",
+      "size": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "alpha_range": null,
+      "status": "PASS"
+    },
+    {
+      "id": "ball_normal",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "ball_inverse",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "toggle_active",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "toggle_used",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "triangle_target",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "hint_inscribed",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "hint_circumscribed",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "aim_arrow",
+      "size": [
+        128,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "ui_panel",
+      "size": [
+        256,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "button_normal",
+      "size": [
+        128,
+        48
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "button_pressed",
+      "size": [
+        128,
+        48
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "power_frame",
+      "size": [
+        192,
+        24
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "power_fill",
+      "size": [
+        176,
+        12
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "icon_grow",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "icon_shrink",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "shot_available",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "shot_used",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "icon_success",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    },
+    {
+      "id": "icon_failure",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "status": "PASS"
+    }
+  ],
+  "scope": "File dimensions and transparency; previews are static artwork, not a running game."
+}

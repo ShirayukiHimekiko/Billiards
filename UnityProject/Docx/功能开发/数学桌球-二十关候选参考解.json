@@ -1,0 +1,511 @@
+{
+  "angleConvention": "+X=0 degrees, counterclockwise",
+  "status": "candidate_unverified",
+  "mechanics": {
+    "spawnRadius": 0.28,
+    "growRateMin": 0.06,
+    "growRateMax": 0.18,
+    "shrinkRate": 0.12,
+    "radiusPersistsAcrossShots": true
+  },
+  "levels": [
+    {
+      "levelId": 1,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.25,
+          "aimPoint": {
+            "x": 0,
+            "y": 1
+          },
+          "expected": "����������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 2,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.65,
+          "aimPoint": {
+            "x": 0,
+            "y": -1.5
+          },
+          "expected": "����������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 3,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 49.856498,
+          "power": 0.6,
+          "aimPoint": {
+            "x": 0,
+            "y": 1.3714196489499089
+          },
+          "expected": "��������ĽӴ��뾶б���������� +Y �������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 4,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 13.546249,
+          "power": 1,
+          "aimPoint": {
+            "x": 3.402634088684251,
+            "y": 0.8198056224032004
+          },
+          "expected": "����ײ�Ҳ����ߺ�������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 5,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.3,
+          "aimPoint": {
+            "x": 0,
+            "y": 1
+          },
+          "expected": "��һ�ź���������ж�"
+        },
+        {
+          "angleDegrees": -90,
+          "power": 0.55,
+          "aimPoint": {
+            "x": 0,
+            "y": 0.9025110366281297
+          },
+          "expected": "�ڶ��ź���������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 6,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.35,
+          "aimPoint": {
+            "x": 0,
+            "y": -1
+          },
+          "expected": "���ͼ�Ρ��������ж����������ƽ���"
+        }
+      ]
+    },
+    {
+      "levelId": 7,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.5,
+          "aimPoint": {
+            "x": 0,
+            "y": -1
+          },
+          "expected": "���ͼ�Ρ��������ж����������ƽ���"
+        }
+      ]
+    },
+    {
+      "levelId": 8,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.3,
+          "aimPoint": {
+            "x": 0,
+            "y": -1.4
+          },
+          "expected": "����·�ͼ�η�תΪ��С��������Ϸ�ͼ�ν���������"
+        }
+      ]
+    },
+    {
+      "levelId": 9,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 13.546249,
+          "power": 1,
+          "aimPoint": {
+            "x": 3.402634088684251,
+            "y": 0.8198056224032004
+          },
+          "expected": "��ɵ�һ��ͼ�Σ�����ײ�ұߺ�������ж�"
+        },
+        {
+          "angleDegrees": -120.863603,
+          "power": 0.7,
+          "aimPoint": {
+            "x": 2.2796039606719005,
+            "y": -0.1855624580833969
+          },
+          "expected": "��ɵڶ���ͼ�Σ���һ�ź���������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 10,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 13.546249,
+          "power": 1,
+          "aimPoint": {
+            "x": 3.402634088684251,
+            "y": 0.8198056224032004
+          },
+          "expected": "��÷�ת���������ж�����һ�ź���ײ�ұߺ��붴"
+        },
+        {
+          "angleDegrees": -157.404565,
+          "power": 0.6,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "�¸˻ָ����������������Ŀ�꣬�ڶ��ź�������¶�"
+        },
+        {
+          "angleDegrees": -4.695131,
+          "power": 0.7,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "�¸˻ָ�����������Ҳ����Ŀ�꣬�����ź�������¶�"
+        }
+      ]
+    },
+    {
+      "levelId": 11,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 13.546249,
+          "power": 1,
+          "aimPoint": {
+            "x": 0.9721811681955003,
+            "y": 0.23423017782948582
+          },
+          "expected": "���Ҳ����߽������ж�"
+        },
+        {
+          "angleDegrees": -166.453751,
+          "power": 1,
+          "aimPoint": {
+            "x": 1.820418853450457,
+            "y": 0.4385983247950582
+          },
+          "expected": "��������߽������ж�"
+        }
+      ]
+    },
+    {
+      "levelId": 12,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 152.492863,
+          "power": 0.8,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "��һ��������϶�"
+        },
+        {
+          "angleDegrees": -24.922564,
+          "power": 0.85,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "�ڶ���������¶�"
+        },
+        {
+          "angleDegrees": 31.942768,
+          "power": 0.75,
+          "aimPoint": {
+            "x": 7.72,
+            "y": 3.72
+          },
+          "expected": "������������϶�"
+        }
+      ]
+    },
+    {
+      "levelId": 13,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 154.272197,
+          "power": 0.7,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "������У������϶�"
+        },
+        {
+          "angleDegrees": -25.727803,
+          "power": 0.8,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "�����ӣ������¶�"
+        }
+      ]
+    },
+    {
+      "levelId": 14,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 0,
+          "power": 0.2,
+          "aimPoint": {
+            "x": 3,
+            "y": 0
+          },
+          "expected": "���������Ŀ�꣬�������������¶������˲�������"
+        },
+        {
+          "angleDegrees": 37.092837,
+          "power": 0.65,
+          "aimPoint": {
+            "x": 7.72,
+            "y": 3.72
+          },
+          "expected": "�����Ѿ����������϶�����"
+        },
+        {
+          "angleDegrees": -157.699596,
+          "power": 0.9,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "�����Ѿ����������¶�����"
+        }
+      ]
+    },
+    {
+      "levelId": 15,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 13.546249,
+          "power": 1,
+          "aimPoint": {
+            "x": 0.9721811681955003,
+            "y": 0.23423017782948582
+          },
+          "expected": "ƥ�����к���ұ߽����ж�"
+        },
+        {
+          "angleDegrees": -157.695367,
+          "power": 0.8,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "ƥ����Ӻ�����¶�"
+        }
+      ]
+    },
+    {
+      "levelId": 16,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 151.912107,
+          "power": 0.7,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "����С����ƥ��Ŀ��������϶�������"
+        },
+        {
+          "angleDegrees": -24.680032,
+          "power": 0.8,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "�¸��������������¶�������"
+        }
+      ]
+    },
+    {
+      "levelId": 17,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.65,
+          "aimPoint": {
+            "x": 0,
+            "y": 3.72
+          },
+          "expected": "������С���ָ��������ٽ������ж�������"
+        },
+        {
+          "angleDegrees": -39.310057,
+          "power": 0.9,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "ƥ����ӣ������¶�"
+        }
+      ]
+    },
+    {
+      "levelId": 18,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 152.492863,
+          "power": 0.8,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "������"
+        },
+        {
+          "angleDegrees": -24.922564,
+          "power": 0.85,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "������"
+        },
+        {
+          "angleDegrees": 31.942768,
+          "power": 0.75,
+          "aimPoint": {
+            "x": 7.72,
+            "y": 3.72
+          },
+          "expected": "Ȼ������"
+        },
+        {
+          "angleDegrees": -156.72566,
+          "power": 0.9,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "�������"
+        }
+      ]
+    },
+    {
+      "levelId": 19,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 151.912107,
+          "power": 0.7,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "��ת���������϶�������"
+        },
+        {
+          "angleDegrees": -24.680032,
+          "power": 0.8,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "�������¶�������"
+        },
+        {
+          "angleDegrees": 32.31441,
+          "power": 0.85,
+          "aimPoint": {
+            "x": 7.72,
+            "y": 3.72
+          },
+          "expected": "�������϶�������"
+        }
+      ]
+    },
+    {
+      "levelId": 20,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90,
+          "power": 0.1,
+          "aimPoint": {
+            "x": 0,
+            "y": 3
+          },
+          "expected": "׼����������С���ָ��������������ж�"
+        },
+        {
+          "angleDegrees": -21.62204,
+          "power": 1,
+          "aimPoint": {
+            "x": 0.9296348074726108,
+            "y": 2.031517809473292
+          },
+          "expected": "�����ӽ������¶������ұ߷��������ж�"
+        },
+        {
+          "angleDegrees": -153.637926,
+          "power": 0.9,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "������С��������¶�������"
+        },
+        {
+          "angleDegrees": 124.05307,
+          "power": 0.9,
+          "aimPoint": {
+            "x": -7.72,
+            "y": 3.72
+          },
+          "expected": "�����ӣ��������϶�������"
+        },
+        {
+          "angleDegrees": -20.397757,
+          "power": 1,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "����֮ǰ�Ľ������ȣ����һ����������¶�"
+        }
+      ]
+    }
+  ]
+}

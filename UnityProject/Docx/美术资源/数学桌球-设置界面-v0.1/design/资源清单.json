@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-06",
+  "status": "图片已准备；未导入 Unity",
+  "sprite_count": 11,
+  "preview_count": 4,
+  "files": [
+    {
+      "file": "previews/设置界面效果图-v0.2.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "b3223e811bcadc1371e0ae6727b6e53ad394dff9f90c4db022ce461cf0aa8443",
+      "source": "内置 image_gen 本次生成",
+      "usage": "历史参考稿"
+    },
+    {
+      "file": "previews/设置界面效果图.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "e4db5e06c425d143f1d81174b4fd458be2ceb254c29f78537fe1c047d2607ed4",
+      "source": "内置 image_gen 本次生成",
+      "usage": "历史参考稿"
+    },
+    {
+      "file": "sprites/settings_close_normal.png",
+      "width": 128,
+      "height": 48,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "d054d980425b85d35c74238f1dd7d1fb1c966315e5e9f5e288aa7290e918a5f0",
+      "source": "../数学桌球-像素资源-v0.1/sprites/button_normal.png",
+      "source_hash_match": true,
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_close_pressed.png",
+      "width": 128,
+      "height": 48,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "9946d36ffb27b23167ee6793ad9a6fcde6aa86efd35d636f6085b689d7cb383b",
+      "source": "../数学桌球-像素资源-v0.1/sprites/button_pressed.png",
+      "source_hash_match": true,
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_icon_music.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "11d749116eecd2dc331df717ad0c55b6cd6c75a655cdb26d0ef9940bfbdf1ee8",
+      "source": "内置 image_gen 本次生成",
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_icon_sound.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "eba3becc5c4902bd2a97066e67bd93036d39e1881af26a9837a6b2afe22aeedd",
+      "source": "内置 image_gen 本次生成",
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_icon_ui_sound.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "87ac04866bca91751ae0948e0887d6f661ef8198734c7bacb0c210b4dd0c4eef",
+      "source": "内置 image_gen 本次生成",
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_icon_voice.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "04743fa52000beba1f1e4202d80446e82295c3b2a3eb5622bea79324c4f16be7",
+      "source": "内置 image_gen 本次生成",
+      "usage": "历史麦克风图标，不用于当前设置"
+    },
+    {
+      "file": "sprites/settings_panel.png",
+      "width": 1448,
+      "height": 1086,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "ba111810de50762e9a2710b8d417f8d4d6b1366bd67e4c1dda71667d9353d780",
+      "source": "内置 image_gen 本次生成",
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_slider_fill.png",
+      "width": 176,
+      "height": 12,
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "0ae8147f5f8b8e7920813b1040b85a8aa9439069747ea26a4c1e80471b02939d",
+      "source": "../数学桌球-像素资源-v0.1/sprites/power_fill.png",
+      "source_hash_match": true,
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_slider_handle.png",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "330ab01032dd1a26c344e4e707ddf62f8382752e18df84980e270bbc0185e333",
+      "source": "../数学桌球-像素资源-v0.1/sprites/shot_available.png",
+      "source_hash_match": true,
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "sprites/settings_slider_track.png",
+      "width": 192,
+      "height": 24,
+      "mode": "RGBA",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "11c48a3ab57b1f8cfb17377662b43e7f39aee7a44869e2c4ae234236e0c58650",
+      "source": "../数学桌球-像素资源-v0.1/sprites/power_frame.png",
+      "source_hash_match": true,
+      "usage": "运行组件待导入"
+    },
+    {
+      "file": "previews/设置界面效果图-v0.3.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "990dd8bc6245f79337c38af9288cb454e0bc086115009b0ae4f04dbc2a9d12ac",
+      "source": "内置 image_gen 本次修改第四项文字",
+      "usage": "历史参考稿"
+    },
+    {
+      "file": "sprites/settings_icon_voice_v2.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "sha256": "445e5e66d7ee659f1fb7aada190132f8ab200ee474498ba8f253722bc42e8dbe",
+      "source": "内置 image_gen 本次替换声音图标",
+      "usage": "当前声音图标：扬声器"
+    },
+    {
+      "file": "previews/设置界面效果图-v0.4.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "alpha_range": [
+        255,
+        255
+      ],
+      "sha256": "18863d75214c15690193ba2ca36eae40c4f68571e75ab811dc6de2f1e292eb02",
+      "source": "内置 image_gen 本次替换声音图标",
+      "usage": "当前效果图"
+    }
+  ],
+  "current_sprite_count": 10,
+  "historical_sprite_count": 1
+}

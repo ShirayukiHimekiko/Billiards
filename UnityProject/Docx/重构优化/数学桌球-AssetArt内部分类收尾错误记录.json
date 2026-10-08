@@ -1,0 +1,62 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "tail": "5",
+      "level": "error",
+      "since": "2",
+      "since_session": "dae5fb56036247adb921867dd4a41ead"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 3,
+          "timestampUtc": "2026-10-07T05:43:32.2710281Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "Command 'rename_asset' failed: An asset already exists at 'Assets/AssetArt/Materials/Balls'.",
+          "stackTrace": "UnityEngine.Debug:LogError (object)\nUnity.Pipeline.BasePipelineServer:ExecuteCommandDirect (Unity.Pipeline.Commands.CommandInfo,object[]) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2828)\nUnity.Pipeline.BasePipelineServer/<>c__DisplayClass138_0:<ExecuteCommand>b__1 () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/BasePipelineServer.cs:2694)\nUnity.Pipeline.Threading.Dispatcher/WorkItem`1<object>:ExecuteCore () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:284)\nUnity.Pipeline.Threading.Dispatcher/WorkItem:Execute () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:229)\nUnity.Pipeline.Threading.Dispatcher:ProcessWorkQueue (int) (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:195)\nUnity.Pipeline.Threading.Dispatcher:ProcessWorkQueue () (at ./Library/PackageCache/com.unity.pipeline@62c08c808737/Runtime/Common/Dispatcher.cs:210)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 331,
+          "timestampUtc": "2026-10-07T05:44:49.1638048Z",
+          "level": "error",
+          "logType": "Error",
+          "message": "Problem detected while importing the Prefab file: 'Assets/AssetRaw/UI/LevelSelectUI.prefab'.\nThe file might be corrupt or have a missing Variant parent or nested Prefabs. See details below.\nErrors:\n\tNested Prefab problem. Missing Nested Prefab Asset: 'm_item_LevelItemWidget (Missing Prefab with guid: 84db84b7f9a65f2429fe7b365705659d)'\n",
+          "stackTrace": "UnityEditor.EditorApplication:Internal_CallGlobalEventHandler ()\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 331,
+      "session": "dae5fb56036247adb921867dd4a41ead",
+      "returned": 2,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 2,
+        "warn": 6,
+        "log": 323
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-07T05:45:15.5806896Z",
+        "ageMs": 264,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 0,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

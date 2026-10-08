@@ -1,0 +1,156 @@
+{
+  "purpose": "执行前迁移清单，不是验证结果",
+  "meshFolderGuid": "77b7ca55528a3ef4cab8bb4ce171130f",
+  "assets": [
+    {
+      "source": "Assets/AssetArt/Actor/Billiards/Meshes/TableDisk.asset",
+      "destination": "Assets/AssetArt/Meshes/TableDisk.asset",
+      "guid": "247169a8d8b3a06409d293f7ef41b161",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Actor/Billiards/Meshes/TableQuad.asset",
+      "destination": "Assets/AssetArt/Meshes/TableQuad.asset",
+      "guid": "1db6c81bb4b15024e90a1779007cafff",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/BallShadow.mat",
+      "destination": "Assets/AssetArt/Materials/BallShadow.mat",
+      "guid": "126154cefce3f0e4cb1632e75c9685f6",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/BottomSight0.mat",
+      "destination": "Assets/AssetArt/Materials/BottomSight0.mat",
+      "guid": "1d921c3dc28a5ff44b53ef168595e17c",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/BottomSight1.mat",
+      "destination": "Assets/AssetArt/Materials/BottomSight1.mat",
+      "guid": "b483cf11ee5c50d4882d5176c426ca97",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/BottomSight2.mat",
+      "destination": "Assets/AssetArt/Materials/BottomSight2.mat",
+      "guid": "c09f07832078e0f47918ac3c6daed0b6",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/BottomSight3.mat",
+      "destination": "Assets/AssetArt/Materials/BottomSight3.mat",
+      "guid": "9c8debc928846ee4b9f9a02b03f29d23",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/Cushion.mat",
+      "destination": "Assets/AssetArt/Materials/Cushion.mat",
+      "guid": "8521d74031b09494090a20a26c954aa6",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/Felt.mat",
+      "destination": "Assets/AssetArt/Materials/Felt.mat",
+      "guid": "2a89ca3ec32a5e44590d8479ed1ad731",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/FrameInlay.mat",
+      "destination": "Assets/AssetArt/Materials/FrameInlay.mat",
+      "guid": "9b867631bca8afe4ca963892a9cdc26c",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/MultiBall_BarA.mat",
+      "destination": "Assets/AssetArt/Materials/MultiBall_BarA.mat",
+      "guid": "b8f29113cc9282745b341aa2a48fc3b2",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/MultiBall_BarB.mat",
+      "destination": "Assets/AssetArt/Materials/MultiBall_BarB.mat",
+      "guid": "91c49fd19ae6a364490a6d1467cab007",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/MultiBall_Mouth.mat",
+      "destination": "Assets/AssetArt/Materials/MultiBall_Mouth.mat",
+      "guid": "68ef4a9aa80c4ad4f8066ccb795aef85",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/MultiBall_PredictionDot.mat",
+      "destination": "Assets/AssetArt/Materials/MultiBall_PredictionDot.mat",
+      "guid": "0c804bf48e769e846a6eac21ef1708e2",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/RollingBall.mat",
+      "destination": "Assets/AssetArt/Materials/RollingBall.mat",
+      "guid": "5b200704e7a73e24d8feeeb93d54274b",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TableShadow.mat",
+      "destination": "Assets/AssetArt/Materials/TableShadow.mat",
+      "guid": "eabc2bcda48b028428b60795e441b230",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TargetPoint.mat",
+      "destination": "Assets/AssetArt/Materials/TargetPoint.mat",
+      "guid": "78782c75e2b23364a958e59f2c0770ce",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TopSight0.mat",
+      "destination": "Assets/AssetArt/Materials/TopSight0.mat",
+      "guid": "48ba8c1f88bcaea489bed45da10dbbfc",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TopSight1.mat",
+      "destination": "Assets/AssetArt/Materials/TopSight1.mat",
+      "guid": "fb3bbf2fdcfd1c242b40c94fe412e8fe",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TopSight2.mat",
+      "destination": "Assets/AssetArt/Materials/TopSight2.mat",
+      "guid": "ca9c46bc449a0b8459176f753c5c41d9",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/TopSight3.mat",
+      "destination": "Assets/AssetArt/Materials/TopSight3.mat",
+      "guid": "f2e216ff2de4a7447b23217dda69f785",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/WoodFrame.mat",
+      "destination": "Assets/AssetArt/Materials/WoodFrame.mat",
+      "guid": "15b296ecdaeac0047a22f7d27305fc81",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Billiards/WorldTint.mat",
+      "destination": "Assets/AssetArt/Materials/WorldTint.mat",
+      "guid": "7fd42ede8cb4822438689d7cd004283a",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Shaders/Billiards/BilliardsBall.shader",
+      "destination": "Assets/AssetArt/Shaders/BilliardsBall.shader",
+      "guid": "e7627bf2c12a85140a65543eaa6ff6ae",
+      "targetExists": false
+    },
+    {
+      "source": "Assets/AssetArt/Shaders/Billiards/BilliardsWorld.shader",
+      "destination": "Assets/AssetArt/Shaders/BilliardsWorld.shader",
+      "guid": "22bf88bfd1fca9c47885f0c0d8995f96",
+      "targetExists": false
+    }
+  ]
+}

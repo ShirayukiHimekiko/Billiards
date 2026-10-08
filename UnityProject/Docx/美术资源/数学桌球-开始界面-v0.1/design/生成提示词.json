@@ -1,0 +1,17 @@
+[
+  {
+    "id": "start_menu_background",
+    "mode": "built-in image_gen",
+    "intent": "generate with style reference",
+    "transparent_background": false,
+    "reference": "../../数学桌球-像素资源-v0.1/previews/游戏画面组合示意.png",
+    "prompt": "Use case: stylized-concept. Asset type: a reusable background image for the start menu of the Chinese game 数学桌球, a top-down mathematical billiards puzzle. Input image: style reference ONLY, not an edit target. Create a new 16:9 wide landscape image, ideally 1920x1080. Match the reference handcrafted chunky pixel art, deep midnight-blue felt, warm walnut wooden frame with tiny brass corner fittings, crisp stepped pixel edges and restrained two-tone shading. Strict orthographic overhead, no perspective. Fill the screen with the blue table inside its narrow wooden border. Composition: reserve the entire left 44 percent as calm, low-detail, dark blue negative space for a title and a vertical menu to be composited later. In the right half, show an elegant large golden outline triangle, a restrained cyan dashed geometric circle as a thematic diagram, one ivory billiard ball with a subtle cyan outline near the diagram, and one compact violet diamond reversal pickup with a gold two-way arrow. These are decorative motifs of a geometry puzzle, not a standard competitive billiards game. Keep all artwork inside the frame, leave clear breathing room. No HUD, no buttons, no words, no lettering, no title, no numbers, no watermark, no ball pockets, no black eight ball, no cue sticks, no humans, no extra menus. Flat sharp pixel clusters, no blurred gradients, no photorealism, no 3D render. Deliver just the clean background image."
+  },
+  {
+    "id": "start_menu_mockup",
+    "mode": "built-in image_gen",
+    "intent": "edit",
+    "transparent_background": false,
+    "reference": "../sprites/start_menu_background.png"
+  }
+]

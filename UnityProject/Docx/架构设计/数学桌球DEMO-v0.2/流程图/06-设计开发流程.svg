@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1310" viewBox="0 0 1100 1310"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#63748a"/></marker></defs><rect width="100%" height="100%" fill="#f8fafd"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif"><text x="30" y="43" font-size="29" font-weight="700" fill="#172b47">设计和开发按什么顺序</text><text x="30" y="77" font-size="18" fill="#5b6c82">每一步都有可检查的成果，再进入下一步。</text><g transform="translate(0 100)"><path d="M 535 88 L 535 145" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 223 L 535 280" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 358 L 535 415" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 493 L 535 550" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 628 L 535 685" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 763 L 535 820" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 920 L 535 1000" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="517.5" y="933" width="35" height="26" rx="5" fill="#f8fafd"/><text x="535" y="952" text-anchor="middle" font-size="16" fill="#506079">是</text>
+<path d="M 395 870 L 80 870 L 80 184 L 410 184" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="37" y="500" width="86" height="26" rx="5" fill="#f8fafd"/><text x="80" y="519" text-anchor="middle" font-size="16" fill="#506079">否：调整</text>
+<rect x="410" y="10" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="56" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">理解玩法目标</text>
+<rect x="410" y="145" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="191" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">击球、运动和大小变化</text>
+<rect x="410" y="280" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="326" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">加入两种通关判定</text>
+<rect x="410" y="415" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="461" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">加入翻转道具</text>
+<rect x="410" y="550" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="596" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">完成3杆循环和重开</text>
+<rect x="410" y="685" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="731" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">加入界面和提示</text>
+<polygon points="535,820 675,870 535,920 395,870" fill="#fff6dd" stroke="#ae8429" stroke-width="2"/>
+<text x="535" y="877" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">试玩和检查通过?</text>
+<rect x="410" y="1000" width="250" height="78" rx="12" fill="#e5f5ee" stroke="#238064" stroke-width="2"/>
+<text x="535" y="1046" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">交付单关演示</text>
+<text x="30" y="1122" font-size="18" fill="#5b6c82">先保证关卡有解，再调操作手感；完成后检查流畅度、暂停、退出和重开。</text></g><text x="30" y="1297" font-size="15" fill="#7b8797">数学桌球 · 简明版 · 2026-10-04</text></g></svg>

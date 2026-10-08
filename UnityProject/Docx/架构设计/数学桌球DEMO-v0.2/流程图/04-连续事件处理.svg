@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1240" viewBox="0 0 1100 1240"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#63748a"/></marker></defs><rect width="100%" height="100%" fill="#f8fafd"/><g font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif"><text x="30" y="43" font-size="29" font-weight="700" fill="#172b47">滚动期间检查什么</text><text x="30" y="77" font-size="18" fill="#5b6c82">成功立即停球；翻转道具后继续滚动。</text><g transform="translate(0 100)"><path d="M 535 88 L 535 150" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 395 200 L 395 199.5 L 315 199.5 L 315 199" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="337.5" y="172.5" width="35" height="26" rx="5" fill="#f8fafd"/><text x="355" y="191.5" text-anchor="middle" font-size="16" fill="#506079">是</text>
+<path d="M 535 250 L 535 330" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="517.5" y="263" width="35" height="26" rx="5" fill="#f8fafd"/><text x="535" y="282" text-anchor="middle" font-size="16" fill="#506079">否</text>
+<path d="M 675 380 L 675 379.5 L 790 379.5 L 790 379" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="715" y="352.5" width="35" height="26" rx="5" fill="#f8fafd"/><text x="732.5" y="371.5" text-anchor="middle" font-size="16" fill="#506079">是</text>
+<path d="M 535 430 L 535 520" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="517.5" y="448" width="35" height="26" rx="5" fill="#f8fafd"/><text x="535" y="467" text-anchor="middle" font-size="16" fill="#506079">否</text>
+<path d="M 535 598 L 535 700" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<path d="M 535 800 L 535 900" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="517.5" y="823" width="35" height="26" rx="5" fill="#f8fafd"/><text x="535" y="842" text-anchor="middle" font-size="16" fill="#506079">是</text>
+<path d="M 395 750 L 20 750 L 20 49 L 410 49" fill="none" stroke="#63748a" stroke-width="2.2" marker-end="url(#arrow)"/>
+<rect x="12" y="372.5" width="86" height="26" rx="5" fill="#f8fafd"/><text x="55" y="391.5" text-anchor="middle" font-size="16" fill="#506079">否：继续</text>
+<rect x="410" y="10" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="56" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">白球滚动并改变大小</text>
+<polygon points="535,150 675,200 535,250 395,200" fill="#fff6dd" stroke="#ae8429" stroke-width="2"/>
+<text x="535" y="207" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">球体越界?</text>
+<rect x="35" y="160" width="280" height="78" rx="12" fill="#fff0ee" stroke="#bc564b" stroke-width="2"/>
+<text x="175" y="206" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">是：本杆失败</text>
+<polygon points="535,330 675,380 535,430 395,380" fill="#fff6dd" stroke="#ae8429" stroke-width="2"/>
+<text x="535" y="387" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">完成内切或外接?</text>
+<rect x="790" y="340" width="280" height="78" rx="12" fill="#e5f5ee" stroke="#238064" stroke-width="2"/>
+<text x="930" y="386" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">是：立即通关</text>
+<rect x="410" y="520" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="552" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">接触可用道具时</text>
+<text x="535" y="580" text-anchor="middle" font-size="20" font-weight="400" fill="#20334e">保持大小并翻转变化方向</text>
+<polygon points="535,700 675,750 535,800 395,750" fill="#fff6dd" stroke="#ae8429" stroke-width="2"/>
+<text x="535" y="757" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">走完路程?</text>
+<rect x="410" y="900" width="250" height="78" rx="12" fill="#eaf2ff" stroke="#4274c4" stroke-width="2"/>
+<text x="535" y="932" text-anchor="middle" font-size="20" font-weight="600" fill="#20334e">是：停止并最后检查</text>
+<text x="535" y="960" text-anchor="middle" font-size="20" font-weight="400" fill="#20334e">成功或本杆失败</text>
+<text x="30" y="1052" font-size="18" fill="#5b6c82">不能遗漏途中短暂贴合或高速接触；同刻冲突先出界，再成功，再道具，最后停止。</text></g><text x="30" y="1227" font-size="15" fill="#7b8797">数学桌球 · 简明版 · 2026-10-04</text></g></svg>

@@ -1,0 +1,21 @@
+﻿id,role,type,description,size/ratio,style line ref,source,method,status,file
+board_background,桌面背景,background,空白俯视深蓝桌面与木制边框,1280x720,STYLE-01,generate,builtin_imagegen,ready,sprites/board_background.png
+ball_normal,变大状态白球,sprite,象牙白球与青色边缘,128x128,STYLE-01,generate,builtin_imagegen,ready,sprites/ball_normal.png
+ball_inverse,变小状态白球,sprite,象牙白球与珊瑚红边缘,128x128,STYLE-01,generate,builtin_imagegen,ready,sprites/ball_inverse.png
+toggle_active,可用翻转道具,sprite,紫色几何水晶与双向箭头,128x128,STYLE-01,generate,builtin_imagegen,ready,sprites/toggle_active.png
+toggle_used,已用翻转道具,sprite,低亮度紫灰水晶,128x128,STYLE-01,generate,builtin_imagegen,ready,sprites/toggle_used.png
+triangle_target,三角形目标示例,sprite,金色细轮廓与透明内部,256x256 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/triangle_target.png
+hint_inscribed,内切提示圆,sprite,青色虚线圆与透明内部,256x256 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/hint_inscribed.png
+hint_circumscribed,外接提示圆,sprite,金色虚线圆与透明内部,256x256 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/hint_circumscribed.png
+aim_arrow,瞄准方向,sprite,象牙白细线与箭头,128x32 / 4:1,STYLE-01,generate,pixel_geometry,ready,sprites/aim_arrow.png
+ui_panel,信息和结果面板,ui,深蓝填充与金色像素边框不含文字,256x96,STYLE-01,generate,builtin_imagegen,ready,sprites/ui_panel.png
+button_normal,按钮常态,ui,木色像素按钮不含文字,128x48 / 8:3,STYLE-01,generate,pixel_geometry,ready,sprites/button_normal.png
+button_pressed,按钮按下,ui,下沉的木色像素按钮不含文字,128x48 / 8:3,STYLE-01,generate,pixel_geometry,ready,sprites/button_pressed.png
+power_frame,力量条外框,ui,深蓝底与细金色边框,192x24 / 8:1,STYLE-01,generate,pixel_geometry,ready,sprites/power_frame.png
+power_fill,力量条填充,ui,青色像素填充,176x12 / 44:3,STYLE-01,generate,pixel_geometry,ready,sprites/power_fill.png
+icon_grow,变大标记,ui,青色加号图标,32x32 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/icon_grow.png
+icon_shrink,变小标记,ui,珊瑚红减号图标,32x32 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/icon_shrink.png
+shot_available,剩余杆数标记,ui,亮色小白球,32x32 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/shot_available.png
+shot_used,已用杆数标记,ui,暗色小白球,32x32 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/shot_used.png
+icon_success,成功反馈,ui,金色对勾徽章,64x64 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/icon_success.png
+icon_failure,失败反馈,ui,珊瑚红叉号徽章,64x64 / 1:1,STYLE-01,generate,pixel_geometry,ready,sprites/icon_failure.png

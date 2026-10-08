@@ -1,0 +1,3 @@
+STYLE-01
+
+Chunky handcrafted pixel art with crisp stepped edges and restrained two-tone shading, simple geometric silhouettes and consistent dark navy outlines. Use deep midnight-blue felt and warm walnut for the environment, ivory-white balls with cyan accents for growth and coral accents for shrinkage, golden-yellow targets, and violet crystal pickups. Lighting is gentle from the upper left, with a calm playful arcade mood. Keep foreground elements strongly contrasted, uncluttered, and readable at small sizes, always in a strict orthographic top-down perspective.

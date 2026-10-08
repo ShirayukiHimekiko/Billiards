@@ -1,0 +1,192 @@
+{
+  "angleConvention": "+X=0 degrees, counterclockwise",
+  "status": "candidate_unverified",
+  "levels": [
+    {
+      "levelId": 1,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.25,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "黑球进入上中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 2,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.65,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "黑球进入上中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 3,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 44.480814,
+          "power": 0.6,
+          "aimPoint": {
+            "x": 0,
+            "y": 0.9640784933114386
+          },
+          "expected": "按增长后的接触半径斜碰，黑球沿 +Y 进入上中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 4,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 5.601128,
+          "power": 1,
+          "aimPoint": {
+            "x": 3,
+            "y": 2.5
+          },
+          "expected": "黑球撞右侧桌边后进入上中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 5,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.3,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "第一颗黑球进入上中洞"
+        },
+        {
+          "angleDegrees": -90.0,
+          "power": 0.55,
+          "aimPoint": {
+            "x": 0,
+            "y": -4
+          },
+          "expected": "第二颗黑球进入下中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 6,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.35,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "完成图形、解锁上中洞并将黑球推进洞"
+        }
+      ]
+    },
+    {
+      "levelId": 7,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.5,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "完成图形、解锁上中洞并将黑球推进洞"
+        }
+      ]
+    },
+    {
+      "levelId": 8,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.3,
+          "aimPoint": {
+            "x": 0,
+            "y": 4
+          },
+          "expected": "完成下方图形翻转为缩小，再完成上方图形解锁并进洞"
+        }
+      ]
+    },
+    {
+      "levelId": 9,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 5.601128,
+          "power": 1,
+          "aimPoint": {
+            "x": 3,
+            "y": 2.5
+          },
+          "expected": "完成第一个图形；黑球撞右边后进入上中洞"
+        },
+        {
+          "angleDegrees": -104.809953,
+          "power": 0.7,
+          "aimPoint": {
+            "x": 0,
+            "y": -4
+          },
+          "expected": "完成第二个图形；另一颗黑球进入下中洞"
+        }
+      ]
+    },
+    {
+      "levelId": 10,
+      "status": "candidate_unverified",
+      "shots": [
+        {
+          "angleDegrees": 5.601128,
+          "power": 1,
+          "aimPoint": {
+            "x": 3,
+            "y": 2.5
+          },
+          "expected": "获得翻转、解锁上中洞，第一颗黑球撞右边后入洞"
+        },
+        {
+          "angleDegrees": -147.250512,
+          "power": 0.6,
+          "aimPoint": {
+            "x": -7.72,
+            "y": -3.72
+          },
+          "expected": "新杆恢复增长，完成左侧外接目标，第二颗黑球进左下洞"
+        },
+        {
+          "angleDegrees": -7.649831,
+          "power": 1,
+          "aimPoint": {
+            "x": 7.72,
+            "y": -3.72
+          },
+          "expected": "新杆恢复增长，完成右侧外接目标，第三颗黑球进右下洞"
+        }
+      ]
+    }
+  ]
+}

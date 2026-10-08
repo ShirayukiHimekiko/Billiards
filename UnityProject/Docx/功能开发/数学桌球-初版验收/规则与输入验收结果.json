@@ -1,0 +1,67 @@
+{
+  "math": {
+    "diagnostics": [],
+    "compileMs": 320,
+    "executeMs": 7,
+    "assemblyName": "PipelineRunScript_InitialDemoChecks_cfa42f6307934e648a5d479c238c1351",
+    "success": true,
+    "result": {
+      "passed": 15,
+      "cases": [
+        "内切正例",
+        "外接正例",
+        "错误半径反例",
+        "外部球心反例",
+        "运动途中内切及候选复核",
+        "道具圆周接触",
+        "半径增长造成越界",
+        "高速区间两端未命中仍找到途中目标",
+        "四次多项式含偶重根",
+        "退化三角形拒绝发布",
+        "固定路程力量档 0",
+        "固定路程力量档 1",
+        "固定路程力量档 2",
+        "固定路程力量档 3",
+        "固定路程力量档 4"
+      ]
+    }
+  },
+  "runtime": {
+    "diagnostics": [],
+    "compileMs": 174,
+    "executeMs": 13,
+    "assemblyName": "PipelineRunScript_InitialDemoRuntimeChecks_d133f0a7666244dcba3e92242e27243d",
+    "success": true,
+    "result": {
+      "passed": [
+        "重开恢复三次机会",
+        "可以出杆",
+        "运动中禁止重复出杆扣次数",
+        "暂停冻结位置半径和运动时间",
+        "真实配置：接触道具翻转后内切成功",
+        "成功停球并锁定后续出杆",
+        "真实配置：外接目标可达成",
+        "失败自动复位 1",
+        "失败自动复位 2",
+        "三次失败进入最终失败并锁定",
+        "最后一次机会成功优先于次数耗尽",
+        "失焦不会反复切换回继续"
+      ],
+      "count": 12
+    }
+  },
+  "input": {
+    "diagnostics": [],
+    "compileMs": 176,
+    "executeMs": 312,
+    "assemblyName": "PipelineRunScript_InitialDemoInputChecks_cf9a32b19a8342d8875ae456a43a0198",
+    "success": true,
+    "result": {
+      "charging": true,
+      "power": 0.170774579,
+      "shotsLeft": 2,
+      "state": "Rolling",
+      "passed": true
+    }
+  }
+}

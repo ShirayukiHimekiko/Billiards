@@ -1,0 +1,89 @@
+<module name="">
+  <enum name="BallKind">
+    <var name="White" value="0" />
+    <var name="Black" value="1" />
+  </enum>
+  <enum name="PocketSlot">
+    <var name="TopLeft" value="0" />
+    <var name="TopMiddle" value="1" />
+    <var name="TopRight" value="2" />
+    <var name="BottomLeft" value="3" />
+    <var name="BottomMiddle" value="4" />
+    <var name="BottomRight" value="5" />
+  </enum>
+  <enum name="PocketState">
+    <var name="Locked" value="0" />
+    <var name="Unlocked" value="1" />
+    <var name="Occupied" value="2" />
+    <var name="Disabled" value="3" />
+  </enum>
+  <enum name="ConditionKind">
+    <var name="Inscribed" value="0" />
+    <var name="Circumscribed" value="1" />
+  </enum>
+  <enum name="TriggerMode">
+    <var name="Contact" value="0" />
+    <var name="Geometry" value="1" />
+  </enum>
+  <enum name="PropKind">
+    <var name="Flip" value="0" />
+  </enum>
+  <enum name="UseScope">
+    <var name="Shot" value="0" />
+    <var name="Level" value="1" />
+  </enum>
+  <enum name="DecelerationModel">
+    <var name="ShotDistance" value="0" />
+  </enum>
+  <bean name="ShotParams">
+    <var name="chargeDuration" type="float" />
+    <var name="speedMin" type="float" />
+    <var name="speedMax" type="float" />
+    <var name="radiusMin" type="float" />
+    <var name="radiusMax" type="float" />
+    <var name="distanceMin" type="float" />
+    <var name="distanceMax" type="float" />
+  </bean>
+  <bean name="SizeChangeParams">
+    <var name="growRateMin" type="float" />
+    <var name="growRateMax" type="float" />
+    <var name="shrinkRate" type="float" />
+  </bean>
+  <bean name="Shape" />
+  <bean name="Triangle" parent="Shape">
+    <var name="a" type="vector2" />
+    <var name="b" type="vector2" />
+    <var name="c" type="vector2" />
+  </bean>
+  <bean name="EffectBinding" />
+  <bean name="UnlockPocket" parent="EffectBinding">
+    <var name="pocketPlacementId" type="int#ref=TbLevelPocket" />
+  </bean>
+  <bean name="TriggerProp" parent="EffectBinding">
+    <var name="propPlacementId" type="int#ref=TbLevelProp" />
+  </bean>
+  <bean name="PropEffect" />
+  <bean name="FlipEffect" parent="PropEffect" />
+  <bean name="PocketLayout">
+    <var name="slot" type="PocketSlot" />
+    <var name="offset" type="vector2" />
+    <var name="mouthWidth" type="float" />
+    <var name="captureRadius" type="float" />
+  </bean>
+  <bean name="PocketStyle">
+    <var name="state" type="PocketState" />
+    <var name="color" type="vector4" />
+  </bean>
+  <bean name="GeometryStyle">
+    <var name="figureColor" type="vector4" />
+    <var name="circleColor" type="vector4" />
+    <var name="lineWidth" type="float" />
+  </bean>
+  <bean name="PredictionStyle">
+    <var name="color" type="vector4" />
+    <var name="lineWidth" type="float" />
+    <var name="dashLength" type="float" />
+    <var name="gapLength" type="float" />
+    <var name="dotDiameter" type="float" />
+  </bean>
+</module>

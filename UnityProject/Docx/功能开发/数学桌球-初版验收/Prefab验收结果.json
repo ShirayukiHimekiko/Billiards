@@ -1,0 +1,15 @@
+{
+  "diagnostics": [],
+  "compileMs": 302,
+  "executeMs": 40,
+  "assemblyName": "PipelineRunScript_InitialDemoPrefabChecks_319230b6247344b8a010180089de7d48",
+  "success": true,
+  "result": {
+    "passed": [
+      "StartUI：画布、绑定、业务引用和脚本完整",
+      "GameMainUI：画布、绑定、业务引用和脚本完整",
+      "SettingsUI：画布、绑定、业务引用和脚本完整"
+    ],
+    "count": 3
+  }
+}

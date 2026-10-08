@@ -1,0 +1,145 @@
+{
+  "tool": "内置 image_gen",
+  "date": "2026-10-06",
+  "assets": [
+    {
+      "output": "sprites/settings_panel.png",
+      "mode": "generate",
+      "transparent_background": true,
+      "prompt": "Use case: ui-mockup. Asset type: a production-ready standalone BLANK settings popup background sprite for a Unity 2D pixel-art billiards game. Create ONLY one rectangular landscape popup panel, approximately 4:3 proportion, centered with a small fully transparent margin. Style: chunky crisp handcrafted pixel art, orthographic front-facing flat UI, midnight navy blue inset interior, warm walnut wood frame with simple stepped pixel edges and restrained golden corner studs, subtle two-tone highlights from upper left. Match a calm arcade game palette of navy, walnut, ivory and gold. The panel must be a clean reusable empty container with a large plain dark-blue interior suitable for a title, four volume-slider rows and a close action to be composed as separate Unity elements. Do NOT bake any text, title, numbers, sliders, buttons, icons, division lines or controls into it. No scenery, no game board, no outer window or device, no perspective, no glossy 3D, no busy decoration, no watermark. Preserve genuine alpha transparency outside the panel; the interior is opaque. Keep the complete frame visible with no cropped edges."
+    },
+    {
+      "output": "previews/设置界面效果图.png",
+      "mode": "edit-compositing",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "../数学桌球-开始界面-v0.1/previews/开始界面效果图.png",
+          "role": "edit target: preserve original menu beneath dimming and modal"
+        },
+        {
+          "path": "sprites/settings_panel.png",
+          "role": "supporting insert: settings popup frame and interior"
+        }
+      ],
+      "prompt": "Use case: compositing. Asset type: finished Unity pixel-art UI layout preview, opaque landscape 16:9 screenshot.\nInput image 1 is the edit target: existing Chinese billiards start menu. Preserve its layout, text, walnut frame, balls and geometric art in the background. Input image 2 is the supporting insert: use its wooden frame and navy blank interior as the settings popup container.\nPrimary request: overlay a centered NON-FULLSCREEN settings modal, occupying about 56% of the viewport width and 72% of height. Darken the existing menu with a uniform translucent navy overlay but keep the menu edges clearly visible surrounding the popup. The popup must fit completely inside the screen. Crisp orthographic handcrafted chunky pixel art, warm walnut, navy, ivory and golden accents matching the supplied assets.\nInside the panel: centered ivory title \"设置\", exactly FOUR evenly spaced horizontal volume-slider rows, and a centered wooden close button at the bottom. Each row has an ivory Chinese label on the left, a dark outlined gold-filled track in the middle, an ivory round knob and percentage on the right.\nText verbatim, rows from top to bottom: \"背景音乐\" with \"80%\"; \"游戏音效\" with \"70%\"; \"界面音效\" with \"60%\"; \"语音\" with \"50%\". Bottom button text: \"关闭\". Keep slider lengths aligned, labels legible, airy spacing and no overlapping text. These numbers only illustrate layout.\nConstraints: only these four controls plus close. No master volume, no tabs, no mute toggle, no reset, no save or apply buttons, no extra icons. Do not add any new scene objects or alter the underlying menu content beyond dimming and occlusion. No mock device, no perspective, no watermark."
+    },
+    {
+      "output": "sprites/settings_icon_music.png",
+      "mode": "generate",
+      "transparent_background": true,
+      "prompt": "Use case: ui-mockup. Asset type: ONE standalone clickable category icon for a Unity pixel-art game settings row. Category: BACKGROUND MUSIC. A large, immediately recognizable pair of connected musical notes, warm golden-yellow silhouette with ivory highlights, thick midnight navy stepped outline and subtle upper-left pixel shading. Chunky crisp handcrafted pixel art matching a dark navy and walnut billiards game menu. Centered single compact icon, generous recognizable silhouette at 48 pixels display size, no button container, no text, no numbers, no background scenery, no watermark, no mute slash. Entire icon visible, square canvas, actual fully transparent background outside the icon. Color and outline style should be consistent with sibling volume icons: billiard impact ball, clicking cursor, microphone."
+    },
+    {
+      "output": "sprites/settings_icon_sound.png",
+      "mode": "generate",
+      "transparent_background": true,
+      "prompt": "Use case: ui-mockup. Asset type: ONE standalone clickable category icon for a Unity pixel-art game settings row. Category: GAME SOUND EFFECTS. A single ivory-white billiard cue ball with two short golden impact rays at its upper right to communicate a billiard collision sound; no numbers on the ball. Thick midnight navy stepped outline, restrained upper-left ivory highlights and gold rim accent. Chunky crisp handcrafted pixel art matching a dark navy and walnut billiards game menu. Centered single compact icon, readable silhouette at 48 pixels display size, no button container, no text, no background scenery, no watermark, no mute slash. Complete shape visible, square canvas, actual fully transparent background outside the icon. Match sibling volume icon styling: golden musical notes, clicking cursor, microphone."
+    },
+    {
+      "output": "sprites/settings_icon_ui_sound.png",
+      "mode": "generate",
+      "transparent_background": true,
+      "prompt": "Use case: ui-mockup. Asset type: ONE standalone clickable category icon for a Unity pixel-art game settings row. Category: INTERFACE SOUND EFFECTS. An immediately recognizable ivory-white computer pointer arrow tilted upper left, with two tiny golden click rays above its tip. Thick midnight navy stepped outline, golden edge accent and restrained upper-left shading. Chunky crisp handcrafted pixel art matching a dark navy and walnut billiards game menu. Centered single compact icon, readable silhouette at 48 pixels display size, no button container, no text, no background scenery, no watermark, no mute slash. Complete icon visible, square canvas, actual fully transparent background outside the icon. Match sibling volume icon styling: golden musical notes, ivory billiard impact ball, microphone."
+    },
+    {
+      "output": "sprites/settings_icon_voice.png",
+      "mode": "generate",
+      "transparent_background": true,
+      "prompt": "Use case: ui-mockup. Asset type: ONE standalone clickable category icon for a Unity pixel-art game settings row. Category: VOICE VOLUME. An immediately recognizable compact upright microphone: rounded golden capsule with a few simple dark navy horizontal grille slots, an ivory highlight, a golden U-shaped cradle and a short stand. Thick midnight navy stepped outline and restrained upper-left pixel shading. Chunky crisp handcrafted pixel art matching a dark navy and walnut billiards game menu. Centered single compact icon, readable silhouette at 48 pixels display size, no button container, no text, no background scenery, no watermark, no mute slash. Complete icon visible, square canvas, actual fully transparent background outside the icon. Match sibling volume icon styling: golden musical notes, ivory billiard impact ball, ivory clicking cursor with gold accents."
+    },
+    {
+      "output": "previews/设置界面效果图-v0.2.png",
+      "mode": "edit-compositing",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "previews/设置界面效果图.png",
+          "role": "edit target, preserve popup and background"
+        },
+        {
+          "path": "sprites/settings_icon_music.png",
+          "role": "supporting insert, actual category icon"
+        },
+        {
+          "path": "sprites/settings_icon_sound.png",
+          "role": "supporting insert, actual category icon"
+        },
+        {
+          "path": "sprites/settings_icon_ui_sound.png",
+          "role": "supporting insert, actual category icon"
+        },
+        {
+          "path": "sprites/settings_icon_voice.png",
+          "role": "supporting insert, actual category icon"
+        }
+      ],
+      "prompt": "Use case: compositing. Asset type: updated finished pixel-art Unity settings UI preview.\nInput image 1 is the EDIT TARGET, the existing settings modal screenshot. Preserve the entire darkened start menu background, wooden outer screen border, centered NON-fullscreen walnut modal, title \"设置\", four row labels, four percentages, bottom \"关闭\" button and their styles. Only revise the row layout to add icons and a small state indicator.\nSupporting inserts, inputs 2 through 5 are the actual category sprites: image 2 golden musical notes; image 3 ivory billiard impact ball; image 4 clicking cursor; image 5 golden microphone. Insert these exact shapes at small consistent size, 48-56 pixels, in a aligned column to the left of their respective Chinese labels. No new buttons or frames around the icons. Keep the gold/ivory/navy chunky pixel-art style.\nInside the modal adjust spacing as needed so every row fits without overlap: icon column, Chinese label, shorter aligned gold slider, right percentage. Keep the modal footprint and centered placement. Exact rows top to bottom: \"背景音乐\" \"80%\"; \"游戏音效\" \"70%\"; \"界面音效\" \"60%\"; \"语音\" \"50%\". Put a tiny legible ivory \"开\" below each of the first three icons. For the fourth row only, show a MUTED example: desaturate microphone and slider to readable medium gray, preserve the label \"语音\" and retained percentage \"50%\", put a tiny legible \"关\" below microphone. This is an example state only. The close button remains bright and usable.\nConstraints: exactly four category icons, exactly four sliders. No master slider, no separate checkbox or mute button, no reset or apply controls. Labels, percentage, title and close text must be correct Chinese and unoccluded. Do not change the background other than existing dimming/occlusion; no extra scenery, watermark, perspective or device frame. Opaque landscape output same composition as image 1."
+    },
+    {
+      "output": "previews/设置界面效果图-v0.3.png",
+      "mode": "edit-text-localization",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "previews/设置界面效果图-v0.2.png",
+          "role": "edit target: change fourth label to user-selected 声音"
+        }
+      ],
+      "prompt": "Use case: text-localization. Asset type: existing Chinese pixel-art game settings UI preview.\nEdit the supplied image with EXACTLY ONE text change: in the fourth volume row, replace the Chinese label \"语音\" with the Chinese label \"声音\". Render \"声音\" verbatim, in the same ivory chunky pixel font, same size, same location, aligned like the original two-character label. The user has chosen \"声音\" as the display name for the Voice category.\nPreserve all other pixels and layout as closely as possible: centered non-fullscreen wooden popup, dimmed menu backdrop, title \"设置\", first three labels \"背景音乐\", \"游戏音效\", \"界面音效\", all four icons, on/off state text, slider values \"80%\", \"70%\", \"60%\", \"50%\", microphone and fourth slider gray disabled state, bottom \"关闭\" button, colors, borders, and dimensions. No icon changes, no extra controls or text, no redesign. Opaque landscape output."
+    },
+    {
+      "output": "sprites/settings_icon_voice_v2.png",
+      "mode": "edit-precise-object",
+      "transparent_background": true,
+      "inputs": [
+        {
+          "path": "sprites/settings_icon_voice.png",
+          "role": "edit target, replace microphone silhouette with speaker"
+        },
+        {
+          "path": "sprites/settings_icon_music.png",
+          "role": "style reference only, pixel palette and outline"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit.\nAsset type: replacement transparent category icon for a pixel-art Unity game settings row labelled \"声音\".\nInput image 1 is the edit target: replace its microphone silhouette completely with a simple compact SPEAKER WITH TWO SOUND WAVES. Input image 2 is a style reference only: the golden music-note icon used in the adjacent settings row.\nCreate one immediately recognizable side-profile speaker symbol, short rectangular rear block at left, flared ivory-and-gold cone toward right, and two short golden stepped sound-wave arcs on the right. Match image 2's thick midnight-navy stepped outline, warm golden-yellow base, ivory highlights, limited two-tone upper-left shading and chunky clean pixel construction. Keep it flat and orthographic, balanced and readable when displayed at 48 pixels, with less ornament than the old microphone.\nPreserve the square transparent sprite format, complete silhouette inside the canvas and modest transparent margin. Real alpha outside the shape. No microphone, no stand, no button frame, no text, no numbers, no badge, no mute slash, no scene, no realistic electronics, no perspective or smooth glossy rendering. This is the normal enabled icon; disabled tint will be applied by Unity."
+    },
+    {
+      "output": "previews/设置界面效果图-v0.4.png",
+      "mode": "edit-compositing",
+      "transparent_background": false,
+      "inputs": [
+        {
+          "path": "previews/设置界面效果图-v0.3.png",
+          "role": "edit target, fourth row icon replacement only"
+        },
+        {
+          "path": "sprites/settings_icon_voice_v2.png",
+          "role": "supporting insert, speaker scaled and tinted disabled gray"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit / compositing.\nAsset type: updated Chinese pixel-art settings UI preview for a billiards game.\nInput image 1 is the edit target: the existing full settings screenshot. Input image 2 is the supporting insert: the new golden speaker-with-two-waves icon.\nReplace ONLY the fourth row's old MICROPHONE icon with the SPEAKER icon from image 2, scaled down to the same visual weight and about 48-56 pixels wide as the other category icons. Fit the complete speaker and both sound waves inside the icon column. The fourth row is disabled: desaturate the inserted speaker to readable medium gray, preserving navy outline and its stepped pixel silhouette. Keep the tiny Chinese \"关\" directly below the new icon, clearly separated.\nPreserve all other content and layout as closely as possible: popup and walnut frame, dimmed menu backdrop, title \"设置\", labels \"背景音乐\" \"游戏音效\" \"界面音效\" \"声音\", percentages \"80%\" \"70%\" \"60%\" \"50%\", first three icons and \"开\" state labels, all sliders including the gray fourth slider, and bottom \"关闭\" button. Match the existing crisp chunky pixel style. No microphone remains in the fourth row. No new text, buttons, panels, scenes, or decoration; no device or watermark. Opaque landscape output, same composition and dimensions as input image 1."
+    }
+  ],
+  "reuse": {
+    "source": "../数学桌球-像素资源-v0.1/sprites/",
+    "method": "原样复制，不裁剪、不重采样",
+    "files": {
+      "settings_slider_track.png": "power_frame.png",
+      "settings_slider_fill.png": "power_fill.png",
+      "settings_slider_handle.png": "shot_available.png",
+      "settings_close_normal.png": "button_normal.png",
+      "settings_close_pressed.png": "button_pressed.png"
+    }
+  },
+  "current_preview": "previews/设置界面效果图-v0.4.png",
+  "historical_previews": [
+    "previews/设置界面效果图.png",
+    "previews/设置界面效果图-v0.2.png",
+    "previews/设置界面效果图-v0.3.png"
+  ],
+  "current_voice_icon": "sprites/settings_icon_voice_v2.png",
+  "historical_sprite_files": [
+    "sprites/settings_icon_voice.png"
+  ]
+}

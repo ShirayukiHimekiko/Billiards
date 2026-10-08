@@ -1,0 +1,4 @@
+# Project-level Codex settings.
+# Keep approval and sandbox behavior explicit for local Unity work.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"

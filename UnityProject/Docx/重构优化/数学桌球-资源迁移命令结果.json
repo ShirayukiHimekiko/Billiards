@@ -1,0 +1,238 @@
+{
+  "success": true,
+  "command": "command batch",
+  "data": {
+    "command": "batch",
+    "parameters": {
+      "operations": "[{\"params\":{\"path\":\"Assets/AssetArt/UIRaw/Raw\"},\"command\":\"create_folder\"},{\"params\":{\"path\":\"Assets/AssetArt/Materials\"},\"command\":\"create_folder\"},{\"params\":{\"path\":\"Assets/AssetArt/Actor/Billiards\"},\"command\":\"create_folder\"},{\"params\":{\"path\":\"Assets/AssetArt/Fonts\"},\"command\":\"create_folder\"},{\"params\":{\"path\":\"Assets/AssetArt/UI\"},\"command\":\"create_folder\"},{\"params\":{\"path\":\"Assets/AssetArt/Shaders/Billiards\"},\"command\":\"create_folder\"},{\"params\":{\"destination\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards\",\"asset\":\"Assets/AssetRaw/UIRaw/Raw/MathBilliards\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Materials/Billiards\",\"asset\":\"Assets/AssetRaw/Materials/Billiards\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Actor/Billiards/Meshes\",\"asset\":\"Assets/AssetRaw/Actor/Billiards/Meshes\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Fonts/NotoSansCJKsc-Regular.otf\",\"asset\":\"Assets/AssetRaw/Fonts/NotoSansCJKsc-Regular.otf\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Fonts/NotoSansCJK-LICENSE.txt\",\"asset\":\"Assets/AssetRaw/Fonts/NotoSansCJK-LICENSE.txt\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/UI/LevelItemWidget.prefab\",\"asset\":\"Assets/AssetRaw/UI/LevelItemWidget.prefab\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/UI/MainUI.prefab\",\"asset\":\"Assets/AssetRaw/UI/MainUI.prefab\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Shaders/Billiards/BilliardsWorld.shader\",\"asset\":\"Assets/GameScripts/HotFix/GameLogic/Core/Level/BilliardsWorld.shader\"},\"command\":\"move_asset\"},{\"params\":{\"destination\":\"Assets/AssetArt/Shaders/Billiards/BilliardsBall.shader\",\"asset\":\"Assets/GameScripts/HotFix/GameLogic/Core/Ball/BilliardsBall.shader\"},\"command\":\"move_asset\"}]",
+      "transactional": "false",
+      "on_error": "abort"
+    },
+    "result": {
+      "results": [
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-21b4fd4b3c4966248a8c2474a75bf7c5-102900000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw",
+            "guid": "21b4fd4b3c4966248a8c2474a75bf7c5",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-60bddb3f629692d418631c4d85115293-102900000-0",
+            "assetPath": "Assets/AssetArt/Materials",
+            "guid": "60bddb3f629692d418631c4d85115293",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-bb4452a844c387d48a9a9783fd8a433d-102900000-0",
+            "assetPath": "Assets/AssetArt/Actor/Billiards",
+            "guid": "bb4452a844c387d48a9a9783fd8a433d",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-0b348c758f91ac446ab97a694d93bd77-102900000-0",
+            "assetPath": "Assets/AssetArt/Fonts",
+            "guid": "0b348c758f91ac446ab97a694d93bd77",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-5f97d1dfbe925504583fa111b563ca59-102900000-0",
+            "assetPath": "Assets/AssetArt/UI",
+            "guid": "5f97d1dfbe925504583fa111b563ca59",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "create_folder",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e656f47084006ee46acf47550c6a3b41-102900000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Billiards",
+            "guid": "e656f47084006ee46acf47550c6a3b41",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-5a5e9402cbeb10d4ca2ed65b46994527-102900000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/MathBilliards",
+            "guid": "5a5e9402cbeb10d4ca2ed65b46994527",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-d1008c008c21146439d87c8ba6097434-102900000-0",
+            "assetPath": "Assets/AssetArt/Materials/Billiards",
+            "guid": "d1008c008c21146439d87c8ba6097434",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-77b7ca55528a3ef4cab8bb4ce171130f-102900000-0",
+            "assetPath": "Assets/AssetArt/Actor/Billiards/Meshes",
+            "guid": "77b7ca55528a3ef4cab8bb4ce171130f",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-3daa90392e21bb14b8fd84a2949425fa-12800000-0",
+            "assetPath": "Assets/AssetArt/Fonts/NotoSansCJKsc-Regular.otf",
+            "guid": "3daa90392e21bb14b8fd84a2949425fa",
+            "fileId": 12800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Font"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-c06de6a3cd27eb848a68cd266c00b5b4-4900000-0",
+            "assetPath": "Assets/AssetArt/Fonts/NotoSansCJK-LICENSE.txt",
+            "guid": "c06de6a3cd27eb848a68cd266c00b5b4",
+            "fileId": 4900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "TextAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-84db84b7f9a65f2429fe7b365705659d-3886959438074540240-0",
+            "assetPath": "Assets/AssetArt/UI/LevelItemWidget.prefab",
+            "guid": "84db84b7f9a65f2429fe7b365705659d",
+            "fileId": 3886959438074540000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "GameObject"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-ecec8ee629e7e1945b209218a435b9cc-7952108263221729084-0",
+            "assetPath": "Assets/AssetArt/UI/MainUI.prefab",
+            "guid": "ecec8ee629e7e1945b209218a435b9cc",
+            "fileId": 7952108263221729000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "GameObject"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-22bf88bfd1fca9c47885f0c0d8995f96-4800000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Billiards/BilliardsWorld.shader",
+            "guid": "22bf88bfd1fca9c47885f0c0d8995f96",
+            "fileId": 4800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Shader"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e7627bf2c12a85140a65543eaa6ff6ae-4800000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Billiards/BilliardsBall.shader",
+            "guid": "e7627bf2c12a85140a65543eaa6ff6ae",
+            "fileId": 4800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Shader"
+          },
+          "revertible": false
+        }
+      ],
+      "applied": 15,
+      "reverted": false,
+      "transactional": false,
+      "onError": "abort",
+      "undoGroup": 9
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

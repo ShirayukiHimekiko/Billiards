@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command batch",
+  "data": {
+    "command": "batch",
+    "parameters": {
+      "operations": "[{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BallS\",\"destination\":\"Assets/AssetArt/Materials/BallsCaseMigration\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BallsCaseMigration\",\"destination\":\"Assets/AssetArt/Materials/Balls\"}}]",
+      "transactional": "false",
+      "on_error": "abort"
+    },
+    "result": {
+      "results": [
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-c1f6c837d574e9e46bf00f05e04d394f-102900000-0",
+            "assetPath": "Assets/AssetArt/Materials/BallsCaseMigration",
+            "guid": "c1f6c837d574e9e46bf00f05e04d394f",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-c1f6c837d574e9e46bf00f05e04d394f-102900000-0",
+            "assetPath": "Assets/AssetArt/Materials/Balls",
+            "guid": "c1f6c837d574e9e46bf00f05e04d394f",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        }
+      ],
+      "applied": 2,
+      "reverted": false,
+      "transactional": false,
+      "onError": "abort",
+      "undoGroup": 142
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,2629 @@
+{
+  "status": "passed",
+  "passed": 20,
+  "total": 20,
+  "levels": [
+    {
+      "levelId": 1,
+      "passed": true,
+      "error": null,
+      "name": "第一次进洞",
+      "maxShots": 3,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.25,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": -8.448508E-08,
+            "y": 1.93261766
+          },
+          "whiteRadius": 0.487332433,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 101,
+              "active": true,
+              "position": {
+                "x": -8.448508E-08,
+                "y": 1.93261766
+              },
+              "radius": 0.487332433
+            },
+            {
+              "id": 102,
+              "active": false,
+              "position": {
+                "x": 7.92686237E-08,
+                "y": 3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 2,
+      "passed": true,
+      "error": null,
+      "name": "力度练习",
+      "maxShots": 3,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.65,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -2.5
+          },
+          "whiteEnd": {
+            "x": -1.06483185E-07,
+            "y": -0.06411507
+          },
+          "whiteRadius": 0.784065,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 201,
+              "active": true,
+              "position": {
+                "x": -1.06483185E-07,
+                "y": -0.06411507
+              },
+              "radius": 0.784065
+            },
+            {
+              "id": 202,
+              "active": false,
+              "position": {
+                "x": 2.4216277E-07,
+                "y": 3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 3,
+      "passed": true,
+      "error": null,
+      "name": "碰撞方向",
+      "maxShots": 4,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 44.4808159,
+          "power": 0.6,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -2.0,
+            "y": -1.0
+          },
+          "whiteEnd": {
+            "x": 4.88537169,
+            "y": 0.964029133
+          },
+          "whiteRadius": 1.04692,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 301,
+              "active": true,
+              "position": {
+                "x": 4.88537169,
+                "y": 0.964029133
+              },
+              "radius": 1.04692
+            },
+            {
+              "id": 302,
+              "active": false,
+              "position": {
+                "x": -1.04239473E-06,
+                "y": 3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 4,
+      "passed": true,
+      "error": null,
+      "name": "借边反弹",
+      "maxShots": 4,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 13.5462494,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.12528062,
+            "y": 0.5120497
+          },
+          "whiteRadius": 1.03385484,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 401,
+              "active": true,
+              "position": {
+                "x": 2.12528062,
+                "y": 0.5120497
+              },
+              "radius": 1.03385484
+            },
+            {
+              "id": 402,
+              "active": false,
+              "position": {
+                "x": 0.4341308,
+                "y": 3.61538267
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 5,
+      "passed": true,
+      "error": null,
+      "name": "两球顺序",
+      "maxShots": 5,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.3,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": -7.446292E-08,
+            "y": 1.70335531
+          },
+          "whiteRadius": 0.516594648,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 501,
+              "active": true,
+              "position": {
+                "x": -7.446292E-08,
+                "y": 1.70335531
+              },
+              "radius": 0.516594648
+            },
+            {
+              "id": 502,
+              "active": false,
+              "position": {
+                "x": 8.599306E-08,
+                "y": 3.42
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 503,
+              "active": true,
+              "position": {
+                "x": 0.0,
+                "y": -2.5
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -90.0,
+          "power": 0.55,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -7.446292E-08,
+            "y": 1.70335531
+          },
+          "whiteEnd": {
+            "x": -2.14093021E-07,
+            "y": -1.49071193
+          },
+          "whiteRadius": 0.729238033,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 501,
+              "active": true,
+              "position": {
+                "x": -2.14093021E-07,
+                "y": -1.49071193
+              },
+              "radius": 0.729238033
+            },
+            {
+              "id": 502,
+              "active": false,
+              "position": {
+                "x": 8.599306E-08,
+                "y": 3.42
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 503,
+              "active": false,
+              "position": {
+                "x": 1.95152737E-07,
+                "y": -3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 6,
+      "passed": true,
+      "error": null,
+      "name": "内切开门",
+      "maxShots": 5,
+      "completedGoals": [
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.35,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -2.0
+          },
+          "whiteEnd": {
+            "x": -1.62348741E-07,
+            "y": 1.71384406
+          },
+          "whiteRadius": 0.6061058,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 601,
+              "active": true,
+              "position": {
+                "x": -1.62348741E-07,
+                "y": 1.71384406
+              },
+              "radius": 0.6061058
+            },
+            {
+              "id": 602,
+              "active": false,
+              "position": {
+                "x": 1.502291E-07,
+                "y": 3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 601=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 7,
+      "passed": true,
+      "error": null,
+      "name": "外接开门",
+      "maxShots": 5,
+      "completedGoals": [
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.5,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -2.0
+          },
+          "whiteEnd": {
+            "x": -1.58047243E-07,
+            "y": 1.61546
+          },
+          "whiteRadius": 0.7044898,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 701,
+              "active": true,
+              "position": {
+                "x": -1.58047243E-07,
+                "y": 1.61546
+              },
+              "radius": 0.7044898
+            },
+            {
+              "id": 702,
+              "active": false,
+              "position": {
+                "x": 1.31633641E-07,
+                "y": 3.42
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 701=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 8,
+      "passed": true,
+      "error": null,
+      "name": "图形赠礼",
+      "maxShots": 6,
+      "completedGoals": [
+        true,
+        true
+      ],
+      "propUses": [
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.3,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -2.4
+          },
+          "whiteEnd": {
+            "x": -1.9644483E-07,
+            "y": 2.09376049
+          },
+          "whiteRadius": 0.426189482,
+          "growing": false,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 801,
+              "active": true,
+              "position": {
+                "x": -1.9644483E-07,
+                "y": 2.09376049
+              },
+              "radius": 0.426189482
+            },
+            {
+              "id": 802,
+              "active": false,
+              "position": {
+                "x": 1.72456637E-07,
+                "y": 3.41999984
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 801=True",
+            "翻转 801 次数=1",
+            "图形 802=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 9,
+      "passed": true,
+      "error": null,
+      "name": "解锁与反弹",
+      "maxShots": 7,
+      "completedGoals": [
+        true,
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 13.5462494,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.12528062,
+            "y": 0.5120496
+          },
+          "whiteRadius": 1.03385484,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 901,
+              "active": true,
+              "position": {
+                "x": 2.12528062,
+                "y": 0.5120496
+              },
+              "radius": 1.03385484
+            },
+            {
+              "id": 902,
+              "active": false,
+              "position": {
+                "x": 0.4341312,
+                "y": 3.61538315
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 903,
+              "active": true,
+              "position": {
+                "x": 0.207744375,
+                "y": -3.55895114
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 901=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -115.221542,
+          "power": 0.7,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 2.12528062,
+            "y": 0.5120496
+          },
+          "whiteEnd": {
+            "x": -3.75509572,
+            "y": 0.25325796
+          },
+          "whiteRadius": 1.25961316,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 901,
+              "active": true,
+              "position": {
+                "x": -3.75509572,
+                "y": 0.25325796
+              },
+              "radius": 1.25961316
+            },
+            {
+              "id": 902,
+              "active": false,
+              "position": {
+                "x": 0.4341312,
+                "y": 3.61538315
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 903,
+              "active": false,
+              "position": {
+                "x": 0.207744375,
+                "y": -3.55895114
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 902=True",
+            "洞 BottomMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 10,
+      "passed": true,
+      "error": null,
+      "name": "综合谜题",
+      "maxShots": 9,
+      "completedGoals": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "propUses": [
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 13.5462494,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.1863203,
+            "y": 0.526756167
+          },
+          "whiteRadius": 0.971068442,
+          "growing": false,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1001,
+              "active": true,
+              "position": {
+                "x": 2.1863203,
+                "y": 0.526756167
+              },
+              "radius": 0.971068442
+            },
+            {
+              "id": 1002,
+              "active": false,
+              "position": {
+                "x": 0.434130281,
+                "y": 3.61538219
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1003,
+              "active": true,
+              "position": {
+                "x": -5.88180971,
+                "y": -2.9319284
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1004,
+              "active": true,
+              "position": {
+                "x": 1.74929857,
+                "y": -3.12777948
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1001=True",
+            "翻转 1001 次数=1",
+            "图形 1002=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -156.794144,
+          "power": 0.6,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 2.1863203,
+            "y": 0.526756167
+          },
+          "whiteEnd": {
+            "x": -4.81886148,
+            "y": -2.4765172
+          },
+          "whiteRadius": 0.8763488,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1001,
+              "active": true,
+              "position": {
+                "x": -4.81886148,
+                "y": -2.4765172
+              },
+              "radius": 0.8763488
+            },
+            {
+              "id": 1002,
+              "active": false,
+              "position": {
+                "x": 0.434130281,
+                "y": 3.61538219
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1003,
+              "active": false,
+              "position": {
+                "x": -7.542535,
+                "y": -3.64345312
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1004,
+              "active": true,
+              "position": {
+                "x": 1.74929857,
+                "y": -3.12777948
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1003=True",
+            "洞 BottomLeft=Unlocked",
+            "洞 BottomLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -5.664512,
+          "power": 0.7,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -4.81886148,
+            "y": -2.4765172
+          },
+          "whiteEnd": {
+            "x": 0.5919984,
+            "y": -3.013209
+          },
+          "whiteRadius": 0.88290745,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1001,
+              "active": true,
+              "position": {
+                "x": 0.5919984,
+                "y": -3.013209
+              },
+              "radius": 0.88290745
+            },
+            {
+              "id": 1002,
+              "active": false,
+              "position": {
+                "x": 0.434130281,
+                "y": 3.61538219
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1003,
+              "active": false,
+              "position": {
+                "x": -7.542535,
+                "y": -3.64345312
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1004,
+              "active": false,
+              "position": {
+                "x": 7.505078,
+                "y": -3.69758964
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1004=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 11,
+      "passed": true,
+      "error": null,
+      "name": "双向借边",
+      "maxShots": 8,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 13.5462494,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.12528062,
+            "y": 0.5120497
+          },
+          "whiteRadius": 1.03385484,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1101,
+              "active": true,
+              "position": {
+                "x": 2.12528062,
+                "y": 0.5120497
+              },
+              "radius": 1.03385484
+            },
+            {
+              "id": 1102,
+              "active": false,
+              "position": {
+                "x": 0.4341308,
+                "y": 3.61538267
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1103,
+              "active": true,
+              "position": {
+                "x": -2.24953318,
+                "y": -0.541986
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -166.453751,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 2.12528062,
+            "y": 0.5120497
+          },
+          "whiteEnd": {
+            "x": -0.9566237,
+            "y": -0.230482578
+          },
+          "whiteRadius": 1.04985571,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1101,
+              "active": true,
+              "position": {
+                "x": -0.9566237,
+                "y": -0.230482578
+              },
+              "radius": 1.04985571
+            },
+            {
+              "id": 1102,
+              "active": false,
+              "position": {
+                "x": 0.4341308,
+                "y": 3.61538267
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1103,
+              "active": false,
+              "position": {
+                "x": -0.434125543,
+                "y": -3.615377
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomMiddle=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 12,
+      "passed": true,
+      "error": null,
+      "name": "三球布阵",
+      "maxShots": 8,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 152.492859,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -0.3
+          },
+          "whiteEnd": {
+            "x": -2.50167823,
+            "y": 1.00268948
+          },
+          "whiteRadius": 0.8994193,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1201,
+              "active": true,
+              "position": {
+                "x": -2.50167823,
+                "y": 1.00268948
+              },
+              "radius": 0.8994193
+            },
+            {
+              "id": 1202,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1203,
+              "active": true,
+              "position": {
+                "x": 2.037275,
+                "y": -1.09442985
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1204,
+              "active": true,
+              "position": {
+                "x": 4.299803,
+                "y": 1.55912375
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -24.7981949,
+          "power": 0.85,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": -2.50167823,
+            "y": 1.00268948
+          },
+          "whiteEnd": {
+            "x": 0.918185234,
+            "y": -0.57737565
+          },
+          "whiteRadius": 0.952714,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1201,
+              "active": true,
+              "position": {
+                "x": 0.918185234,
+                "y": -0.57737565
+              },
+              "radius": 0.952714
+            },
+            {
+              "id": 1202,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1203,
+              "active": false,
+              "position": {
+                "x": 7.54566336,
+                "y": -3.63947535
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1204,
+              "active": true,
+              "position": {
+                "x": 4.299803,
+                "y": 1.55912375
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomRight=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": 32.28464,
+          "power": 0.75,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.918185234,
+            "y": -0.57737565
+          },
+          "whiteEnd": {
+            "x": 3.33249855,
+            "y": 0.9479852
+          },
+          "whiteRadius": 0.864138842,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1201,
+              "active": true,
+              "position": {
+                "x": 3.33249855,
+                "y": 0.9479852
+              },
+              "radius": 0.864138842
+            },
+            {
+              "id": 1202,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1203,
+              "active": false,
+              "position": {
+                "x": 7.54566336,
+                "y": -3.63947535
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1204,
+              "active": false,
+              "position": {
+                "x": 7.561788,
+                "y": 3.62003875
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 13,
+      "passed": true,
+      "error": null,
+      "name": "双门分工",
+      "maxShots": 8,
+      "completedGoals": [
+        true,
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 154.2722,
+          "power": 0.7,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": -2.60434914,
+            "y": 1.25494647
+          },
+          "whiteRadius": 0.8290117,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1301,
+              "active": true,
+              "position": {
+                "x": -2.60434914,
+                "y": 1.25494647
+              },
+              "radius": 0.8290117
+            },
+            {
+              "id": 1302,
+              "active": false,
+              "position": {
+                "x": -7.547671,
+                "y": 3.63696
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1303,
+              "active": true,
+              "position": {
+                "x": 1.89998353,
+                "y": -0.9155361
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1301=True",
+            "洞 TopLeft=Unlocked",
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -25.7278023,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -2.60434914,
+            "y": 1.25494647
+          },
+          "whiteEnd": {
+            "x": 0.8207743,
+            "y": -0.3954988
+          },
+          "whiteRadius": 0.917919636,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1301,
+              "active": true,
+              "position": {
+                "x": 0.8207743,
+                "y": -0.3954988
+              },
+              "radius": 0.917919636
+            },
+            {
+              "id": 1302,
+              "active": false,
+              "position": {
+                "x": -7.547671,
+                "y": 3.63696
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1303,
+              "active": false,
+              "position": {
+                "x": 7.5476656,
+                "y": -3.63696575
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1302=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 14,
+      "passed": true,
+      "error": null,
+      "name": "先解后打",
+      "maxShots": 9,
+      "completedGoals": [
+        true,
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 0.0,
+          "power": 0.2,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": -4.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.79991,
+            "y": 0.0
+          },
+          "whiteRadius": 0.7389957,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1401,
+              "active": true,
+              "position": {
+                "x": 2.79991,
+                "y": 0.0
+              },
+              "radius": 0.7389957
+            },
+            {
+              "id": 1402,
+              "active": true,
+              "position": {
+                "x": 5.192978,
+                "y": 1.80932486
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1403,
+              "active": true,
+              "position": {
+                "x": -3.06207514,
+                "y": -1.83188438
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1401=True",
+            "洞 TopRight=Unlocked",
+            "图形 1402=True",
+            "洞 BottomLeft=Unlocked"
+          ]
+        },
+        {
+          "angleDegrees": 37.09284,
+          "power": 0.65,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 2.79991,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 4.35193348,
+            "y": 1.17348242
+          },
+          "whiteRadius": 0.774298549,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1401,
+              "active": true,
+              "position": {
+                "x": 4.35193348,
+                "y": 1.17348242
+              },
+              "radius": 0.774298549
+            },
+            {
+              "id": 1402,
+              "active": false,
+              "position": {
+                "x": 7.57235527,
+                "y": 3.60818338
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1403,
+              "active": true,
+              "position": {
+                "x": -3.06207514,
+                "y": -1.83188438
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopRight=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -157.934555,
+          "power": 0.9,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 4.35193348,
+            "y": 1.17348242
+          },
+          "whiteEnd": {
+            "x": -1.83511937,
+            "y": -1.33447742
+          },
+          "whiteRadius": 1.04389632,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1401,
+              "active": true,
+              "position": {
+                "x": -1.83511937,
+                "y": -1.33447742
+              },
+              "radius": 1.04389632
+            },
+            {
+              "id": 1402,
+              "active": false,
+              "position": {
+                "x": 7.57235527,
+                "y": 3.60818338
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1403,
+              "active": false,
+              "position": {
+                "x": -7.539708,
+                "y": -3.64711022
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomLeft=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 15,
+      "passed": true,
+      "error": null,
+      "name": "借边过门",
+      "maxShots": 9,
+      "completedGoals": [
+        true,
+        true
+      ],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 13.5462494,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "whiteEnd": {
+            "x": 2.60365438,
+            "y": 0.6273057
+          },
+          "whiteRadius": 1.04179215,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1501,
+              "active": true,
+              "position": {
+                "x": 2.60365438,
+                "y": 0.6273057
+              },
+              "radius": 1.04179215
+            },
+            {
+              "id": 1502,
+              "active": false,
+              "position": {
+                "x": 0.434129775,
+                "y": 3.61538172
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1503,
+              "active": true,
+              "position": {
+                "x": -2.00444,
+                "y": -1.31317
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1501=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -157.163971,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 2.60365438,
+            "y": 0.6273057
+          },
+          "whiteEnd": {
+            "x": -0.900368,
+            "y": -0.8482436
+          },
+          "whiteRadius": 0.917919755,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1501,
+              "active": true,
+              "position": {
+                "x": -0.900368,
+                "y": -0.8482436
+              },
+              "radius": 0.917919755
+            },
+            {
+              "id": 1502,
+              "active": false,
+              "position": {
+                "x": 0.434129775,
+                "y": 3.61538172
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1503,
+              "active": false,
+              "position": {
+                "x": -7.541471,
+                "y": -3.64482236
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1502=True",
+            "洞 BottomLeft=Unlocked",
+            "洞 BottomLeft=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 16,
+      "passed": true,
+      "error": null,
+      "name": "缩小穿关",
+      "maxShots": 9,
+      "completedGoals": [
+        true,
+        true,
+        true
+      ],
+      "propUses": [
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 151.912109,
+          "power": 0.7,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -0.4
+          },
+          "whiteEnd": {
+            "x": -2.62782359,
+            "y": 1.00241315
+          },
+          "whiteRadius": 0.7413228,
+          "growing": false,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1601,
+              "active": true,
+              "position": {
+                "x": -2.62782359,
+                "y": 1.00241315
+              },
+              "radius": 0.7413228
+            },
+            {
+              "id": 1602,
+              "active": false,
+              "position": {
+                "x": -7.55273342,
+                "y": 3.63074017
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1603,
+              "active": true,
+              "position": {
+                "x": 1.92356908,
+                "y": -1.0748105
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1601=True",
+            "翻转 1601 次数=1",
+            "图形 1602=True",
+            "洞 TopLeft=Unlocked",
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -24.52949,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -2.62782359,
+            "y": 1.00241315
+          },
+          "whiteEnd": {
+            "x": 0.8337446,
+            "y": -0.577266932
+          },
+          "whiteRadius": 0.9179764,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1601,
+              "active": true,
+              "position": {
+                "x": 0.8337446,
+                "y": -0.577266932
+              },
+              "radius": 0.9179764
+            },
+            {
+              "id": 1602,
+              "active": false,
+              "position": {
+                "x": -7.55273342,
+                "y": 3.63074017
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1603,
+              "active": false,
+              "position": {
+                "x": 7.544482,
+                "y": -3.64096856
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1603=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 17,
+      "passed": true,
+      "error": null,
+      "name": "再度翻转",
+      "maxShots": 10,
+      "completedGoals": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "propUses": [
+        1,
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.65,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -3.0
+          },
+          "whiteEnd": {
+            "x": -2.257536E-07,
+            "y": 2.16433859
+          },
+          "whiteRadius": 0.7556113,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1701,
+              "active": true,
+              "position": {
+                "x": -2.257536E-07,
+                "y": 2.16433859
+              },
+              "radius": 0.7556113
+            },
+            {
+              "id": 1702,
+              "active": false,
+              "position": {
+                "x": 4.79556057E-08,
+                "y": 3.42
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1703,
+              "active": true,
+              "position": {
+                "x": 3.57882833,
+                "y": -0.5633468
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1701=True",
+            "翻转 1701 次数=1",
+            "图形 1702=True",
+            "翻转 1702 次数=1",
+            "图形 1703=True",
+            "洞 TopMiddle=Unlocked",
+            "洞 TopMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -37.3168564,
+          "power": 0.9,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -2.257536E-07,
+            "y": 2.16433859
+          },
+          "whiteEnd": {
+            "x": 2.577401,
+            "y": 0.199684069
+          },
+          "whiteRadius": 0.978946745,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1701,
+              "active": true,
+              "position": {
+                "x": 2.577401,
+                "y": 0.199684069
+              },
+              "radius": 0.978946745
+            },
+            {
+              "id": 1702,
+              "active": false,
+              "position": {
+                "x": 4.79556057E-08,
+                "y": 3.42
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1703,
+              "active": false,
+              "position": {
+                "x": 7.573434,
+                "y": -3.60700965
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1704=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 18,
+      "passed": true,
+      "error": null,
+      "name": "四球调度",
+      "maxShots": 10,
+      "completedGoals": [],
+      "propUses": [],
+      "shots": [
+        {
+          "angleDegrees": 152.492859,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 3,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -0.3
+          },
+          "whiteEnd": {
+            "x": -2.50167823,
+            "y": 1.00268948
+          },
+          "whiteRadius": 0.8994193,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1801,
+              "active": true,
+              "position": {
+                "x": -2.50167823,
+                "y": 1.00268948
+              },
+              "radius": 0.8994193
+            },
+            {
+              "id": 1802,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1803,
+              "active": true,
+              "position": {
+                "x": 2.037275,
+                "y": -1.09442985
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1804,
+              "active": true,
+              "position": {
+                "x": 4.299803,
+                "y": 1.55912375
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1805,
+              "active": true,
+              "position": {
+                "x": -2.19475245,
+                "y": -1.38643181
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -24.7981949,
+          "power": 0.85,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": -2.50167823,
+            "y": 1.00268948
+          },
+          "whiteEnd": {
+            "x": 0.918185234,
+            "y": -0.57737565
+          },
+          "whiteRadius": 0.952714,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1801,
+              "active": true,
+              "position": {
+                "x": 0.918185234,
+                "y": -0.57737565
+              },
+              "radius": 0.952714
+            },
+            {
+              "id": 1802,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1803,
+              "active": false,
+              "position": {
+                "x": 7.54566336,
+                "y": -3.63947535
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1804,
+              "active": true,
+              "position": {
+                "x": 4.299803,
+                "y": 1.55912375
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1805,
+              "active": true,
+              "position": {
+                "x": -2.19475245,
+                "y": -1.38643181
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomRight=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": 32.28464,
+          "power": 0.75,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": 0.918185234,
+            "y": -0.57737565
+          },
+          "whiteEnd": {
+            "x": 3.33249855,
+            "y": 0.9479852
+          },
+          "whiteRadius": 0.864138842,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1801,
+              "active": true,
+              "position": {
+                "x": 3.33249855,
+                "y": 0.9479852
+              },
+              "radius": 0.864138842
+            },
+            {
+              "id": 1802,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1803,
+              "active": false,
+              "position": {
+                "x": 7.54566336,
+                "y": -3.63947535
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1804,
+              "active": false,
+              "position": {
+                "x": 7.561788,
+                "y": 3.62003875
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1805,
+              "active": true,
+              "position": {
+                "x": -2.19475245,
+                "y": -1.38643181
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 TopRight=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -157.103409,
+          "power": 0.9,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 3.33249855,
+            "y": 0.9479852
+          },
+          "whiteEnd": {
+            "x": -1.01036584,
+            "y": -0.886208
+          },
+          "whiteRadius": 1.00563884,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1801,
+              "active": true,
+              "position": {
+                "x": -1.01036584,
+                "y": -0.886208
+              },
+              "radius": 1.00563884
+            },
+            {
+              "id": 1802,
+              "active": false,
+              "position": {
+                "x": -7.551495,
+                "y": 3.63224578
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1803,
+              "active": false,
+              "position": {
+                "x": 7.54566336,
+                "y": -3.63947535
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1804,
+              "active": false,
+              "position": {
+                "x": 7.561788,
+                "y": 3.62003875
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1805,
+              "active": false,
+              "position": {
+                "x": -7.541597,
+                "y": -3.64465976
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomLeft=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 19,
+      "passed": true,
+      "error": null,
+      "name": "连锁开洞",
+      "maxShots": 11,
+      "completedGoals": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "propUses": [
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 151.912109,
+          "power": 0.7,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -0.4
+          },
+          "whiteEnd": {
+            "x": -2.62782359,
+            "y": 1.00241315
+          },
+          "whiteRadius": 0.7413228,
+          "growing": false,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1901,
+              "active": true,
+              "position": {
+                "x": -2.62782359,
+                "y": 1.00241315
+              },
+              "radius": 0.7413228
+            },
+            {
+              "id": 1902,
+              "active": false,
+              "position": {
+                "x": -7.55273342,
+                "y": 3.63074017
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1903,
+              "active": true,
+              "position": {
+                "x": 1.92356908,
+                "y": -1.0748105
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1904,
+              "active": true,
+              "position": {
+                "x": 5.075499,
+                "y": 2.06967044
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1901=True",
+            "翻转 1901 次数=1",
+            "图形 1902=True",
+            "洞 TopLeft=Unlocked",
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -24.52949,
+          "power": 0.8,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": -2.62782359,
+            "y": 1.00241315
+          },
+          "whiteEnd": {
+            "x": 0.8337446,
+            "y": -0.5772669
+          },
+          "whiteRadius": 0.9179764,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1901,
+              "active": true,
+              "position": {
+                "x": 0.8337446,
+                "y": -0.5772669
+              },
+              "radius": 0.9179764
+            },
+            {
+              "id": 1902,
+              "active": false,
+              "position": {
+                "x": -7.55273342,
+                "y": 3.63074017
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1903,
+              "active": false,
+              "position": {
+                "x": 7.54448175,
+                "y": -3.6409688
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1904,
+              "active": true,
+              "position": {
+                "x": 5.075499,
+                "y": 2.06967044
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1903=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomRight=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": 31.9666748,
+          "power": 0.85,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": 0.8337446,
+            "y": -0.5772669
+          },
+          "whiteEnd": {
+            "x": 4.02959728,
+            "y": 1.4171437
+          },
+          "whiteRadius": 0.9527119,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 1901,
+              "active": true,
+              "position": {
+                "x": 4.02959728,
+                "y": 1.4171437
+              },
+              "radius": 0.9527119
+            },
+            {
+              "id": 1902,
+              "active": false,
+              "position": {
+                "x": -7.55273342,
+                "y": 3.63074017
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1903,
+              "active": false,
+              "position": {
+                "x": 7.54448175,
+                "y": -3.6409688
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 1904,
+              "active": false,
+              "position": {
+                "x": 7.561343,
+                "y": 3.620553
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 1904=True",
+            "洞 TopRight=Unlocked",
+            "洞 TopRight=Occupied"
+          ]
+        }
+      ]
+    },
+    {
+      "levelId": 20,
+      "passed": true,
+      "error": null,
+      "name": "终局规划",
+      "maxShots": 12,
+      "completedGoals": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "propUses": [
+        1,
+        1
+      ],
+      "shots": [
+        {
+          "angleDegrees": 90.0,
+          "power": 0.1,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 4,
+          "whiteStart": {
+            "x": 0.0,
+            "y": -3.0
+          },
+          "whiteEnd": {
+            "x": -2.36041274E-07,
+            "y": 2.39996386
+          },
+          "whiteRadius": 0.534499168,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 2001,
+              "active": true,
+              "position": {
+                "x": -2.36041274E-07,
+                "y": 2.39996386
+              },
+              "radius": 0.534499168
+            },
+            {
+              "id": 2002,
+              "active": true,
+              "position": {
+                "x": 3.25372171,
+                "y": 1.11031234
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2003,
+              "active": true,
+              "position": {
+                "x": -5.16801071,
+                "y": -2.32930326
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2004,
+              "active": true,
+              "position": {
+                "x": -6.83253431,
+                "y": 2.427761
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2005,
+              "active": true,
+              "position": {
+                "x": 1.39089239,
+                "y": -1.38561976
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 2001=True",
+            "翻转 2001 次数=1",
+            "图形 2002=True",
+            "翻转 2002 次数=1",
+            "图形 2003=True",
+            "洞 BottomMiddle=Unlocked"
+          ]
+        },
+        {
+          "angleDegrees": -21.62204,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 3,
+          "whiteStart": {
+            "x": -2.36041274E-07,
+            "y": 2.39996386
+          },
+          "whiteEnd": {
+            "x": 2.0322578,
+            "y": 1.594431
+          },
+          "whiteRadius": 1.03385448,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 2001,
+              "active": true,
+              "position": {
+                "x": 2.0322578,
+                "y": 1.594431
+              },
+              "radius": 1.03385448
+            },
+            {
+              "id": 2002,
+              "active": false,
+              "position": {
+                "x": 0.385624528,
+                "y": -3.56676364
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2003,
+              "active": true,
+              "position": {
+                "x": -5.16801071,
+                "y": -2.32930326
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2004,
+              "active": true,
+              "position": {
+                "x": -6.83253431,
+                "y": 2.427761
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2005,
+              "active": true,
+              "position": {
+                "x": 1.39089239,
+                "y": -1.38561976
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 2006=True",
+            "洞 BottomRight=Unlocked",
+            "洞 BottomMiddle=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -151.412,
+          "power": 0.9,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 2,
+          "whiteStart": {
+            "x": 2.0322578,
+            "y": 1.594431
+          },
+          "whiteEnd": {
+            "x": -4.00193453,
+            "y": -1.6938771
+          },
+          "whiteRadius": 1.0479182,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 2001,
+              "active": true,
+              "position": {
+                "x": -4.00193453,
+                "y": -1.6938771
+              },
+              "radius": 1.0479182
+            },
+            {
+              "id": 2002,
+              "active": false,
+              "position": {
+                "x": 0.385624528,
+                "y": -3.56676364
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2003,
+              "active": false,
+              "position": {
+                "x": -7.55384,
+                "y": -3.629404
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2004,
+              "active": true,
+              "position": {
+                "x": -6.83253431,
+                "y": 2.427761
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2005,
+              "active": true,
+              "position": {
+                "x": 1.39089239,
+                "y": -1.38561976
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 2004=True",
+            "洞 BottomLeft=Unlocked",
+            "洞 BottomLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": 124.479958,
+          "power": 0.9,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 1,
+          "whiteStart": {
+            "x": -4.00193453,
+            "y": -1.6938771
+          },
+          "whiteEnd": {
+            "x": -6.114844,
+            "y": 1.38274658
+          },
+          "whiteRadius": 0.98767823,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 2001,
+              "active": true,
+              "position": {
+                "x": -6.114844,
+                "y": 1.38274658
+              },
+              "radius": 0.98767823
+            },
+            {
+              "id": 2002,
+              "active": false,
+              "position": {
+                "x": 0.385624528,
+                "y": -3.56676364
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2003,
+              "active": false,
+              "position": {
+                "x": -7.55384,
+                "y": -3.629404
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2004,
+              "active": false,
+              "position": {
+                "x": -7.61462069,
+                "y": 3.56654525
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2005,
+              "active": true,
+              "position": {
+                "x": 1.39089239,
+                "y": -1.38561976
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "图形 2005=True",
+            "洞 TopLeft=Unlocked",
+            "洞 TopLeft=Occupied"
+          ]
+        },
+        {
+          "angleDegrees": -20.2456112,
+          "power": 1.0,
+          "accepted": true,
+          "stopped": true,
+          "remainingBlack": 0,
+          "whiteStart": {
+            "x": -6.114844,
+            "y": 1.38274658
+          },
+          "whiteEnd": {
+            "x": 0.08631176,
+            "y": -0.9044398
+          },
+          "whiteRadius": 1.11044085,
+          "growing": true,
+          "whiteFoul": false,
+          "balls": [
+            {
+              "id": 2001,
+              "active": true,
+              "position": {
+                "x": 0.08631176,
+                "y": -0.9044398
+              },
+              "radius": 1.11044085
+            },
+            {
+              "id": 2002,
+              "active": false,
+              "position": {
+                "x": 0.385624528,
+                "y": -3.56676364
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2003,
+              "active": false,
+              "position": {
+                "x": -7.55384,
+                "y": -3.629404
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2004,
+              "active": false,
+              "position": {
+                "x": -7.61462069,
+                "y": 3.56654525
+              },
+              "radius": 0.28
+            },
+            {
+              "id": 2005,
+              "active": false,
+              "position": {
+                "x": 7.53591156,
+                "y": -3.65211749
+              },
+              "radius": 0.28
+            }
+          ],
+          "events": [
+            "洞 BottomRight=Occupied"
+          ]
+        }
+      ]
+    }
+  ]
+}

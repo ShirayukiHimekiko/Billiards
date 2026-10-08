@@ -1,0 +1,337 @@
+{
+  "success": true,
+  "command": "command batch",
+  "data": {
+    "command": "batch",
+    "parameters": {
+      "operations": "[{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/button_normal.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Common/button_normal.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/button_pressed.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Common/button_pressed.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/ui_panel.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Common/ui_panel.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_normal.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Balls/ball_normal.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_inverse.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Balls/ball_inverse.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/board_background.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Table/board_background.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/aim_arrow.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Guides/aim_arrow.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/triangle_target.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Guides/triangle_target.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_inscribed.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Guides/hint_inscribed.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_circumscribed.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Guides/hint_circumscribed.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_active.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Props/toggle_active.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_used.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Props/toggle_used.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_grow.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Props/icon_grow.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_shrink.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Props/icon_shrink.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/power_fill.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/power_fill.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/power_frame.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/power_frame.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_available.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/shot_available.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_used.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/shot_used.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_success.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/icon_success.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_failure.png\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/HUD/icon_failure.png\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/Menu\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Menu\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings\",\"destination\":\"Assets/AssetArt/UIRaw/Raw/Settings\"}}]",
+      "transactional": "false",
+      "on_error": "abort",
+      "time_budget_ms": "50000"
+    },
+    "result": {
+      "results": [
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-38a45ddb8d96a8e43b2ec5c1b21761da-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Common/button_normal.png",
+            "guid": "38a45ddb8d96a8e43b2ec5c1b21761da",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-84fcc59eb644e2843962618873c65b81-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Common/button_pressed.png",
+            "guid": "84fcc59eb644e2843962618873c65b81",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-129b2b6ade8074d468f124d70f3ede36-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Common/ui_panel.png",
+            "guid": "129b2b6ade8074d468f124d70f3ede36",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-2750b84c3f3f49148b26ec1b69b22ceb-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Balls/ball_normal.png",
+            "guid": "2750b84c3f3f49148b26ec1b69b22ceb",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-625b067b7a2e40441bdb977d033b9750-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Balls/ball_inverse.png",
+            "guid": "625b067b7a2e40441bdb977d033b9750",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-86fcdcbe9f519854eb1c139d8194a16d-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Table/board_background.png",
+            "guid": "86fcdcbe9f519854eb1c139d8194a16d",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-1e8a271cb29015e4095cc08245abba13-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Guides/aim_arrow.png",
+            "guid": "1e8a271cb29015e4095cc08245abba13",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-2592c70af127afa4bacb2dbff9e702f9-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Guides/triangle_target.png",
+            "guid": "2592c70af127afa4bacb2dbff9e702f9",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-bf566c49e7d503e45ad0233b2d284455-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Guides/hint_inscribed.png",
+            "guid": "bf566c49e7d503e45ad0233b2d284455",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-570949ac18008ee42944371d1e28b59b-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Guides/hint_circumscribed.png",
+            "guid": "570949ac18008ee42944371d1e28b59b",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e92e5c367ebacf646879eb66f431ba45-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Props/toggle_active.png",
+            "guid": "e92e5c367ebacf646879eb66f431ba45",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-187d1da2ddea2ee41b4c9287b4e8cc88-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Props/toggle_used.png",
+            "guid": "187d1da2ddea2ee41b4c9287b4e8cc88",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-cfce5125dbe2fdd4fb6b9514b8b1d13a-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Props/icon_grow.png",
+            "guid": "cfce5125dbe2fdd4fb6b9514b8b1d13a",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-3411a3c2121c83441918c99f43e6ac53-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Props/icon_shrink.png",
+            "guid": "3411a3c2121c83441918c99f43e6ac53",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-bae940c244837c84292ec6b2f2479802-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/power_fill.png",
+            "guid": "bae940c244837c84292ec6b2f2479802",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-d69221574360cb247abf7ab7c3e2f17a-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/power_frame.png",
+            "guid": "d69221574360cb247abf7ab7c3e2f17a",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-edcd6fc3ff1d80f45a956deae02b77c7-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/shot_available.png",
+            "guid": "edcd6fc3ff1d80f45a956deae02b77c7",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-c32f8e67e5beaee47b729fb33b09079a-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/shot_used.png",
+            "guid": "c32f8e67e5beaee47b729fb33b09079a",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e0f84c41ec7111a4bbaa308b9ab74f29-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/icon_success.png",
+            "guid": "e0f84c41ec7111a4bbaa308b9ab74f29",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-884b76b83b5ac2948be33012641311ab-2800000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/HUD/icon_failure.png",
+            "guid": "884b76b83b5ac2948be33012641311ab",
+            "fileId": 2800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Texture2D"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-472f66315901c634fbc077e968a6aaf1-102900000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Menu",
+            "guid": "472f66315901c634fbc077e968a6aaf1",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-60cc1903bb40ac345b443a7b26dcd9ea-102900000-0",
+            "assetPath": "Assets/AssetArt/UIRaw/Raw/Settings",
+            "guid": "60cc1903bb40ac345b443a7b26dcd9ea",
+            "fileId": 102900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "DefaultAsset"
+          },
+          "revertible": false
+        }
+      ],
+      "applied": 22,
+      "reverted": false,
+      "transactional": false,
+      "onError": "abort",
+      "undoGroup": 84
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

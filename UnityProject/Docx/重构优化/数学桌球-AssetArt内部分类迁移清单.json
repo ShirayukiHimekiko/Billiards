@@ -1,0 +1,674 @@
+{
+  "purpose": "执行前路径与GUID清单，不是功能验证结果",
+  "operations": [
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/WorldTint.mat",
+        "destination": "Assets/AssetArt/Materials/Common/WorldTint.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/Felt.mat",
+        "destination": "Assets/AssetArt/Materials/Table/Felt.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/Cushion.mat",
+        "destination": "Assets/AssetArt/Materials/Table/Cushion.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/WoodFrame.mat",
+        "destination": "Assets/AssetArt/Materials/Table/WoodFrame.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/FrameInlay.mat",
+        "destination": "Assets/AssetArt/Materials/Table/FrameInlay.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TableShadow.mat",
+        "destination": "Assets/AssetArt/Materials/Table/TableShadow.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TopSight0.mat",
+        "destination": "Assets/AssetArt/Materials/Table/TopSight0.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TopSight1.mat",
+        "destination": "Assets/AssetArt/Materials/Table/TopSight1.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TopSight2.mat",
+        "destination": "Assets/AssetArt/Materials/Table/TopSight2.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TopSight3.mat",
+        "destination": "Assets/AssetArt/Materials/Table/TopSight3.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/BottomSight0.mat",
+        "destination": "Assets/AssetArt/Materials/Table/BottomSight0.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/BottomSight1.mat",
+        "destination": "Assets/AssetArt/Materials/Table/BottomSight1.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/BottomSight2.mat",
+        "destination": "Assets/AssetArt/Materials/Table/BottomSight2.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/BottomSight3.mat",
+        "destination": "Assets/AssetArt/Materials/Table/BottomSight3.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/MultiBall_Mouth.mat",
+        "destination": "Assets/AssetArt/Materials/Table/MultiBall_Mouth.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/MultiBall_BarA.mat",
+        "destination": "Assets/AssetArt/Materials/Table/MultiBall_BarA.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/MultiBall_BarB.mat",
+        "destination": "Assets/AssetArt/Materials/Table/MultiBall_BarB.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/RollingBall.mat",
+        "destination": "Assets/AssetArt/Materials/Balls/RollingBall.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/BallShadow.mat",
+        "destination": "Assets/AssetArt/Materials/Balls/BallShadow.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/TargetPoint.mat",
+        "destination": "Assets/AssetArt/Materials/Aiming/TargetPoint.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Materials/MultiBall_PredictionDot.mat",
+        "destination": "Assets/AssetArt/Materials/Aiming/MultiBall_PredictionDot.mat"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Meshes/TableDisk.asset",
+        "destination": "Assets/AssetArt/Meshes/Primitives/TableDisk.asset"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Meshes/TableQuad.asset",
+        "destination": "Assets/AssetArt/Meshes/Primitives/TableQuad.asset"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Shaders/BilliardsWorld.shader",
+        "destination": "Assets/AssetArt/Shaders/Common/BilliardsWorld.shader"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Shaders/BilliardsBall.shader",
+        "destination": "Assets/AssetArt/Shaders/Balls/BilliardsBall.shader"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Fonts/NotoSansCJKsc-Regular.otf",
+        "destination": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJKsc-Regular.otf"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/Fonts/NotoSansCJK-LICENSE.txt",
+        "destination": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJK-LICENSE.txt"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UI/MainUI.prefab",
+        "destination": "Assets/AssetArt/UI/Windows/MainUI.prefab"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UI/LevelItemWidget.prefab",
+        "destination": "Assets/AssetArt/UI/Widgets/LevelItemWidget.prefab"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/button_normal.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Common/button_normal.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/button_pressed.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Common/button_pressed.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ui_panel.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Common/ui_panel.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_normal.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Balls/ball_normal.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_inverse.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Balls/ball_inverse.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/board_background.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Table/board_background.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/aim_arrow.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Guides/aim_arrow.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/triangle_target.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Guides/triangle_target.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_inscribed.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Guides/hint_inscribed.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_circumscribed.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Guides/hint_circumscribed.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_active.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Props/toggle_active.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_used.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Props/toggle_used.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_grow.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Props/icon_grow.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_shrink.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Props/icon_shrink.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/power_fill.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/power_fill.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/power_frame.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/power_frame.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_available.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/shot_available.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_used.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/shot_used.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_success.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/icon_success.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_failure.png",
+        "destination": "Assets/AssetArt/UIRaw/Raw/HUD/icon_failure.png"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Menu",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Menu"
+      }
+    },
+    {
+      "command": "move_asset",
+      "params": {
+        "asset": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings",
+        "destination": "Assets/AssetArt/UIRaw/Raw/Settings"
+      }
+    }
+  ],
+  "assets": [
+    {
+      "source": "Assets/AssetArt/Materials/WorldTint.mat",
+      "destination": "Assets/AssetArt/Materials/Common/WorldTint.mat",
+      "guid": "7fd42ede8cb4822438689d7cd004283a"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Felt.mat",
+      "destination": "Assets/AssetArt/Materials/Table/Felt.mat",
+      "guid": "2a89ca3ec32a5e44590d8479ed1ad731"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/Cushion.mat",
+      "destination": "Assets/AssetArt/Materials/Table/Cushion.mat",
+      "guid": "8521d74031b09494090a20a26c954aa6"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/WoodFrame.mat",
+      "destination": "Assets/AssetArt/Materials/Table/WoodFrame.mat",
+      "guid": "15b296ecdaeac0047a22f7d27305fc81"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/FrameInlay.mat",
+      "destination": "Assets/AssetArt/Materials/Table/FrameInlay.mat",
+      "guid": "9b867631bca8afe4ca963892a9cdc26c"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TableShadow.mat",
+      "destination": "Assets/AssetArt/Materials/Table/TableShadow.mat",
+      "guid": "eabc2bcda48b028428b60795e441b230"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TopSight0.mat",
+      "destination": "Assets/AssetArt/Materials/Table/TopSight0.mat",
+      "guid": "48ba8c1f88bcaea489bed45da10dbbfc"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TopSight1.mat",
+      "destination": "Assets/AssetArt/Materials/Table/TopSight1.mat",
+      "guid": "fb3bbf2fdcfd1c242b40c94fe412e8fe"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TopSight2.mat",
+      "destination": "Assets/AssetArt/Materials/Table/TopSight2.mat",
+      "guid": "ca9c46bc449a0b8459176f753c5c41d9"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TopSight3.mat",
+      "destination": "Assets/AssetArt/Materials/Table/TopSight3.mat",
+      "guid": "f2e216ff2de4a7447b23217dda69f785"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/BottomSight0.mat",
+      "destination": "Assets/AssetArt/Materials/Table/BottomSight0.mat",
+      "guid": "1d921c3dc28a5ff44b53ef168595e17c"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/BottomSight1.mat",
+      "destination": "Assets/AssetArt/Materials/Table/BottomSight1.mat",
+      "guid": "b483cf11ee5c50d4882d5176c426ca97"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/BottomSight2.mat",
+      "destination": "Assets/AssetArt/Materials/Table/BottomSight2.mat",
+      "guid": "c09f07832078e0f47918ac3c6daed0b6"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/BottomSight3.mat",
+      "destination": "Assets/AssetArt/Materials/Table/BottomSight3.mat",
+      "guid": "9c8debc928846ee4b9f9a02b03f29d23"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/MultiBall_Mouth.mat",
+      "destination": "Assets/AssetArt/Materials/Table/MultiBall_Mouth.mat",
+      "guid": "68ef4a9aa80c4ad4f8066ccb795aef85"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/MultiBall_BarA.mat",
+      "destination": "Assets/AssetArt/Materials/Table/MultiBall_BarA.mat",
+      "guid": "b8f29113cc9282745b341aa2a48fc3b2"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/MultiBall_BarB.mat",
+      "destination": "Assets/AssetArt/Materials/Table/MultiBall_BarB.mat",
+      "guid": "91c49fd19ae6a364490a6d1467cab007"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/RollingBall.mat",
+      "destination": "Assets/AssetArt/Materials/Balls/RollingBall.mat",
+      "guid": "5b200704e7a73e24d8feeeb93d54274b"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/BallShadow.mat",
+      "destination": "Assets/AssetArt/Materials/Balls/BallShadow.mat",
+      "guid": "126154cefce3f0e4cb1632e75c9685f6"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/TargetPoint.mat",
+      "destination": "Assets/AssetArt/Materials/Aiming/TargetPoint.mat",
+      "guid": "78782c75e2b23364a958e59f2c0770ce"
+    },
+    {
+      "source": "Assets/AssetArt/Materials/MultiBall_PredictionDot.mat",
+      "destination": "Assets/AssetArt/Materials/Aiming/MultiBall_PredictionDot.mat",
+      "guid": "0c804bf48e769e846a6eac21ef1708e2"
+    },
+    {
+      "source": "Assets/AssetArt/Meshes/TableDisk.asset",
+      "destination": "Assets/AssetArt/Meshes/Primitives/TableDisk.asset",
+      "guid": "247169a8d8b3a06409d293f7ef41b161"
+    },
+    {
+      "source": "Assets/AssetArt/Meshes/TableQuad.asset",
+      "destination": "Assets/AssetArt/Meshes/Primitives/TableQuad.asset",
+      "guid": "1db6c81bb4b15024e90a1779007cafff"
+    },
+    {
+      "source": "Assets/AssetArt/Shaders/BilliardsWorld.shader",
+      "destination": "Assets/AssetArt/Shaders/Common/BilliardsWorld.shader",
+      "guid": "22bf88bfd1fca9c47885f0c0d8995f96"
+    },
+    {
+      "source": "Assets/AssetArt/Shaders/BilliardsBall.shader",
+      "destination": "Assets/AssetArt/Shaders/Balls/BilliardsBall.shader",
+      "guid": "e7627bf2c12a85140a65543eaa6ff6ae"
+    },
+    {
+      "source": "Assets/AssetArt/Fonts/NotoSansCJKsc-Regular.otf",
+      "destination": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJKsc-Regular.otf",
+      "guid": "3daa90392e21bb14b8fd84a2949425fa"
+    },
+    {
+      "source": "Assets/AssetArt/Fonts/NotoSansCJK-LICENSE.txt",
+      "destination": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJK-LICENSE.txt",
+      "guid": "c06de6a3cd27eb848a68cd266c00b5b4"
+    },
+    {
+      "source": "Assets/AssetArt/UI/MainUI.prefab",
+      "destination": "Assets/AssetArt/UI/Windows/MainUI.prefab",
+      "guid": "ecec8ee629e7e1945b209218a435b9cc"
+    },
+    {
+      "source": "Assets/AssetArt/UI/LevelItemWidget.prefab",
+      "destination": "Assets/AssetArt/UI/Widgets/LevelItemWidget.prefab",
+      "guid": "84db84b7f9a65f2429fe7b365705659d"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/button_normal.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Common/button_normal.png",
+      "guid": "38a45ddb8d96a8e43b2ec5c1b21761da"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/button_pressed.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Common/button_pressed.png",
+      "guid": "84fcc59eb644e2843962618873c65b81"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ui_panel.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Common/ui_panel.png",
+      "guid": "129b2b6ade8074d468f124d70f3ede36"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_normal.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Balls/ball_normal.png",
+      "guid": "2750b84c3f3f49148b26ec1b69b22ceb"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/ball_inverse.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Balls/ball_inverse.png",
+      "guid": "625b067b7a2e40441bdb977d033b9750"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/board_background.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Table/board_background.png",
+      "guid": "86fcdcbe9f519854eb1c139d8194a16d"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/aim_arrow.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Guides/aim_arrow.png",
+      "guid": "1e8a271cb29015e4095cc08245abba13"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/triangle_target.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Guides/triangle_target.png",
+      "guid": "2592c70af127afa4bacb2dbff9e702f9"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_inscribed.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Guides/hint_inscribed.png",
+      "guid": "bf566c49e7d503e45ad0233b2d284455"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/hint_circumscribed.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Guides/hint_circumscribed.png",
+      "guid": "570949ac18008ee42944371d1e28b59b"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_active.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Props/toggle_active.png",
+      "guid": "e92e5c367ebacf646879eb66f431ba45"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/toggle_used.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Props/toggle_used.png",
+      "guid": "187d1da2ddea2ee41b4c9287b4e8cc88"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_grow.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Props/icon_grow.png",
+      "guid": "cfce5125dbe2fdd4fb6b9514b8b1d13a"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_shrink.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Props/icon_shrink.png",
+      "guid": "3411a3c2121c83441918c99f43e6ac53"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/power_fill.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/power_fill.png",
+      "guid": "bae940c244837c84292ec6b2f2479802"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/power_frame.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/power_frame.png",
+      "guid": "d69221574360cb247abf7ab7c3e2f17a"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_available.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/shot_available.png",
+      "guid": "edcd6fc3ff1d80f45a956deae02b77c7"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/shot_used.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/shot_used.png",
+      "guid": "c32f8e67e5beaee47b729fb33b09079a"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_success.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/icon_success.png",
+      "guid": "e0f84c41ec7111a4bbaa308b9ab74f29"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/icon_failure.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/HUD/icon_failure.png",
+      "guid": "884b76b83b5ac2948be33012641311ab"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Menu/start_menu_background.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Menu/start_menu_background.png",
+      "guid": "e711f0c3f64064043b91b629ad8b305e"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Menu/start_menu_button_normal.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Menu/start_menu_button_normal.png",
+      "guid": "27e4b5e8469138348831943ee0e4e585"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Menu/start_menu_button_pressed.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Menu/start_menu_button_pressed.png",
+      "guid": "f15864987f533814bbfefb11448de419"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_close_normal.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_close_normal.png",
+      "guid": "88184a512318ca447806d4aac61d74fb"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_close_pressed.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_close_pressed.png",
+      "guid": "642f3f86e7592a344a8d98f194130acb"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_icon_music.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_icon_music.png",
+      "guid": "7c14a55fcd7f9954d96d041933395cb7"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_icon_sound.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_icon_sound.png",
+      "guid": "135a3dc0963b52148b9b3be182614347"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_icon_ui_sound.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_icon_ui_sound.png",
+      "guid": "e0a1152f7d710be4cb9244696a59b642"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_icon_voice_v2.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_icon_voice_v2.png",
+      "guid": "0b32f8516b1abb846bd544be5696c9eb"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_panel.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_panel.png",
+      "guid": "e10e33aaf3a4fb042a9032197f732994"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_slider_fill.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_slider_fill.png",
+      "guid": "bb3428d0f581a2347953d0ba41003725"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_slider_handle.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_slider_handle.png",
+      "guid": "60daf6142f8a9b04386ad96726e53f6d"
+    },
+    {
+      "source": "Assets/AssetArt/UIRaw/Raw/MathBilliards/Settings/settings_slider_track.png",
+      "destination": "Assets/AssetArt/UIRaw/Raw/Settings/settings_slider_track.png",
+      "guid": "11b5b3c45ea1c214cb18eadb630c0131"
+    }
+  ]
+}

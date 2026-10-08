@@ -1,0 +1,435 @@
+{
+  "success": true,
+  "command": "command batch",
+  "data": {
+    "command": "batch",
+    "parameters": {
+      "operations": "[{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/WorldTint.mat\",\"destination\":\"Assets/AssetArt/Materials/Common/WorldTint.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/Felt.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/Felt.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/Cushion.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/Cushion.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/WoodFrame.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/WoodFrame.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/FrameInlay.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/FrameInlay.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TableShadow.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/TableShadow.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TopSight0.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/TopSight0.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TopSight1.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/TopSight1.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TopSight2.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/TopSight2.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TopSight3.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/TopSight3.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BottomSight0.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/BottomSight0.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BottomSight1.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/BottomSight1.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BottomSight2.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/BottomSight2.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BottomSight3.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/BottomSight3.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/MultiBall_Mouth.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/MultiBall_Mouth.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/MultiBall_BarA.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/MultiBall_BarA.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/MultiBall_BarB.mat\",\"destination\":\"Assets/AssetArt/Materials/Table/MultiBall_BarB.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/RollingBall.mat\",\"destination\":\"Assets/AssetArt/Materials/Balls/RollingBall.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/BallShadow.mat\",\"destination\":\"Assets/AssetArt/Materials/Balls/BallShadow.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/TargetPoint.mat\",\"destination\":\"Assets/AssetArt/Materials/Aiming/TargetPoint.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Materials/MultiBall_PredictionDot.mat\",\"destination\":\"Assets/AssetArt/Materials/Aiming/MultiBall_PredictionDot.mat\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Meshes/TableDisk.asset\",\"destination\":\"Assets/AssetArt/Meshes/Primitives/TableDisk.asset\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Meshes/TableQuad.asset\",\"destination\":\"Assets/AssetArt/Meshes/Primitives/TableQuad.asset\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Shaders/BilliardsWorld.shader\",\"destination\":\"Assets/AssetArt/Shaders/Common/BilliardsWorld.shader\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Shaders/BilliardsBall.shader\",\"destination\":\"Assets/AssetArt/Shaders/Balls/BilliardsBall.shader\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Fonts/NotoSansCJKsc-Regular.otf\",\"destination\":\"Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJKsc-Regular.otf\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/Fonts/NotoSansCJK-LICENSE.txt\",\"destination\":\"Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJK-LICENSE.txt\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UI/MainUI.prefab\",\"destination\":\"Assets/AssetArt/UI/Windows/MainUI.prefab\"}},{\"command\":\"move_asset\",\"params\":{\"asset\":\"Assets/AssetArt/UI/LevelItemWidget.prefab\",\"destination\":\"Assets/AssetArt/UI/Widgets/LevelItemWidget.prefab\"}}]",
+      "transactional": "false",
+      "on_error": "abort",
+      "time_budget_ms": "50000"
+    },
+    "result": {
+      "results": [
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-7fd42ede8cb4822438689d7cd004283a-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Common/WorldTint.mat",
+            "guid": "7fd42ede8cb4822438689d7cd004283a",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-2a89ca3ec32a5e44590d8479ed1ad731-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/Felt.mat",
+            "guid": "2a89ca3ec32a5e44590d8479ed1ad731",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-8521d74031b09494090a20a26c954aa6-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/Cushion.mat",
+            "guid": "8521d74031b09494090a20a26c954aa6",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-15b296ecdaeac0047a22f7d27305fc81-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/WoodFrame.mat",
+            "guid": "15b296ecdaeac0047a22f7d27305fc81",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-9b867631bca8afe4ca963892a9cdc26c-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/FrameInlay.mat",
+            "guid": "9b867631bca8afe4ca963892a9cdc26c",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-eabc2bcda48b028428b60795e441b230-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/TableShadow.mat",
+            "guid": "eabc2bcda48b028428b60795e441b230",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-48ba8c1f88bcaea489bed45da10dbbfc-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/TopSight0.mat",
+            "guid": "48ba8c1f88bcaea489bed45da10dbbfc",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-fb3bbf2fdcfd1c242b40c94fe412e8fe-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/TopSight1.mat",
+            "guid": "fb3bbf2fdcfd1c242b40c94fe412e8fe",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-ca9c46bc449a0b8459176f753c5c41d9-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/TopSight2.mat",
+            "guid": "ca9c46bc449a0b8459176f753c5c41d9",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-f2e216ff2de4a7447b23217dda69f785-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/TopSight3.mat",
+            "guid": "f2e216ff2de4a7447b23217dda69f785",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-1d921c3dc28a5ff44b53ef168595e17c-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/BottomSight0.mat",
+            "guid": "1d921c3dc28a5ff44b53ef168595e17c",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-b483cf11ee5c50d4882d5176c426ca97-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/BottomSight1.mat",
+            "guid": "b483cf11ee5c50d4882d5176c426ca97",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-c09f07832078e0f47918ac3c6daed0b6-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/BottomSight2.mat",
+            "guid": "c09f07832078e0f47918ac3c6daed0b6",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-9c8debc928846ee4b9f9a02b03f29d23-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/BottomSight3.mat",
+            "guid": "9c8debc928846ee4b9f9a02b03f29d23",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-68ef4a9aa80c4ad4f8066ccb795aef85-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/MultiBall_Mouth.mat",
+            "guid": "68ef4a9aa80c4ad4f8066ccb795aef85",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-b8f29113cc9282745b341aa2a48fc3b2-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/MultiBall_BarA.mat",
+            "guid": "b8f29113cc9282745b341aa2a48fc3b2",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-91c49fd19ae6a364490a6d1467cab007-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Table/MultiBall_BarB.mat",
+            "guid": "91c49fd19ae6a364490a6d1467cab007",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-5b200704e7a73e24d8feeeb93d54274b-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Balls/RollingBall.mat",
+            "guid": "5b200704e7a73e24d8feeeb93d54274b",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-126154cefce3f0e4cb1632e75c9685f6-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Balls/BallShadow.mat",
+            "guid": "126154cefce3f0e4cb1632e75c9685f6",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-78782c75e2b23364a958e59f2c0770ce-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Aiming/TargetPoint.mat",
+            "guid": "78782c75e2b23364a958e59f2c0770ce",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-0c804bf48e769e846a6eac21ef1708e2-2100000-0",
+            "assetPath": "Assets/AssetArt/Materials/Aiming/MultiBall_PredictionDot.mat",
+            "guid": "0c804bf48e769e846a6eac21ef1708e2",
+            "fileId": 2100000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Material"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-247169a8d8b3a06409d293f7ef41b161-4300000-0",
+            "assetPath": "Assets/AssetArt/Meshes/Primitives/TableDisk.asset",
+            "guid": "247169a8d8b3a06409d293f7ef41b161",
+            "fileId": 4300000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Mesh"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-3-1db6c81bb4b15024e90a1779007cafff-4300000-0",
+            "assetPath": "Assets/AssetArt/Meshes/Primitives/TableQuad.asset",
+            "guid": "1db6c81bb4b15024e90a1779007cafff",
+            "fileId": 4300000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Mesh"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-22bf88bfd1fca9c47885f0c0d8995f96-4800000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Common/BilliardsWorld.shader",
+            "guid": "22bf88bfd1fca9c47885f0c0d8995f96",
+            "fileId": 4800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Shader"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-e7627bf2c12a85140a65543eaa6ff6ae-4800000-0",
+            "assetPath": "Assets/AssetArt/Shaders/Balls/BilliardsBall.shader",
+            "guid": "e7627bf2c12a85140a65543eaa6ff6ae",
+            "fileId": 4800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Shader"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-3daa90392e21bb14b8fd84a2949425fa-12800000-0",
+            "assetPath": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJKsc-Regular.otf",
+            "guid": "3daa90392e21bb14b8fd84a2949425fa",
+            "fileId": 12800000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "Font"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-c06de6a3cd27eb848a68cd266c00b5b4-4900000-0",
+            "assetPath": "Assets/AssetArt/Fonts/NotoSansCJK/NotoSansCJK-LICENSE.txt",
+            "guid": "c06de6a3cd27eb848a68cd266c00b5b4",
+            "fileId": 4900000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "TextAsset"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-ecec8ee629e7e1945b209218a435b9cc-7952108263221729084-0",
+            "assetPath": "Assets/AssetArt/UI/Windows/MainUI.prefab",
+            "guid": "ecec8ee629e7e1945b209218a435b9cc",
+            "fileId": 7952108263221729000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "GameObject"
+          },
+          "revertible": false
+        },
+        {
+          "command": "move_asset",
+          "success": true,
+          "result": {
+            "globalId": "GlobalObjectId_V1-1-84db84b7f9a65f2429fe7b365705659d-3886959438074540240-0",
+            "assetPath": "Assets/AssetArt/UI/Widgets/LevelItemWidget.prefab",
+            "guid": "84db84b7f9a65f2429fe7b365705659d",
+            "fileId": 3886959438074540000,
+            "instanceId": null,
+            "hierarchyPath": null,
+            "type": "GameObject"
+          },
+          "revertible": false
+        }
+      ],
+      "applied": 29,
+      "reverted": false,
+      "transactional": false,
+      "onError": "abort",
+      "undoGroup": 83
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "F:\\code\\Billiards\\UnityProject"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

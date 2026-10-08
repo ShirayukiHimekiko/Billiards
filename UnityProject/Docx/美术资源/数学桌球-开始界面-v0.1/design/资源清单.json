@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-05",
+  "version": "v0.1",
+  "asset_count": 4,
+  "menu_labels": [
+    "开始",
+    "设置",
+    "存档",
+    "制作详情",
+    "退出"
+  ],
+  "visual_check": "人工目视检查：标题与五个按钮文字正确，按钮顺序正确，背景无文字与按钮",
+  "unity_imported": false,
+  "unity_playmode_verified": false,
+  "assets": [
+    {
+      "file": "previews/开始界面效果图.png",
+      "width": 1672,
+      "height": 941,
+      "pixel_format": "Format24bppRgb",
+      "has_transparent_pixels": false,
+      "bytes": 1470542,
+      "sha256": "364FCED6863EA797554F27AD0F11C2D7395D0C8A8D8BACC1AC01FB1E4400723D",
+      "source": "built-in image_gen",
+      "reused_source_hash_matches": null,
+      "decode_check": "passed"
+    },
+    {
+      "file": "sprites/start_menu_background.png",
+      "width": 1672,
+      "height": 941,
+      "pixel_format": "Format24bppRgb",
+      "has_transparent_pixels": false,
+      "bytes": 1386513,
+      "sha256": "FCC223F9F4426DCC9E76311948B76107FCBFDB7FA9A4D3BD2BC7F3005858590A",
+      "source": "built-in image_gen",
+      "reused_source_hash_matches": null,
+      "decode_check": "passed"
+    },
+    {
+      "file": "sprites/start_menu_button_normal.png",
+      "width": 128,
+      "height": 48,
+      "pixel_format": "Format32bppArgb",
+      "has_transparent_pixels": true,
+      "bytes": 297,
+      "sha256": "D054D980425B85D35C74238F1DD7D1FB1C966315E5E9F5E288AA7290E918A5F0",
+      "source": "../../数学桌球-像素资源-v0.1/sprites/button_normal.png",
+      "reused_source_hash_matches": true,
+      "decode_check": "passed"
+    },
+    {
+      "file": "sprites/start_menu_button_pressed.png",
+      "width": 128,
+      "height": 48,
+      "pixel_format": "Format32bppArgb",
+      "has_transparent_pixels": true,
+      "bytes": 289,
+      "sha256": "9946D36FFB27B23167EE6793AD9A6FCDE6AA86EFD35D636F6085B689D7CB383B",
+      "source": "../../数学桌球-像素资源-v0.1/sprites/button_pressed.png",
+      "reused_source_hash_matches": true,
+      "decode_check": "passed"
+    }
+  ]
+}
