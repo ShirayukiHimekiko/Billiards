@@ -4,7 +4,34 @@ using UnityEngine;
 namespace GameLogic
 {
     /// <summary>
-    /// 按图形配置的唯一条件查询轨迹中的最早触发时刻。
+    /// 三角形双目标判定结果。
+    /// </summary>
+    public readonly struct GoalMatch
+    {
+        public readonly GoalKind Kind;
+        public readonly Vector2 Center;
+        public readonly float Radius;
+        public readonly float Error;
+
+        public GoalMatch(GoalKind kind, Vector2 center, float radius, float error)
+        {
+            Kind = kind;
+            Center = center;
+            Radius = radius;
+            Error = error;
+        }
+
+        public bool Success
+        {
+            get
+            {
+                return Kind != GoalKind.None;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 按图形双目标查询轨迹中的最早触发时刻。
     /// </summary>
     public sealed class GoalJudge
     {
@@ -51,6 +78,14 @@ namespace GameLogic
         /// <returns>内切、外接或未达成。</returns>
         public static GoalKind Check(GeometryData level, BallState state)
         {
+            return Evaluate(level, state).Kind;
+        }
+
+        /// <summary>
+        /// 比较当前半径与双目标半径，返回误差更小的有效目标。
+        /// </summary>
+        public static GoalMatch Evaluate(GeometryData level, BallState state)
+        {
             bool inside = true;
             bool inner = true;
             bool outer = true;
@@ -66,11 +101,24 @@ namespace GameLogic
                 outer &= Mathf.Abs(Vector2.Distance(state.Position, vertex) - state.Radius) <= level.Tolerance + 0.000001f;
             }
 
-            return level.Condition == GameConfig.ConditionKind.Inscribed
-                ? (inside
-                && inner
-                ? GoalKind.Inscribed : GoalKind.None) : (outer
-                ? GoalKind.Circumscribed : GoalKind.None);
+            float tolerance = level.Tolerance + 0.000001f;
+            bool inscribed = inside && inner && Mathf.Abs(state.Radius - level.InscribedRadius) <= tolerance;
+            bool circumscribed = outer && Mathf.Abs(state.Radius - level.CircumscribedRadius) <= tolerance;
+
+            if (!inscribed && !circumscribed)
+            {
+                return new GoalMatch(GoalKind.None, Vector2.zero, 0, float.PositiveInfinity);
+            }
+
+            float inscribedError = Mathf.Abs(state.Radius - level.InscribedRadius);
+            float circumscribedError = Mathf.Abs(state.Radius - level.CircumscribedRadius);
+
+            if (inscribed && (!circumscribed || inscribedError <= circumscribedError))
+            {
+                return new GoalMatch(GoalKind.Inscribed, level.InscribedCenter, level.InscribedRadius, inscribedError);
+            }
+
+            return new GoalMatch(GoalKind.Circumscribed, level.CircumscribedCenter, level.CircumscribedRadius, circumscribedError);
         }
 
         /// <summary>

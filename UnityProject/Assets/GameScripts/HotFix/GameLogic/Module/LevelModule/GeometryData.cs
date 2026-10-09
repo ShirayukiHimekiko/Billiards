@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameLogic
 {
     /// <summary>
-    /// 一个图形只持有一种条件及一个效果绑定。
+    /// 一个图形同时持有内切、外接两类目标及一个效果绑定。
     /// </summary>
     public sealed class GeometryData
     {
@@ -35,14 +35,24 @@ namespace GameLogic
         public readonly Vector2 C;
 
         /// <summary>
-        /// 配置条件对应的内切圆或外接圆圆心。
+        /// 内切目标圆心。
         /// </summary>
-        public readonly Vector2 Center;
+        public readonly Vector2 InscribedCenter;
 
         /// <summary>
-        /// 配置条件对应的内切圆或外接圆半径。
+        /// 外接目标圆心。
         /// </summary>
-        public readonly float Radius;
+        public readonly Vector2 CircumscribedCenter;
+
+        /// <summary>
+        /// 配置中的内切目标半径。
+        /// </summary>
+        public readonly float InscribedRadius;
+
+        /// <summary>
+        /// 配置中的外接目标半径。
+        /// </summary>
+        public readonly float CircumscribedRadius;
 
         /// <summary>
         /// 几何条件判定允许的距离误差。
@@ -50,7 +60,7 @@ namespace GameLogic
         public readonly float Tolerance;
 
         /// <summary>
-        /// 本图形采用的唯一内切或外接条件。
+        /// 历史配置中的提示优先条件，不参与双目标判定。
         /// </summary>
         public readonly ConditionKind Condition;
 
@@ -65,7 +75,7 @@ namespace GameLogic
         public readonly bool UnlocksPocket;
 
         /// <summary>
-        /// 转换顶点并计算唯一目标圆。
+        /// 转换顶点并计算双目标圆。
         /// </summary>
         /// <param name="row">包含三角形、变换、唯一条件及效果绑定的图形明细。</param>
         public GeometryData(LevelGeometry row)
@@ -94,19 +104,27 @@ namespace GameLogic
                 throw new ArgumentException($"图形 {Id} 退化或缩放无效。");
             }
 
-            if (Condition == ConditionKind.Inscribed)
+            float a = Vector2.Distance(B, C);
+            float b = Vector2.Distance(C, A);
+            float c = Vector2.Distance(A, B);
+            InscribedCenter = (a * A + b * B + c * C) / (a + b + c);
+            float calculatedInscribedRadius = Mathf.Abs(cross) / (a + b + c);
+            CircumscribedCenter = A + new Vector2(v.y * u.sqrMagnitude - u.y * v.sqrMagnitude, u.x * v.sqrMagnitude - v.x * u.sqrMagnitude) / (2 * cross);
+            float calculatedCircumscribedRadius = Vector2.Distance(CircumscribedCenter, A);
+
+            if (row.InscribedRadius <= 0 || row.CircumscribedRadius <= 0)
             {
-                float a = Vector2.Distance(B, C);
-                float b = Vector2.Distance(C, A);
-                float c = Vector2.Distance(A, B);
-                Center = (a * A + b * B + c * C) / (a + b + c);
-                Radius = Mathf.Abs(cross) / (a + b + c);
+                throw new ArgumentException($"图形 {Id} 的双目标半径必须为正数。");
             }
-            else
+
+            if (Mathf.Abs(row.InscribedRadius - calculatedInscribedRadius) > .001f
+                || Mathf.Abs(row.CircumscribedRadius - calculatedCircumscribedRadius) > .001f)
             {
-                Center = A + new Vector2(v.y * u.sqrMagnitude - u.y * v.sqrMagnitude, u.x * v.sqrMagnitude - v.x * u.sqrMagnitude) / (2 * cross);
-                Radius = Vector2.Distance(Center, A);
+                throw new ArgumentException($"图形 {Id} 的双目标半径与三角形几何数据不一致。");
             }
+
+            InscribedRadius = row.InscribedRadius;
+            CircumscribedRadius = row.CircumscribedRadius;
 
             UnlocksPocket = row.EffectBinding is UnlockPocket;
             TargetId = UnlocksPocket
@@ -121,6 +139,54 @@ namespace GameLogic
         public Vector2 Vertex(int index)
         {
             return index == 0 ? A : index == 1 ? B : C;
+        }
+
+        /// <summary>
+        /// 取得历史提示优先使用的目标圆心。
+        /// </summary>
+        public Vector2 Center
+        {
+            get
+            {
+                return Condition == ConditionKind.Inscribed ? InscribedCenter : CircumscribedCenter;
+            }
+        }
+
+        /// <summary>
+        /// 取得历史提示优先使用的目标半径。
+        /// </summary>
+        public float Radius
+        {
+            get
+            {
+                return Condition == ConditionKind.Inscribed ? InscribedRadius : CircumscribedRadius;
+            }
+        }
+
+        /// <summary>
+        /// 取得球心到三角形三条内法线边界的最小距离。
+        /// </summary>
+        public float MinimumBoundaryDistance(Vector2 position, out Vector2 normal)
+        {
+            float orientation = Mathf.Sign(LevelData.Cross(B - A, C - A));
+            float minimum = float.PositiveInfinity;
+            normal = Vector2.zero;
+
+            for (int i = 0; i < 3; i++)
+            {
+                Vector2 vertex = Vertex(i);
+                Vector2 edge = Vertex((i + 1) % 3) - vertex;
+                Vector2 edgeNormal = orientation * new Vector2(-edge.y, edge.x).normalized;
+                float distance = Vector2.Dot(edgeNormal, position - vertex);
+
+                if (distance < minimum)
+                {
+                    minimum = distance;
+                    normal = edgeNormal;
+                }
+            }
+
+            return minimum;
         }
     }
 }

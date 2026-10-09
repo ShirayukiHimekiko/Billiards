@@ -382,8 +382,9 @@ namespace GameLogic
                     var ball = Balls[b];
 
                     // 仅放行初始穿透；边界外的接近仍由运动中的条件预测决定。
+                    Vector2 boundaryNormal;
                     if (ball.Active
-                        && Vector2.Distance(ball.State.Position, geometry.Center) < ball.State.Radius + geometry.Radius)
+                        && geometry.MinimumBoundaryDistance(ball.State.Position, out boundaryNormal) < ball.State.Radius)
                     {
                         _admitted[g * Balls.Length + b] = true;
                     }
@@ -705,8 +706,9 @@ namespace GameLogic
                     }
 
                     var geometry = _level.Geometries[g];
-                    double t = _contacts.Circle(trajectory, Stationary(geometry.Center, geometry.Radius, duration));
-                    Choose(ref hit, t, EventKind.Gate, i, g, Vector2.zero);
+                    Vector2 normal;
+                    double t = _contacts.Triangle(trajectory, geometry.A, geometry.B, geometry.C, out normal);
+                    Choose(ref hit, t, EventKind.Gate, i, g, normal);
                 }
             }
 
@@ -869,9 +871,10 @@ namespace GameLogic
 
                     if (hit.Ball == WhiteIndex)
                     {
-                        // 容差只用于识别成功；提交时吸附到理论目标圆，保证下一杆从标准内切或外接状态开始。
-                        ball.State.Position = geometry.Center;
-                        ball.State.Radius = geometry.Radius;
+                        // 容差只用于识别成功；提交时吸附到命中的理论目标圆。
+                        GoalMatch match = GoalJudge.Evaluate(geometry, ball.State);
+                        ball.State.Position = match.Center;
+                        ball.State.Radius = match.Radius;
                         ball.State.Velocity = Vector2.zero;
                         _whiteStoppedAtGoal = true;
                     }
@@ -957,9 +960,11 @@ namespace GameLogic
                     }
                     else
                     {
-                        Vector2 n = (ball.State.Position - gate.Center).normalized;
+                        Vector2 n = hit.Normal.sqrMagnitude > .000001f ? hit.Normal : Vector2.up;
                         Reflect(ball, n, _level.Physics.GeometryRestitution);
-                        ball.State.Position = gate.Center + n * (gate.Radius + ball.State.Radius + epsilon);
+                        Vector2 boundaryNormal;
+                        float boundary = gate.MinimumBoundaryDistance(ball.State.Position, out boundaryNormal);
+                        ball.State.Position += n * Mathf.Max(epsilon, ball.State.Radius - boundary + epsilon);
                     }
 
                     break;
@@ -991,11 +996,12 @@ namespace GameLogic
 
                 var candidate = query.Balls[ball];
 
+                Vector2 boundaryNormal;
+                float boundary = gate.MinimumBoundaryDistance(candidate.State.Position, out boundaryNormal);
+
                 if (!candidate.Active
-                    || Vector2.Distance(candidate.State.Position, gate.Center) > candidate.State.Radius + gate.Radius + .002f
-                    && Vector2.Dot(
-                    candidate.State.Position - gate.Center,
-                    candidate.State.Velocity) > 0)
+                    || boundary < -.002f
+                    && Vector2.Dot(boundaryNormal, candidate.State.Velocity) < 0)
                 {
                     return false;
                 }
@@ -1034,8 +1040,11 @@ namespace GameLogic
                         _conditionLatched[g * Balls.Length + b] = false;
                     }
 
+                    Vector2 boundaryNormal;
+                    float boundary = _level.Geometries[g].MinimumBoundaryDistance(Balls[b].State.Position, out boundaryNormal);
+
                     if (_admitted[g * Balls.Length + b]
-                        && Vector2.Distance(Balls[b].State.Position, _level.Geometries[g].Center) > Balls[b].State.Radius + _level.Geometries[g].Radius + .002f)
+                        && boundary > Balls[b].State.Radius + .002f)
                     {
                         _admitted[g * Balls.Length + b] = false;
                     }

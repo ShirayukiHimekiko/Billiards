@@ -101,5 +101,61 @@ namespace GameLogic
 
             return double.PositiveInfinity;
         }
+
+        /// <summary>
+        /// 求变半径球首次接触凸三角形边界的时间，并返回接触处的内法线。
+        /// </summary>
+        public double Triangle(BallTrajectory trajectory, Vector2 a, Vector2 b, Vector2 c, out Vector2 normal)
+        {
+            double earliest = double.PositiveInfinity;
+            normal = Vector2.zero;
+            float orientation = Mathf.Sign(Cross(b - a, c - a));
+
+            for (int i = 0; i < 3; i++)
+            {
+                Vector2 vertex = i == 0 ? a : i == 1 ? b : c;
+                Vector2 next = i == 0 ? b : i == 1 ? c : a;
+                Vector2 edge = next - vertex;
+                Vector2 edgeNormal = -orientation * new Vector2(-edge.y, edge.x).normalized;
+                double time = Plane(trajectory, edgeNormal, Vector2.Dot(edgeNormal, vertex));
+
+                if (time < earliest)
+                {
+                    Vector2 center = trajectory.At(time).Position;
+                    float projection = Vector2.Dot(center - vertex, edge) / edge.sqrMagnitude;
+
+                    if (projection >= -0.000001f && projection <= 1.000001f)
+                    {
+                        earliest = time;
+                        normal = edgeNormal;
+                    }
+                }
+
+                BallTrajectory point = new BallTrajectory(
+                    new BallState { Position = vertex, Radius = 0 },
+                    Vector2.zero,
+                    0,
+                    trajectory.Duration);
+                time = Circle(trajectory, point);
+
+                if (time < earliest)
+                {
+                    Vector2 delta = trajectory.At(time).Position - vertex;
+
+                    if (delta.sqrMagnitude > .00000001f)
+                    {
+                        earliest = time;
+                        normal = delta.normalized;
+                    }
+                }
+            }
+
+            return earliest;
+        }
+
+        private static float Cross(Vector2 a, Vector2 b)
+        {
+            return a.x * b.y - a.y * b.x;
+        }
     }
 }

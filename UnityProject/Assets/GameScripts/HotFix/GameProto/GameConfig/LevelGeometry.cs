@@ -27,6 +27,8 @@ public sealed partial class LevelGeometry : Luban.BeanBase
         Tolerance = _buf.ReadFloat();
         AllowedBallKind = (BallKind)_buf.ReadInt();
         EffectBinding = global::GameConfig.EffectBinding.DeserializeEffectBinding(_buf);
+        InscribedRadius = _buf.ReadFloat();
+        CircumscribedRadius = _buf.ReadFloat();
     }
 
     public static LevelGeometry DeserializeLevelGeometry(ByteBuf _buf)
@@ -75,6 +77,14 @@ public sealed partial class LevelGeometry : Luban.BeanBase
     /// effectBinding
     /// </summary>
     public readonly EffectBinding EffectBinding;
+    /// <summary>
+    /// inscribedRadius
+    /// </summary>
+    public readonly float InscribedRadius;
+    /// <summary>
+    /// circumscribedRadius
+    /// </summary>
+    public readonly float CircumscribedRadius;
    
     public const int __ID__ = -652119050;
     public override int GetTypeId() => __ID__;
@@ -99,6 +109,8 @@ public sealed partial class LevelGeometry : Luban.BeanBase
         + "tolerance:" + Tolerance + ","
         + "allowedBallKind:" + AllowedBallKind + ","
         + "effectBinding:" + EffectBinding + ","
+        + "inscribedRadius:" + InscribedRadius + ","
+        + "circumscribedRadius:" + CircumscribedRadius + ","
         + "}";
     }
 }
