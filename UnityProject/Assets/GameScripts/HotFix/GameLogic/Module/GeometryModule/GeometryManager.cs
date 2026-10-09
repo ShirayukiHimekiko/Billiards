@@ -41,6 +41,18 @@ namespace GameLogic
             {
                 _views[i].SetCompleted(world.GeometryCompleted[i]);
             }
+
+            if (world.TryConsumeGoalFeedback(out GoalFeedback feedback))
+            {
+                foreach (var view in _views)
+                {
+                    if (view.GeometryId == feedback.GeometryId)
+                    {
+                        view.ShowFailureFeedback(feedback);
+                        break;
+                    }
+                }
+            }
         }
 
         /// <summary>

@@ -122,6 +122,20 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 查询与当前半径误差最小的目标半径，供失败反馈显示建议尺寸。
+        /// </summary>
+        /// <param name="level">待显示反馈的图形。</param>
+        /// <param name="radius">失败时的白球半径。</param>
+        /// <returns>内切或外接目标中更接近当前半径的半径。</returns>
+        public static float NearestTargetRadius(GeometryData level, float radius)
+        {
+            float inscribedError = Mathf.Abs(radius - level.InscribedRadius);
+            float circumscribedError = Mathf.Abs(radius - level.CircumscribedRadius);
+
+            return inscribedError <= circumscribedError ? level.InscribedRadius : level.CircumscribedRadius;
+        }
+
+        /// <summary>
         /// 查询轨迹中最早满足目标的时间。
         /// </summary>
         /// <param name="level">待查询图形的唯一条件及容差。</param>

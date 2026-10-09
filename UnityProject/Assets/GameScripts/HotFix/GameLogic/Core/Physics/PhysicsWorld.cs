@@ -168,6 +168,16 @@ namespace GameLogic
         public readonly bool[] GeometryCompleted;
 
         /// <summary>
+        /// 最近一次几何失败反馈；由表现层消费后清除。
+        /// </summary>
+        private GoalFeedback _pendingGoalFeedback;
+
+        /// <summary>
+        /// 是否存在待消费的几何失败反馈。
+        /// </summary>
+        private bool _hasPendingGoalFeedback;
+
+        /// <summary>
         /// 唯一白球在球体数组中的索引。
         /// </summary>
         public readonly int WhiteIndex;
@@ -179,6 +189,26 @@ namespace GameLogic
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// 消费最近一次几何失败反馈，避免表现层重复显示同一事件。
+        /// </summary>
+        /// <param name="feedback">读取到的失败反馈。</param>
+        /// <returns>存在待消费反馈时为 true。</returns>
+        public bool TryConsumeGoalFeedback(out GoalFeedback feedback)
+        {
+            if (!_hasPendingGoalFeedback)
+            {
+                feedback = default;
+
+                return false;
+            }
+
+            feedback = _pendingGoalFeedback;
+            _hasPendingGoalFeedback = false;
+
+            return true;
         }
 
         /// <summary>
@@ -326,6 +356,7 @@ namespace GameLogic
 
             WhiteFoul = false;
             _whiteStoppedAtGoal = false;
+            _hasPendingGoalFeedback = false;
 
             // 新杆只重置 Shot 作用域记录；球洞解锁和整关道具进度继续保留。
             for (int i = 0; i < PropUses.Length; i++)
@@ -961,11 +992,26 @@ namespace GameLogic
                     }
                     else
                     {
+                        Vector2 failurePosition = ball.State.Position;
+                        float failureRadius = ball.State.Radius;
                         Vector2 n = hit.Normal.sqrMagnitude > .000001f ? hit.Normal : Vector2.up;
                         Reflect(ball, n, _level.Physics.GeometryRestitution);
                         Vector2 boundaryNormal;
                         float boundary = gate.MinimumBoundaryDistance(ball.State.Position, out boundaryNormal);
                         ball.State.Position += n * Mathf.Max(epsilon, ball.State.Radius - boundary + epsilon);
+
+                        if (!_dryApproach && hit.Ball == WhiteIndex)
+                        {
+                            float targetRadius = GoalJudge.NearestTargetRadius(gate, failureRadius);
+                            _pendingGoalFeedback = new GoalFeedback(
+                                gate.Id,
+                                failurePosition,
+                                failureRadius,
+                                targetRadius,
+                                Revision + 1);
+                            _hasPendingGoalFeedback = true;
+                            Revision++;
+                        }
                     }
 
                     break;
