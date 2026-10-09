@@ -14,6 +14,16 @@ namespace GameLogic
         private static readonly Color _shrinkingColor = new Color(0.52f, 0.82f, 1);
 
         /// <summary>
+        /// 冻结状态的像素表现颜色。
+        /// </summary>
+        private static readonly Color _frozenColor = new Color(0.62f, 0.86f, 1);
+
+        /// <summary>
+        /// 疾变状态的像素表现颜色。
+        /// </summary>
+        private static readonly Color _fastChangingColor = new Color(1, 0.82f, 0.42f);
+
+        /// <summary>
         /// 初始化时缓存的白球输入组件。
         /// </summary>
         private BallShootComponent _shoot;
@@ -36,7 +46,23 @@ namespace GameLogic
         /// <summary>
         /// 根据白球的增长或缩小趋势决定球面颜色。
         /// </summary>
-        protected override Color SurfaceColor => _simulation.Growing ? Color.white : _shrinkingColor;
+        protected override Color SurfaceColor
+        {
+            get
+            {
+                if (_simulation.Frozen)
+                {
+                    return _frozenColor;
+                }
+
+                if (_simulation.FastChanging)
+                {
+                    return _fastChangingColor;
+                }
+
+                return _simulation.Growing ? Color.white : _shrinkingColor;
+            }
+        }
 
         /// <summary>
         /// 自动获取并缓存白球独有的能力组件。
@@ -56,7 +82,7 @@ namespace GameLogic
         /// <param name="ball">白球的模拟快照。</param>
         protected override void SyncFeatures(SimulatedBall ball)
         {
-            _simulation.SetGrowing(ball.Growing);
+            _simulation.SetState(ball.Growing, ball.RateMultiplier);
         }
 
         /// <summary>

@@ -73,8 +73,38 @@ namespace GameLogic
                 }
             }
 
+            ApplyStatePattern(state);
             _renderer.SetPropertyBlock(_properties);
-            _cap.gameObject.SetActive(state != PocketState.Unlocked);
+        }
+
+        /// <summary>
+        /// 通过盖板几何状态表达洞态，避免仅依赖颜色区分。
+        /// </summary>
+        private void ApplyStatePattern(PocketState state)
+        {
+            bool enabled = state != PocketState.Disabled;
+            _renderer.enabled = enabled;
+            _cap.gameObject.SetActive(state == PocketState.Locked || state == PocketState.Occupied || state == PocketState.Disabled);
+
+            switch (state)
+            {
+                case PocketState.Disabled:
+                    _cap.localScale = Vector3.one * 0.72f;
+                    _cap.localRotation = Quaternion.identity;
+                    break;
+                case PocketState.Locked:
+                    _cap.localScale = Vector3.one;
+                    _cap.localRotation = Quaternion.identity;
+                    break;
+                case PocketState.Unlocked:
+                    _cap.localScale = Vector3.one;
+                    _cap.localRotation = Quaternion.identity;
+                    break;
+                case PocketState.Occupied:
+                    _cap.localScale = Vector3.one * 0.84f;
+                    _cap.localRotation = Quaternion.Euler(0, 0, 45);
+                    break;
+            }
         }
     }
 }
