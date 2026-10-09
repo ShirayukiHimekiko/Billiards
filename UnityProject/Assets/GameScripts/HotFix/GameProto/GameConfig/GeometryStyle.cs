@@ -19,6 +19,11 @@ public sealed partial class GeometryStyle : Luban.BeanBase
         FigureColor = ExternalTypeUtil.NewVector4(global::GameConfig.vector4.Deserializevector4(_buf));
         CircleColor = ExternalTypeUtil.NewVector4(global::GameConfig.vector4.Deserializevector4(_buf));
         LineWidth = _buf.ReadFloat();
+        PreviewColor = ExternalTypeUtil.NewVector4(global::GameConfig.vector4.Deserializevector4(_buf));
+        PreviewLineWidth = _buf.ReadFloat();
+        PreviewFailureThreshold = _buf.ReadInt();
+        PreviewFailureInterval = _buf.ReadInt();
+        PreviewDuration = _buf.ReadFloat();
     }
 
     public static GeometryStyle DeserializeGeometryStyle(ByteBuf _buf)
@@ -29,6 +34,11 @@ public sealed partial class GeometryStyle : Luban.BeanBase
     public readonly UnityEngine.Vector4 FigureColor;
     public readonly UnityEngine.Vector4 CircleColor;
     public readonly float LineWidth;
+    public readonly UnityEngine.Vector4 PreviewColor;
+    public readonly float PreviewLineWidth;
+    public readonly int PreviewFailureThreshold;
+    public readonly int PreviewFailureInterval;
+    public readonly float PreviewDuration;
    
     public const int __ID__ = -1263743937;
     public override int GetTypeId() => __ID__;
@@ -43,6 +53,11 @@ public sealed partial class GeometryStyle : Luban.BeanBase
         + "figureColor:" + FigureColor + ","
         + "circleColor:" + CircleColor + ","
         + "lineWidth:" + LineWidth + ","
+        + "previewColor:" + PreviewColor + ","
+        + "previewLineWidth:" + PreviewLineWidth + ","
+        + "previewFailureThreshold:" + PreviewFailureThreshold + ","
+        + "previewFailureInterval:" + PreviewFailureInterval + ","
+        + "previewDuration:" + PreviewDuration + ","
         + "}";
     }
 }

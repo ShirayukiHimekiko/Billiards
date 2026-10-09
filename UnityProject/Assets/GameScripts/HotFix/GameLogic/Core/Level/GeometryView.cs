@@ -44,6 +44,13 @@ namespace GameLogic
         private float _lineWidth;
 
         /// <summary>
+        /// 预亮目标样式与持续时间。
+        /// </summary>
+        private Color _previewColor;
+        private float _previewLineWidth;
+        private float _previewDuration;
+
+        /// <summary>
         /// 失败反馈已显示的非缩放时间。
         /// </summary>
         private float _feedbackElapsed;
@@ -60,6 +67,14 @@ namespace GameLogic
         private float _feedbackLineWidth;
 
         /// <summary>
+        /// 预亮目标的独立生命周期状态。
+        /// </summary>
+        private float _previewElapsed;
+        private bool _previewVisible;
+        private Vector2 _previewCenter;
+        private float _previewRadius;
+
+        /// <summary>
         /// 图形明细 ID。
         /// </summary>
         public int GeometryId => _geometryId;
@@ -74,8 +89,12 @@ namespace GameLogic
             _geometryId = data.Id;
             Vector4 a = style.FigureColor;
             Vector4 b = style.CircleColor;
+            Vector4 c = style.PreviewColor;
             _circleColor = new Color(b.x, b.y, b.z, b.w);
             _lineWidth = style.LineWidth;
+            _previewColor = new Color(c.x, c.y, c.z, c.w);
+            _previewLineWidth = style.PreviewLineWidth;
+            _previewDuration = style.PreviewDuration;
             _figure.SetStyle(new Color(a.x, a.y, a.z, a.w), _lineWidth);
             _circle.SetStyle(_circleColor, _lineWidth);
             _figure.SetTriangle(data.A, data.B, data.C);
@@ -101,7 +120,16 @@ namespace GameLogic
             _feedbackLineWidth = Mathf.Clamp(_lineWidth + Mathf.Abs(feedback.RadiusDelta) * .5f, _lineWidth, .18f);
             _circle.transform.localPosition = feedback.Position;
             _circle.gameObject.SetActive(true);
-            RenderFeedback(1);
+
+            if (feedback.ShouldPreview)
+            {
+                _previewElapsed = 0;
+                _previewVisible = true;
+                _previewCenter = feedback.TargetCenter;
+                _previewRadius = feedback.TargetRadius;
+            }
+
+            RenderCurrentState();
         }
 
         /// <summary>
@@ -115,10 +143,11 @@ namespace GameLogic
             if (completed)
             {
                 _feedbackVisible = false;
+                _previewVisible = false;
             }
 
             _figure.gameObject.SetActive(!completed);
-            _circle.gameObject.SetActive(!completed && (_hints || _feedbackVisible));
+            ApplyCircleVisibility();
         }
 
         /// <summary>
@@ -128,37 +157,68 @@ namespace GameLogic
         public void SetHints(bool hints)
         {
             _hints = hints;
-            _circle.gameObject.SetActive(!_completed && (_feedbackVisible || hints));
+            ApplyCircleVisibility();
         }
 
         private void Update()
         {
-            if (!_feedbackVisible)
+            if (!_feedbackVisible && !_previewVisible)
             {
                 return;
             }
 
-            _feedbackElapsed += Time.unscaledDeltaTime;
-
-            if (_feedbackElapsed < .05f)
+            if (_feedbackVisible)
             {
-                RenderFeedback(1);
+                _feedbackElapsed += Time.unscaledDeltaTime;
+
+                if (_feedbackElapsed >= .45f)
+                {
+                    _feedbackVisible = false;
+                }
+            }
+
+            if (_previewVisible)
+            {
+                _previewElapsed += Time.unscaledDeltaTime;
+
+                if (_previewElapsed >= _previewDuration)
+                {
+                    _previewVisible = false;
+                }
+            }
+
+            RenderCurrentState();
+            ApplyCircleVisibility();
+        }
+
+        /// <summary>
+        /// 按预亮、失败反馈、静态条件圆的优先级绘制当前状态。
+        /// </summary>
+        private void RenderCurrentState()
+        {
+            if (_previewVisible)
+            {
+                _circle.transform.localPosition = _previewCenter;
+                _circle.SetStyle(_previewColor, _previewLineWidth);
+                _circle.SetCircle(_previewRadius);
 
                 return;
             }
 
-            float fade = Mathf.Clamp01((_feedbackElapsed - .05f) / .4f);
-
-            if (fade >= 1)
+            if (_feedbackVisible)
             {
-                _feedbackVisible = false;
-                RestoreCircle();
-                _circle.gameObject.SetActive(!_completed && _hints);
+                float fade = Mathf.Clamp01((_feedbackElapsed - .05f) / .4f);
+                RenderFeedback(1 - fade);
 
                 return;
             }
 
-            RenderFeedback(1 - fade);
+            RestoreCircle();
+        }
+
+        private void ApplyCircleVisibility()
+        {
+            _circle.gameObject.SetActive(!_completed && (_hints || _feedbackVisible || _previewVisible));
         }
 
         private void RenderFeedback(float opacity)

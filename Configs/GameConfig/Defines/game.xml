@@ -98,6 +98,11 @@
     <var name="figureColor" type="vector4" />
     <var name="circleColor" type="vector4" />
     <var name="lineWidth" type="float" />
+    <var name="previewColor" type="vector4" />
+    <var name="previewLineWidth" type="float" />
+    <var name="previewFailureThreshold" type="int" />
+    <var name="previewFailureInterval" type="int" />
+    <var name="previewDuration" type="float" />
   </bean>
   <bean name="PredictionStyle">
     <var name="color" type="vector4" />

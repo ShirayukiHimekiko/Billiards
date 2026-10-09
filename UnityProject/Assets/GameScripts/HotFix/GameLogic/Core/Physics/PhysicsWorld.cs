@@ -168,6 +168,11 @@ namespace GameLogic
         public readonly bool[] GeometryCompleted;
 
         /// <summary>
+        /// 与关卡图形顺序对应的几何门失败次数。
+        /// </summary>
+        public readonly int[] GeometryFailureCounts;
+
+        /// <summary>
         /// 最近一次几何失败反馈；由表现层消费后清除。
         /// </summary>
         private GoalFeedback _pendingGoalFeedback;
@@ -300,6 +305,7 @@ namespace GameLogic
             PocketStates = new PocketState[level.Pockets.Count];
             PropUses = new int[level.Props.Count];
             GeometryCompleted = new bool[level.Geometries.Count];
+            GeometryFailureCounts = new int[level.Geometries.Count];
             _admitted = new bool[level.Geometries.Count * Balls.Length];
             _conditionLatched = new bool[_admitted.Length];
             _trajectories = new BallTrajectory[Balls.Length];
@@ -332,6 +338,7 @@ namespace GameLogic
             Array.Copy(PocketStates, copy.PocketStates, PocketStates.Length);
             Array.Copy(PropUses, copy.PropUses, PropUses.Length);
             Array.Copy(GeometryCompleted, copy.GeometryCompleted, GeometryCompleted.Length);
+            Array.Copy(GeometryFailureCounts, copy.GeometryFailureCounts, GeometryFailureCounts.Length);
             Array.Copy(_admitted, copy._admitted, _admitted.Length);
             Array.Copy(_conditionLatched, copy._conditionLatched, _conditionLatched.Length);
 
@@ -901,6 +908,8 @@ namespace GameLogic
                         GeometryCompleted[hit.Other] = PropUses[prop] >= _level.Props[prop].UseLimit;
                     }
 
+                    GeometryFailureCounts[hit.Other] = 0;
+
                     if (hit.Ball == WhiteIndex)
                     {
                         // 容差只用于识别成功；提交时吸附到命中的理论目标圆。
@@ -1002,12 +1011,18 @@ namespace GameLogic
 
                         if (!_dryApproach && hit.Ball == WhiteIndex)
                         {
-                            float targetRadius = GoalJudge.NearestTargetRadius(gate, failureRadius);
+                            GoalMatch target = GoalJudge.NearestTarget(gate, failureRadius);
+                            int failureCount = ++GeometryFailureCounts[hit.Other];
+                            bool shouldPreview = ShouldPreview(failureCount);
                             _pendingGoalFeedback = new GoalFeedback(
                                 gate.Id,
                                 failurePosition,
                                 failureRadius,
-                                targetRadius,
+                                target.Radius,
+                                target.Kind,
+                                target.Center,
+                                failureCount,
+                                shouldPreview,
                                 Revision + 1);
                             _hasPendingGoalFeedback = true;
                             Revision++;
@@ -1016,6 +1031,17 @@ namespace GameLogic
 
                     break;
             }
+        }
+
+        /// <summary>
+        /// 判断本次失败是否命中配置的预亮梯度节点。
+        /// </summary>
+        private bool ShouldPreview(int failureCount)
+        {
+            int threshold = _level.GeometryStyle.PreviewFailureThreshold;
+            int interval = _level.GeometryStyle.PreviewFailureInterval;
+
+            return failureCount >= threshold && (failureCount - threshold) % interval == 0;
         }
 
         /// <summary>

@@ -33,6 +33,26 @@ namespace GameLogic
         public readonly float RadiusDelta;
 
         /// <summary>
+        /// 与当前半径最接近的目标类型。
+        /// </summary>
+        public readonly GoalKind TargetKind;
+
+        /// <summary>
+        /// 推荐目标圆心。
+        /// </summary>
+        public readonly Vector2 TargetCenter;
+
+        /// <summary>
+        /// 当前图形累计失败次数。
+        /// </summary>
+        public readonly int FailureCount;
+
+        /// <summary>
+        /// 本次失败是否达到预亮梯度节点。
+        /// </summary>
+        public readonly bool ShouldPreview;
+
+        /// <summary>
         /// 物理世界提交反馈时的状态版本。
         /// </summary>
         public readonly int Revision;
@@ -42,6 +62,10 @@ namespace GameLogic
             Vector2 position,
             float currentRadius,
             float targetRadius,
+            GoalKind targetKind,
+            Vector2 targetCenter,
+            int failureCount,
+            bool shouldPreview,
             int revision)
         {
             GeometryId = geometryId;
@@ -49,6 +73,10 @@ namespace GameLogic
             CurrentRadius = currentRadius;
             TargetRadius = targetRadius;
             RadiusDelta = targetRadius - currentRadius;
+            TargetKind = targetKind;
+            TargetCenter = targetCenter;
+            FailureCount = failureCount;
+            ShouldPreview = shouldPreview;
             Revision = revision;
         }
     }

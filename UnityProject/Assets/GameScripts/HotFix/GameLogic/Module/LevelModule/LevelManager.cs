@@ -91,7 +91,11 @@ namespace GameLogic
                 || prediction.GapLength <= 0
                 || prediction.LineWidth <= 0
                 || prediction.DotDiameter <= 0
-                || board.GeometryStyle.LineWidth <= 0)
+                || board.GeometryStyle.LineWidth <= 0
+                || board.GeometryStyle.PreviewLineWidth <= 0
+                || board.GeometryStyle.PreviewFailureThreshold <= 0
+                || board.GeometryStyle.PreviewFailureInterval <= 0
+                || board.GeometryStyle.PreviewDuration <= 0)
             {
                 throw new ArgumentException($"台面 {board.Id} 预测或图形样式尺寸必须为正值。");
             }
