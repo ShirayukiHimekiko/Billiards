@@ -27,6 +27,14 @@
   </enum>
   <enum name="PropKind">
     <var name="Flip" value="0" />
+    <var name="Reverse" value="1" />
+    <var name="Freeze" value="2" />
+    <var name="Restore" value="3" />
+    <var name="FastChange" value="4" />
+    <var name="Reveal" value="5" />
+    <var name="Preview" value="6" />
+    <var name="AddShot" value="7" />
+    <var name="Key" value="8" />
   </enum>
   <enum name="UseScope">
     <var name="Shot" value="0" />
@@ -62,8 +70,20 @@
   <bean name="TriggerProp" parent="EffectBinding">
     <var name="propPlacementId" type="int#ref=TbLevelProp" />
   </bean>
-  <bean name="PropEffect" />
+  <bean name="PropEffect">
+    <var name="durationShots" type="int" />
+    <var name="rateMultiplier" type="float" />
+    <var name="targetPocketId" type="int" />
+  </bean>
   <bean name="FlipEffect" parent="PropEffect" />
+  <bean name="ReverseEffect" parent="PropEffect" />
+  <bean name="FreezeEffect" parent="PropEffect" />
+  <bean name="RestoreEffect" parent="PropEffect" />
+  <bean name="FastChangeEffect" parent="PropEffect" />
+  <bean name="RevealEffect" parent="PropEffect" />
+  <bean name="PreviewEffect" parent="PropEffect" />
+  <bean name="AddShotEffect" parent="PropEffect" />
+  <bean name="KeyEffect" parent="PropEffect" />
   <bean name="PocketLayout">
     <var name="slot" type="PocketSlot" />
     <var name="offset" type="vector2" />

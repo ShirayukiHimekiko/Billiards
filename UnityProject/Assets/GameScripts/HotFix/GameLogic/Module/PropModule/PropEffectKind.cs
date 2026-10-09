@@ -9,5 +9,21 @@ namespace GameLogic
         /// 翻转球体尺寸趋势。
         /// </summary>
         Flip = 0,
+
+        Reverse,
+
+        Freeze,
+
+        Restore,
+
+        FastChange,
+
+        Reveal,
+
+        Preview,
+
+        AddShot,
+
+        Key,
     }
 }

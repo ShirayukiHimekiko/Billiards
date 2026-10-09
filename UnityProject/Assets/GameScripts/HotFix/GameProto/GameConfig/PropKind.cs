@@ -14,6 +14,14 @@ namespace GameConfig
     public enum PropKind
     {
         Flip = 0,
+        Reverse = 1,
+        Freeze = 2,
+        Restore = 3,
+        FastChange = 4,
+        Reveal = 5,
+        Preview = 6,
+        AddShot = 7,
+        Key = 8,
     }
 
 } 

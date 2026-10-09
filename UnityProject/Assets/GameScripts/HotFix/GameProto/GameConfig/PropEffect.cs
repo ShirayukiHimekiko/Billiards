@@ -16,6 +16,9 @@ public abstract partial class PropEffect : Luban.BeanBase
 {
     public PropEffect(ByteBuf _buf) 
     {
+        DurationShots = _buf.ReadInt();
+        RateMultiplier = _buf.ReadFloat();
+        TargetPocketId = _buf.ReadInt();
     }
 
     public static PropEffect DeserializePropEffect(ByteBuf _buf)
@@ -23,10 +26,21 @@ public abstract partial class PropEffect : Luban.BeanBase
         switch (_buf.ReadInt())
         {
             case FlipEffect.__ID__: return new FlipEffect(_buf);
+            case ReverseEffect.__ID__: return new ReverseEffect(_buf);
+            case FreezeEffect.__ID__: return new FreezeEffect(_buf);
+            case RestoreEffect.__ID__: return new RestoreEffect(_buf);
+            case FastChangeEffect.__ID__: return new FastChangeEffect(_buf);
+            case RevealEffect.__ID__: return new RevealEffect(_buf);
+            case PreviewEffect.__ID__: return new PreviewEffect(_buf);
+            case AddShotEffect.__ID__: return new AddShotEffect(_buf);
+            case KeyEffect.__ID__: return new KeyEffect(_buf);
             default: throw new SerializationException();
         }
     }
 
+    public readonly int DurationShots;
+    public readonly float RateMultiplier;
+    public readonly int TargetPocketId;
    
 
     public virtual void ResolveRef(Tables tables)
@@ -36,6 +50,9 @@ public abstract partial class PropEffect : Luban.BeanBase
     public override string ToString()
     {
         return "{ "
+        + "durationShots:" + DurationShots + ","
+        + "rateMultiplier:" + RateMultiplier + ","
+        + "targetPocketId:" + TargetPocketId + ","
         + "}";
     }
 }

@@ -71,9 +71,36 @@ namespace GameLogic
             UseLimit = config.UseLimit;
             Kind = PropKindConverter.ToEffectKind(config.PropKind);
 
-            if (!(config.EffectParams is FlipEffect) || Kind != PropEffectKind.Flip)
+            if (!MatchesEffectType(config.EffectParams, Kind))
             {
                 throw new ArgumentException($"道具 {Id} 类型与效果不匹配。");
+            }
+        }
+
+        private static bool MatchesEffectType(PropEffect effect, PropEffectKind kind)
+        {
+            switch (kind)
+            {
+                case PropEffectKind.Flip:
+                    return effect is FlipEffect;
+                case PropEffectKind.Reverse:
+                    return effect is ReverseEffect;
+                case PropEffectKind.Freeze:
+                    return effect is FreezeEffect;
+                case PropEffectKind.Restore:
+                    return effect is RestoreEffect;
+                case PropEffectKind.FastChange:
+                    return effect is FastChangeEffect;
+                case PropEffectKind.Reveal:
+                    return effect is RevealEffect;
+                case PropEffectKind.Preview:
+                    return effect is PreviewEffect;
+                case PropEffectKind.AddShot:
+                    return effect is AddShotEffect;
+                case PropEffectKind.Key:
+                    return effect is KeyEffect;
+                default:
+                    return false;
             }
         }
     }

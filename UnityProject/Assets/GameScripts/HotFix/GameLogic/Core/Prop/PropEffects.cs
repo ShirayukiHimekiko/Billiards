@@ -11,6 +11,11 @@ namespace GameLogic
         /// 实际模拟与预测可复用的无状态翻转策略。
         /// </summary>
         private static readonly IPropEffect Flip = new FlipPropEffect();
+        private static readonly IPropEffect Reverse = new ReversePropEffect();
+        private static readonly IPropEffect Freeze = new FreezePropEffect();
+        private static readonly IPropEffect Restore = new RestorePropEffect();
+        private static readonly IPropEffect FastChange = new FastChangePropEffect();
+        private static readonly IPropEffect Unsupported = new UnsupportedPropEffect();
 
         /// <summary>
         /// 获取道具类型对应的策略。
@@ -19,7 +24,26 @@ namespace GameLogic
         /// <returns>可复用的无状态策略；不支持的类型抛出参数异常。</returns>
         public static IPropEffect Get(PropEffectKind kind)
         {
-            return kind == PropEffectKind.Flip ? Flip : throw new ArgumentOutOfRangeException(nameof(kind));
+            switch (kind)
+            {
+                case PropEffectKind.Flip:
+                    return Flip;
+                case PropEffectKind.Reverse:
+                    return Reverse;
+                case PropEffectKind.Freeze:
+                    return Freeze;
+                case PropEffectKind.Restore:
+                    return Restore;
+                case PropEffectKind.FastChange:
+                    return FastChange;
+                case PropEffectKind.Reveal:
+                case PropEffectKind.Preview:
+                case PropEffectKind.AddShot:
+                case PropEffectKind.Key:
+                    return Unsupported;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(kind));
+            }
         }
 
         /// <summary>

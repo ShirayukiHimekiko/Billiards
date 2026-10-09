@@ -12,19 +12,19 @@ using Luban;
 
 namespace GameConfig
 {
-public sealed partial class FlipEffect : PropEffect
+public sealed partial class AddShotEffect : PropEffect
 {
-    public FlipEffect(ByteBuf _buf)  : base(_buf) 
+    public AddShotEffect(ByteBuf _buf)  : base(_buf) 
     {
     }
 
-    public static FlipEffect DeserializeFlipEffect(ByteBuf _buf)
+    public static AddShotEffect DeserializeAddShotEffect(ByteBuf _buf)
     {
-        return new FlipEffect(_buf);
+        return new AddShotEffect(_buf);
     }
 
    
-    public const int __ID__ = -1802191746;
+    public const int __ID__ = -1474507636;
     public override int GetTypeId() => __ID__;
 
     public override void ResolveRef(Tables tables)
