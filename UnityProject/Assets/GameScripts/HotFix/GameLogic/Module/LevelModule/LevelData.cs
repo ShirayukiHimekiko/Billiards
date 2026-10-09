@@ -12,6 +12,11 @@ namespace GameLogic
     public sealed class LevelData
     {
         /// <summary>
+        /// v0.3 DEMO 固定使用的球洞数量。
+        /// </summary>
+        public const int FixedPocketCount = 6;
+
+        /// <summary>
         /// 关卡主表 ID。
         /// </summary>
         public readonly int Id;
@@ -167,9 +172,9 @@ namespace GameLogic
                 || PredictionPropCount < 0
                 || Bounds.width <= 0
                 || Bounds.height <= 0
-                || Pockets.Count != 6)
+                || Pockets.Count != FixedPocketCount)
             {
-                throw new ArgumentException($"关卡 {Id} 必须有一个白球、一至六个黑球及六洞。");
+                throw new ArgumentException($"关卡 {Id} 必须有一个白球、一至六个黑球及固定六洞。");
             }
 
             for (int i = 0; i < Balls.Count; i++)
@@ -184,6 +189,7 @@ namespace GameLogic
             }
 
             var slots = new HashSet<PocketSlot>();
+            var pocketIds = new HashSet<int>();
             var boundPockets = new HashSet<int>();
             var boundProps = new HashSet<int>();
             var keyPockets = new HashSet<int>();
@@ -191,11 +197,21 @@ namespace GameLogic
             foreach (var pocket in Pockets)
             {
                 if (!slots.Add(pocket.Slot)
+                    || !pocketIds.Add(pocket.Id)
+                    || pocket.Id <= 0
                     || pocket.InitialState == PocketState.Occupied
                     || pocket.CaptureRadius <= 0
                     || pocket.MouthWidth < 2 * pocket.CaptureRadius)
                 {
                     throw new ArgumentException($"关卡 {Id} 洞状态、槽位或尺寸无效。");
+                }
+            }
+
+            for (int slot = 0; slot < FixedPocketCount; slot++)
+            {
+                if (!slots.Contains((PocketSlot)slot))
+                {
+                    throw new ArgumentException($"关卡 {Id} 必须完整配置六个标准球洞槽位。");
                 }
             }
 

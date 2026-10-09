@@ -70,9 +70,10 @@ namespace GameLogic
                 }
             }
 
-            if (board.PocketLayouts.Count != 6 || board.PocketStyles.Count != 4)
+            if (board.PocketLayouts.Count != LevelData.FixedPocketCount
+                || board.PocketStyles.Count != 4)
             {
-                throw new ArgumentException($"台面 {board.Id} 必须配置六洞及四状态样式。");
+                throw new ArgumentException($"台面 {board.Id} 必须配置固定六洞及四状态样式。");
             }
 
             var styleStates = new HashSet<GameConfig.PocketState>();
@@ -82,6 +83,14 @@ namespace GameLogic
                 if (!styleStates.Add(style.State))
                 {
                     throw new ArgumentException($"台面 {board.Id} 球洞样式状态重复。");
+                }
+            }
+
+            foreach (GameConfig.PocketState state in Enum.GetValues(typeof(GameConfig.PocketState)))
+            {
+                if (!styleStates.Contains(state))
+                {
+                    throw new ArgumentException($"台面 {board.Id} 缺少球洞状态 {state} 的样式。");
                 }
             }
 

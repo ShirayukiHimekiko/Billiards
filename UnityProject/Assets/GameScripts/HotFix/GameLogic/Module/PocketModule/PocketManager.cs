@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameLogic
 {
     /// <summary>
-    /// 管理本关六洞表现，物理状态保存在模拟世界。
+    /// 管理本关固定六洞表现，物理状态保存在模拟世界。
     /// </summary>
     public sealed class PocketManager
     {
@@ -14,7 +14,7 @@ namespace GameLogic
         private readonly List<PocketView> _views = new List<PocketView>();
 
         /// <summary>
-        /// 按配置摆放六洞模板实例。
+        /// 按配置摆放固定六洞模板实例。
         /// </summary>
         /// <param name="level">本关六洞摆放与状态样式。</param>
         /// <param name="board">包含球洞模板和实例父节点的台面。</param>
