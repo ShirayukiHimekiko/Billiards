@@ -390,5 +390,40 @@ def create_campaign():
     route_goal(20,4,second,6,'Inscribed',unlock(20,'BottomLeft'))
     route_goal(20,5,third,3,'Circumscribed',unlock(20,'TopLeft'))
     route_goal(20,6,first,math.dist(first['origin'],first['end']),'Circumscribed',unlock(20,'BottomRight'))
+    # v0.3 的洞解锁统一由接触型钥匙完成。旧版几何绑定只用于生成候选路线，
+    # 导出前转换为同位置钥匙，并移除 UnlockPocket 几何，避免两套解锁入口并存。
+    key_targets = {}
+    for row in geometries:
+        binding = row[9]
+        if binding.get('$type') == 'UnlockPocket':
+            key_targets[binding['pocketPlacementId']] = (row[1], row[3])
+
+    geometries = [row for row in geometries if row[9].get('$type') != 'UnlockPocket']
+    key_configs = []
+    key_placements = []
+    level_key_numbers = {}
+    for pocket_id, (level, position) in sorted(key_targets.items()):
+        number = level_key_numbers.get(level, 0) + 1
+        level_key_numbers[level] = number
+        placement_id = level * 100 + 50 + number
+        config_id = 700000 + pocket_id
+        key_configs.append([
+            config_id,
+            'Key',
+            'BilliardsKeyProp',
+            .468,
+            .234,
+            {
+                '$type': 'KeyEffect',
+                'durationShots': 0,
+                'rateMultiplier': 1,
+                'targetPocketId': pocket_id,
+            },
+            'Level',
+            1,
+        ])
+        key_placements.append([placement_id, level, config_id, position, 'Contact'])
+
+    props.extend(key_placements)
     return dict(levels=LEVEL_SPECS, balls=balls, pockets=pockets, props=props,
-                geometries=geometries, references=references)
+                prop_configs=key_configs, geometries=geometries, references=references)

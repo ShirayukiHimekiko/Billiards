@@ -22,7 +22,7 @@ enum('PocketSlot', ['TopLeft', 'TopMiddle', 'TopRight', 'BottomLeft', 'BottomMid
 enum('PocketState', ['Locked', 'Unlocked', 'Occupied', 'Disabled'])
 enum('ConditionKind', ['Inscribed', 'Circumscribed'])
 enum('TriggerMode', ['Contact', 'Geometry'])
-enum('PropKind', ['Flip'])
+enum('PropKind', ['Flip', 'Reverse', 'Freeze', 'Restore', 'FastChange', 'Reveal', 'Preview', 'AddShot', 'Key'])
 enum('UseScope', ['Shot', 'Level'])
 enum('DecelerationModel', ['ShotDistance'])
 bean('ShotParams', [(n, 'float') for n in ['chargeDuration', 'speedMin', 'speedMax', 'radiusMin', 'radiusMax', 'distanceMin', 'distanceMax']])
@@ -32,11 +32,17 @@ bean('Triangle', [('a','vector2'), ('b','vector2'), ('c','vector2')], 'Shape')
 bean('EffectBinding')
 bean('UnlockPocket', [('pocketPlacementId','int#ref=TbLevelPocket')], 'EffectBinding')
 bean('TriggerProp', [('propPlacementId','int#ref=TbLevelProp')], 'EffectBinding')
-bean('PropEffect')
-bean('FlipEffect', (), 'PropEffect')
+bean('PropEffect', [('durationShots','int'), ('rateMultiplier','float'), ('targetPocketId','int')])
+for effect_name in ['FlipEffect', 'ReverseEffect', 'FreezeEffect', 'RestoreEffect',
+                    'FastChangeEffect', 'RevealEffect', 'PreviewEffect',
+                    'AddShotEffect', 'KeyEffect']:
+    bean(effect_name, (), 'PropEffect')
 bean('PocketLayout', [('slot','PocketSlot'), ('offset','vector2'), ('mouthWidth','float'), ('captureRadius','float')])
 bean('PocketStyle', [('state','PocketState'), ('color','vector4')])
-bean('GeometryStyle', [('figureColor','vector4'), ('circleColor','vector4'), ('lineWidth','float')])
+bean('GeometryStyle', [('figureColor','vector4'), ('circleColor','vector4'), ('lineWidth','float'),
+                       ('previewColor','vector4'), ('previewLineWidth','float'),
+                       ('previewFailureThreshold','int'), ('previewFailureInterval','int'),
+                       ('previewDuration','float')])
 bean('PredictionStyle', [('color','vector4'), ('lineWidth','float'), ('dashLength','float'), ('gapLength','float'), ('dotDiameter','float')])
 
 tables = load_workbook(root / 'Datas/__tables__.xlsx')
@@ -73,12 +79,19 @@ campaign = create_campaign()
 table('Level',[('id','int'),('name','string'),('order','int'),('boardConfigId',ref('Board')),('physicsConfigId',ref('Physics')),('maxShots','int'),('showGeometryHintsByDefault','bool'),('difficulty','string'),('objective','string')],[[i,name,i,1,1,shots,True,difficulty,objective] for i,name,difficulty,objective,shots in campaign['levels']])
 layouts=[dict(slot=s,offset=vec(0,0),mouthWidth=1.5,captureRadius=.58) for s in ['TopLeft','TopMiddle','TopRight','BottomLeft','BottomMiddle','BottomRight']]
 styles=[dict(state=s,color=c) for s,c in [('Locked',color(.85,.45,.13)),('Unlocked',color(.05,.08,.07)),('Occupied',color(.3,.8,.55)),('Disabled',color(.48,.48,.5))]]
-table('Board',[('id','int'),('prefabLocation','string'),('min','vector2'),('max','vector2'),('pocketLayouts','list,PocketLayout'),('pocketStyles','list,PocketStyle'),('geometryStyle','GeometryStyle'),('predictionStyle','PredictionStyle')],[[1,'BilliardsTable',vec(-8,-4),vec(8,4),layouts,styles,dict(figureColor=color(1,.79,.33),circleColor=color(.43,.93,.85,.7),lineWidth=.035),dict(color=color(.76,.96,.89,.7),lineWidth=.025,dashLength=.18,gapLength=.12,dotDiameter=.12)]])
+table('Board',[('id','int'),('prefabLocation','string'),('min','vector2'),('max','vector2'),('pocketLayouts','list,PocketLayout'),('pocketStyles','list,PocketStyle'),('geometryStyle','GeometryStyle'),('predictionStyle','PredictionStyle')],[[1,'BilliardsTable',vec(-8,-4),vec(8,4),layouts,styles,dict(figureColor=color(1,.79,.33),circleColor=color(.43,.93,.85,.7),lineWidth=.035,previewColor=color(1,.33,.16,.95),previewLineWidth=.08,previewFailureThreshold=5,previewFailureInterval=2,previewDuration=1.2),dict(color=color(.76,.96,.89,.7),lineWidth=.025,dashLength=.18,gapLength=.12,dotDiameter=.12)]])
 shot=dict(chargeDuration=3.0,speedMin=4,speedMax=8,radiusMin=.25,radiusMax=1,distanceMin=4,distanceMax=18)
 size_change = dict(growRateMin=.06, growRateMax=.18, shrinkRate=.12)
 # 二十关统一使用白球 ID 1；暂时保留未引用的 ID 3，避免在本轮混入配置删除。
 table('Ball',[('id','int'),('ballKind','BallKind'),('prefabLocation','string'),('mass','float'),('radiusMin','float'),('radiusMax','float'),('shotParams','ShotParams?'),('sizeChangeParams','SizeChangeParams?')],[[1,'White','BilliardsWhiteBall',1,.15,1.6,shot,size_change],[2,'Black','BilliardsBlackBall',1,.28,.28,None,None],[3,'White','BilliardsWhiteBall',1,.15,1.6,shot,size_change]])
-table('Prop',[('id','int'),('propKind','PropKind'),('prefabLocation','string'),('visualDiameter','float'),('triggerRadius','float'),('effectParams','PropEffect'),('useScope','UseScope'),('useLimit','int')],[[1,'Flip','BilliardsFlipProp',.468,.234,{'$type':'FlipEffect'},'Shot',1],[2,'Flip','BilliardsFlipProp',.468,.234,{'$type':'FlipEffect'},'Level',1]])
+prop_rows = [
+    [1, 'Flip', 'BilliardsFlipProp', .468, .234,
+     {'$type': 'FlipEffect', 'durationShots': 1, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Shot', 1],
+    [2, 'Flip', 'BilliardsFlipProp', .468, .234,
+     {'$type': 'FlipEffect', 'durationShots': 1, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Level', 1],
+]
+prop_rows.extend(campaign['prop_configs'])
+table('Prop',[('id','int'),('propKind','PropKind'),('prefabLocation','string'),('visualDiameter','float'),('triggerRadius','float'),('effectParams','PropEffect'),('useScope','UseScope'),('useLimit','int')],prop_rows)
 table('Physics',[('id','int'),('simulationStep','float'),('ballRestitution','float'),('railRestitution','float'),('geometryRestitution','float'),('contactTolerance','float'),('stopSpeed','float'),('maxEventIterations','int'),('predictionBudget','int'),('decelerationModel','DecelerationModel')],[[1,1/120,.6,1,1,.0001,.015,64,10000,'ShotDistance']])
 table('LevelBall',[('id','int'),('levelId',ref('Level')),('ballConfigId',ref('Ball')),('spawnPosition','vector2'),('spawnRadius','float')],campaign['balls'])
 table('LevelPocket',[('id','int'),('levelId',ref('Level')),('slot','PocketSlot'),('initialState','PocketState')],campaign['pockets'])
