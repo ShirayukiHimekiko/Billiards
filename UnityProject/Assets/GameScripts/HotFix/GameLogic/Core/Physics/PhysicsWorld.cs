@@ -309,7 +309,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 开始一杆并恢复白球增长趋势；出杆不再改写白球半径，尺寸跨杆保留，只检查台面及球间摆放，目标圆在运动接近时判断是否阻挡。
+        /// 开始一杆并按力度重置白球初始半径、变化速率和初速度。
         /// </summary>
         /// <param name="direction">非零的击球方向，内部归一化后应用。</param>
         /// <param name="power">调用方提供的零到一归一化力度。</param>
@@ -352,9 +352,10 @@ namespace GameLogic
             float distance = Mathf.Lerp(config.DistanceMin, config.DistanceMax, power);
             // 用无碰撞基准路程推导本杆共用减速度，碰撞后各球的实际路程自行演化。
             _deceleration = speed * speed / (2 * distance);
-            // 白球半径跨杆保留：出杆不再改写尺寸，只在关卡重开或犯规重生时回到出生半径。
-            white.Growing = true;
-            // 本杆成长速率随击球力度线性提升，缩小趋势不受力度影响。
+            white.State.Radius = Mathf.Lerp(config.ShotRadiusMin, config.ShotRadiusMax, power);
+            white.BaseRadius = white.State.Radius;
+            white.RadiusDirection = 1;
+            white.RateMultiplier = 1;
             white.GrowRate = Mathf.Lerp(config.GrowRateMin, config.GrowRateMax, power);
             white.State.Velocity = direction.normalized * speed;
             AdmitOverlappingGeometries();
@@ -578,7 +579,7 @@ namespace GameLogic
 
             var state = ball.State;
             var config = ball.Data.Config;
-            float rate = ball.Growing ? ball.GrowRate : -config.ShrinkRate;
+            float rate = ball.RadiusDirection * ball.GrowRate * ball.RateMultiplier;
 
             if (ball.Growing
                 && state.Radius >= config.RadiusMax - .000001f
@@ -1189,6 +1190,9 @@ namespace GameLogic
                 Position = best,
                 Radius = radius
             };
+            ball.BaseRadius = radius;
+            ball.RadiusDirection = 1;
+            ball.RateMultiplier = 1;
             Revision++;
         }
 

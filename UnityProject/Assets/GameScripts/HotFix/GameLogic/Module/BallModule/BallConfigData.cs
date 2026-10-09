@@ -79,7 +79,7 @@ namespace GameLogic
         public readonly float GrowRateMax;
 
         /// <summary>
-        /// 白球处于缩小趋势时每秒减少的半径，配置保存正值。
+        /// 历史缩小速率字段，保留用于旧配置兼容；当前模型统一使用有符号的 GrowRate。
         /// </summary>
         public readonly float ShrinkRate;
 
