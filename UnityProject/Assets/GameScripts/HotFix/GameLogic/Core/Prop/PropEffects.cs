@@ -15,6 +15,7 @@ namespace GameLogic
         private static readonly IPropEffect Freeze = new FreezePropEffect();
         private static readonly IPropEffect Restore = new RestorePropEffect();
         private static readonly IPropEffect FastChange = new FastChangePropEffect();
+        private static readonly IPropEffect Key = new KeyPropEffect();
         private static readonly IPropEffect Unsupported = new UnsupportedPropEffect();
 
         /// <summary>
@@ -36,10 +37,11 @@ namespace GameLogic
                     return Restore;
                 case PropEffectKind.FastChange:
                     return FastChange;
+                case PropEffectKind.Key:
+                    return Key;
                 case PropEffectKind.Reveal:
                 case PropEffectKind.Preview:
                 case PropEffectKind.AddShot:
-                case PropEffectKind.Key:
                     return Unsupported;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(kind));

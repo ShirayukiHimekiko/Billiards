@@ -70,7 +70,7 @@ namespace GameLogic
         public readonly BallKind AllowedBallKind;
 
         /// <summary>
-        /// 效果是否为解锁球洞；否则触发绑定道具。
+        /// 是否保留旧版洞绑定类型；新版只记录几何完成，洞由钥匙拾取解锁。
         /// </summary>
         public readonly bool UnlocksPocket;
 

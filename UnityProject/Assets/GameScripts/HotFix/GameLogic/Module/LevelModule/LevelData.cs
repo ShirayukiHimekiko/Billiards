@@ -186,6 +186,7 @@ namespace GameLogic
             var slots = new HashSet<PocketSlot>();
             var boundPockets = new HashSet<int>();
             var boundProps = new HashSet<int>();
+            var keyPockets = new HashSet<int>();
 
             foreach (var pocket in Pockets)
             {
@@ -205,6 +206,18 @@ namespace GameLogic
                     prop.TriggerRadius))
                 {
                     throw new ArgumentException($"道具 {prop.Id} 配置无效。");
+                }
+
+                if (prop.Kind == PropEffectKind.Key
+                    && (prop.TriggerMode != TriggerMode.Contact
+                    || prop.UseScope != UseScope.Level
+                    || prop.UseLimit != 1
+                    || prop.TargetPocketId <= 0
+                    || !keyPockets.Add(prop.TargetPocketId)
+                    || !pockets.Exists(p => p.Id == prop.TargetPocketId
+                    && p.InitialState == PocketState.Locked)))
+                {
+                    throw new ArgumentException($"钥匙道具 {prop.Id} 必须接触拾取、整关只使用一次，并独占绑定本关上锁洞。");
                 }
             }
 
@@ -236,9 +249,11 @@ namespace GameLogic
 
             foreach (var pocket in Pockets)
             {
-                if (pocket.InitialState == PocketState.Locked && !boundPockets.Contains(pocket.Id))
+                if (pocket.InitialState == PocketState.Locked
+                    && !boundPockets.Contains(pocket.Id)
+                    && !keyPockets.Contains(pocket.Id))
                 {
-                    throw new ArgumentException($"洞 {pocket.Id} 缺少解锁图形。");
+                    throw new ArgumentException($"洞 {pocket.Id} 缺少解锁配置。");
                 }
 
                 if (pocket.InitialState != PocketState.Disabled)

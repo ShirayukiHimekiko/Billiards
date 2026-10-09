@@ -55,6 +55,11 @@ namespace GameLogic
         public readonly PropEffectKind Kind;
 
         /// <summary>
+        /// 钥匙效果绑定的球洞明细 ID；非钥匙道具为零。
+        /// </summary>
+        public readonly int TargetPocketId;
+
+        /// <summary>
         /// 转换道具明细及复用参数。
         /// </summary>
         /// <param name="row">本关道具位置及触发模式。</param>
@@ -75,6 +80,10 @@ namespace GameLogic
             {
                 throw new ArgumentException($"道具 {Id} 类型与效果不匹配。");
             }
+
+            TargetPocketId = Kind == PropEffectKind.Key
+                ? ((KeyEffect)config.EffectParams).TargetPocketId
+                : 0;
         }
 
         private static bool MatchesEffectType(PropEffect effect, PropEffectKind kind)

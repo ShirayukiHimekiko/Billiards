@@ -860,8 +860,8 @@ namespace GameLogic
 
                     if (geometry.UnlocksPocket)
                     {
+                        // 几何条件只记录完成；球洞必须由绑定钥匙拾取后解锁。
                         GeometryCompleted[hit.Other] = true;
-                        PocketStates[PocketIndex(geometry.TargetId)] = PocketState.Unlocked;
                     }
                     else
                     {
@@ -1077,7 +1077,24 @@ namespace GameLogic
         /// <param name="ball">接受策略效果的模拟球。</param>
         private void TriggerProp(int index, SimulatedBall ball)
         {
-            _propEffects[index].Apply(ball);
+            var prop = _level.Props[index];
+
+            if (prop.Kind == PropEffectKind.Key)
+            {
+                int pocket = PocketIndex(prop.TargetPocketId);
+
+                if (PocketStates[pocket] != PocketState.Locked)
+                {
+                    throw new InvalidOperationException($"钥匙道具 {prop.Id} 触发时绑定洞 {prop.TargetPocketId} 不是上锁状态。");
+                }
+
+                PocketStates[pocket] = PocketState.Unlocked;
+            }
+            else
+            {
+                _propEffects[index].Apply(ball);
+            }
+
             PropUses[index]++;
             Revision++;
         }
