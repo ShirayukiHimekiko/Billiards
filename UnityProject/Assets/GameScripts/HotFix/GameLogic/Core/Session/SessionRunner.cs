@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GameLogic
 {
@@ -7,6 +8,9 @@ namespace GameLogic
     /// </summary>
     public sealed class SessionRunner : MonoBehaviour
     {
+        /// <summary>
+        /// DEMO 约定的单键重置按键；UI 按钮与该入口共用 Session.Restart。
+        /// </summary>
         /// <summary>
         /// 当前绑定的桌球会话，释放或解绑后为空。
         /// </summary>
@@ -26,6 +30,13 @@ namespace GameLogic
         /// </summary>
         private void Update()
         {
+            if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                _session?.Restart();
+
+                return;
+            }
+
             _session?.Tick(Time.unscaledDeltaTime);
         }
 
