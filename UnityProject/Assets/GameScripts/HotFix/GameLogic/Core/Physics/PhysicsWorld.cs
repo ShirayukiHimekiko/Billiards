@@ -454,7 +454,6 @@ namespace GameLogic
             float distance = Mathf.Lerp(config.DistanceMin, config.DistanceMax, power);
             // 用无碰撞基准路程推导本杆共用减速度，碰撞后各球的实际路程自行演化。
             _deceleration = speed * speed / (2 * distance);
-            white.State.Radius = Mathf.Lerp(config.ShotRadiusMin, config.ShotRadiusMax, power);
             white.BaseRadius = white.State.Radius;
             white.RadiusDirection = 1;
             white.RateMultiplier = 1;
