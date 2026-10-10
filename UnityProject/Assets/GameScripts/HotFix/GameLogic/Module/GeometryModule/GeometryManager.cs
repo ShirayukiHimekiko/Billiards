@@ -68,6 +68,17 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 切换显影道具提供的条件圆显示。
+        /// </summary>
+        public void SetReveal(bool visible)
+        {
+            foreach (var view in _views)
+            {
+                view.SetRevealed(visible);
+            }
+        }
+
+        /// <summary>
         /// 释放本关图形。
         /// </summary>
         public void Release()

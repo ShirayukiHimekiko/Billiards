@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using GameConfig;
 using UnityEngine;
 
@@ -20,6 +21,18 @@ namespace GameLogic
         /// </summary>
         [SerializeField]
         private Transform _cap;
+
+        /// <summary>
+        /// 四种洞态共用的像素图案渲染器。
+        /// </summary>
+        [SerializeField]
+        private SpriteRenderer _statePattern;
+
+        /// <summary>
+        /// 洞态图案按 Locked、Unlocked、Occupied、Disabled 顺序绑定。
+        /// </summary>
+        [SerializeField]
+        private Sprite[] _stateSprites;
 
         /// <summary>
         /// 按实例更新材质参数的可复用属性块。
@@ -45,6 +58,12 @@ namespace GameLogic
         {
             _properties = new MaterialPropertyBlock();
             _styles = styles;
+
+            if (_renderer == null || _cap == null || _statePattern == null || _stateSprites == null || _stateSprites.Length != 4)
+            {
+                throw new InvalidOperationException("球洞 Prefab 必须绑定颜色 Renderer、盖板、四态像素图案和对应 Sprite 数组。");
+            }
+
             transform.localPosition = data.Position;
             transform.localScale = Vector3.one * (data.CaptureRadius * 2);
             SetState(data.InitialState);
@@ -74,7 +93,29 @@ namespace GameLogic
             }
 
             ApplyStatePattern(state);
+            _statePattern.sprite = _stateSprites[GetStatePatternIndex(state)];
+            _statePattern.enabled = true;
             _renderer.SetPropertyBlock(_properties);
+        }
+
+        /// <summary>
+        /// 将配置枚举映射到序列化数组，避免依赖枚举声明顺序。
+        /// </summary>
+        private int GetStatePatternIndex(PocketState state)
+        {
+            switch (state)
+            {
+                case PocketState.Locked:
+                    return 0;
+                case PocketState.Unlocked:
+                    return 1;
+                case PocketState.Occupied:
+                    return 2;
+                case PocketState.Disabled:
+                    return 3;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, "未知球洞状态。");
+            }
         }
 
         /// <summary>

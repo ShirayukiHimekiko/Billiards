@@ -66,6 +66,24 @@ namespace GameLogic
         private static readonly int _rollDirectionId = Shader.PropertyToID("_RollDirection");
 
         /// <summary>
+        /// 16BIT 球体尺寸档位 Sprite，数组顺序从半径下限到上限。
+        /// </summary>
+        [SerializeField]
+        private Sprite[] _displaySprites;
+
+        /// <summary>
+        /// 表达白球状态语义的像素覆盖层渲染器。
+        /// </summary>
+        [SerializeField]
+        private SpriteRenderer _stateRenderer;
+
+        /// <summary>
+        /// 状态覆盖层 Sprite，索引由子类状态语义决定。
+        /// </summary>
+        [SerializeField]
+        private Sprite[] _stateSprites;
+
+        /// <summary>
         /// 缓存的球面渲染组件。
         /// </summary>
         private SpriteRenderer _renderer;
@@ -129,9 +147,24 @@ namespace GameLogic
             _renderer = GetRequiredComponent<SpriteRenderer>(_surface.gameObject);
             _collider = GetRequiredComponent<CircleCollider2D>(gameObject);
 
-            if (_renderer.sprite == null)
+            if (_displaySprites == null || _displaySprites.Length != DISPLAY_RADIUS_STEPS)
             {
-                throw new InvalidOperationException($"球 {data.Id} Prefab 节点 {SURFACE_NODE_NAME} 缺少球面 Sprite。");
+                throw new InvalidOperationException($"球 {data.Id} Prefab 必须绑定 {DISPLAY_RADIUS_STEPS} 档 16BIT 球体 Sprite。");
+            }
+
+            if (_stateRenderer == null && RequiresStateOverlay)
+            {
+                throw new InvalidOperationException($"球 {data.Id} Prefab 缺少状态覆盖层 Renderer。");
+            }
+
+            if (RequiresStateOverlay && (_stateSprites == null || _stateSprites.Length != 4))
+            {
+                throw new InvalidOperationException($"球 {data.Id} Prefab 必须绑定 4 档状态覆盖层 Sprite。");
+            }
+
+            if (_displaySprites[0] == null || _displaySprites[DISPLAY_RADIUS_STEPS - 1] == null)
+            {
+                throw new InvalidOperationException($"球 {data.Id} Prefab 缺少首尾 16BIT 球体 Sprite。");
             }
 
             _properties = new MaterialPropertyBlock();
@@ -169,22 +202,84 @@ namespace GameLogic
             State = state;
             transform.localPosition = state.Position;
 
-            float displayRadius = QuantizeDisplayRadius(state.Radius);
+            int displayIndex = QuantizeDisplayIndex(state.Radius);
+            float displayRadius = GetDisplayRadius(displayIndex);
             float diameter = 2 * displayRadius;
-            _surface.localScale = Vector3.one * (diameter / _renderer.sprite.bounds.size.x);
+            _renderer.sprite = _displaySprites[displayIndex];
+            _surface.localScale = Vector3.one;
             _shadow.localScale = new Vector3(diameter * SHADOW_WIDTH_SCALE, diameter * SHADOW_HEIGHT_SCALE, 1);
             _shadow.localPosition = new Vector3(displayRadius * SHADOW_OFFSET_X, displayRadius * SHADOW_OFFSET_Y, 0);
             _collider.radius = state.Radius;
             _renderer.color = SurfaceColor;
+            ApplyStateOverlay(diameter);
             _properties.SetFloat(_rollPhaseId, _rollPhase);
             _renderer.SetPropertyBlock(_properties);
         }
 
         /// <summary>
-        /// 将连续模拟半径映射为固定数量的像素表现档位。
+        /// 子类是否需要绑定并显示状态覆盖层。
         /// </summary>
-        /// <returns>当前球体用于渲染的离散半径。</returns>
-        private float QuantizeDisplayRadius(float radius)
+        protected virtual bool RequiresStateOverlay
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 当前状态覆盖层索引；负值表示隐藏覆盖层。
+        /// </summary>
+        protected virtual int StateOverlayIndex
+        {
+            get
+            {
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 应用子类提供的状态覆盖层，不参与物理状态计算。
+        /// </summary>
+        private void ApplyStateOverlay(float diameter)
+        {
+            if (_stateRenderer == null)
+            {
+                return;
+            }
+
+            int index = StateOverlayIndex;
+            _stateRenderer.sprite = index >= 0 && index < _stateSprites.Length ? _stateSprites[index] : null;
+            _stateRenderer.enabled = _stateRenderer.sprite != null;
+            if (_stateRenderer.sprite != null)
+            {
+                _stateRenderer.transform.localScale = Vector3.one * (diameter / _stateRenderer.sprite.bounds.size.x);
+            }
+            _stateRenderer.color = Color.white;
+        }
+
+        /// <summary>
+        /// 将连续模拟半径映射为固定数量的像素表现档位索引。
+        /// </summary>
+        /// <returns>当前球体用于渲染的离散档位索引。</returns>
+        private int QuantizeDisplayIndex(float radius)
+        {
+            float min = _data.Config.RadiusMin;
+            float max = _data.Config.RadiusMax;
+
+            if (max <= min)
+            {
+                return 0;
+            }
+
+            float normalized = Mathf.InverseLerp(min, max, Mathf.Clamp(radius, min, max));
+            return Mathf.Clamp(Mathf.RoundToInt(normalized * (DISPLAY_RADIUS_STEPS - 1)), 0, DISPLAY_RADIUS_STEPS - 1);
+        }
+
+        /// <summary>
+        /// 将档位索引映射回用于阴影和局部尺寸的离散半径。
+        /// </summary>
+        private float GetDisplayRadius(int index)
         {
             float min = _data.Config.RadiusMin;
             float max = _data.Config.RadiusMax;
@@ -194,9 +289,7 @@ namespace GameLogic
                 return min;
             }
 
-            float normalized = Mathf.InverseLerp(min, max, Mathf.Clamp(radius, min, max));
-            float step = Mathf.Round(normalized * (DISPLAY_RADIUS_STEPS - 1));
-            return Mathf.Lerp(min, max, step / (DISPLAY_RADIUS_STEPS - 1));
+            return Mathf.Lerp(min, max, index / (float)(DISPLAY_RADIUS_STEPS - 1));
         }
 
         /// <summary>

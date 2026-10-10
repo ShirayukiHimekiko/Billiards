@@ -5,9 +5,9 @@ namespace GameLogic
     /// </summary>
     public sealed class FastChangePropEffect : IPropEffect
     {
-        public void Apply(SimulatedBall ball)
+        public void Apply(SimulatedBall ball, float rateMultiplier)
         {
-            ball.RateMultiplier = 2;
+            ball.RateMultiplier = rateMultiplier;
         }
     }
 }

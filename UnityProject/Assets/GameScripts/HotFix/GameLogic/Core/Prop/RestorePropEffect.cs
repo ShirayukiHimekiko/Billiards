@@ -5,7 +5,7 @@ namespace GameLogic
     /// </summary>
     public sealed class RestorePropEffect : IPropEffect
     {
-        public void Apply(SimulatedBall ball)
+        public void Apply(SimulatedBall ball, float rateMultiplier)
         {
             ball.State.Radius = ball.BaseRadius;
         }

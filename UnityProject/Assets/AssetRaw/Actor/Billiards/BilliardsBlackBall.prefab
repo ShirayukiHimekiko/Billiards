@@ -265,3 +265,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3667e3808cd8ca4faf9135238232679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameLogic::GameLogic.BlackBall
+  _displaySprites:
+  - {fileID: 21300000, guid: bfeafb4bc44b90d4796568895d8013b8, type: 3}
+  - {fileID: 21300000, guid: 6fdf00b5ed2ce614bb2c0964ef613639, type: 3}
+  - {fileID: 21300000, guid: 9e4c9e1800c03504592a654ca5ea4b4a, type: 3}
+  - {fileID: 21300000, guid: 4026e15d571b33742b20f46cbfb2e199, type: 3}
+  - {fileID: 21300000, guid: 044831f1dec8f64489a6097a5862605e, type: 3}
+  - {fileID: 21300000, guid: bbe92e9555c0f20438360ab8a4b5f835, type: 3}
+  - {fileID: 21300000, guid: e79f7c05201fa0b4fb37ac38bc34c711, type: 3}
+  - {fileID: 21300000, guid: 659d08b45686ee747bd23a2e780c9462, type: 3}
+  - {fileID: 21300000, guid: 0cf06dcd23dd86a40b3065b0a85b415f, type: 3}
+  - {fileID: 21300000, guid: 36816fea2f3df4341b606d31bbae1963, type: 3}
+  - {fileID: 21300000, guid: 04884d657c4b926408b4494a2caca812, type: 3}
+  - {fileID: 21300000, guid: f4ffce3cb805320478faccc7e21cf8b2, type: 3}
+  - {fileID: 21300000, guid: bd8c79471bf2cc144bd36bb328ed544e, type: 3}
+  - {fileID: 21300000, guid: 8c7c900f9e886e446a63af5511798073, type: 3}
+  - {fileID: 21300000, guid: 9b98717ec8b06414482686e2f3ed3117, type: 3}
+  - {fileID: 21300000, guid: 742690048f213444f990ed8c67f6c4fc, type: 3}
+  - {fileID: 21300000, guid: bf581baef49daf149a607e7b5ca594fc, type: 3}
+  - {fileID: 21300000, guid: 19bd437df172ae64bb903a0f023353c6, type: 3}
+  - {fileID: 21300000, guid: bd5dd40624e18ec4bb11d0a9de720082, type: 3}
+  - {fileID: 21300000, guid: a068b787a3e61644b939cf5f77cfeb58, type: 3}
+  - {fileID: 21300000, guid: a1ab2211c6fb1f74eb145932ec2de4b0, type: 3}
+  - {fileID: 21300000, guid: aab03eb4fd694f24f9432dffd3d54072, type: 3}
+  - {fileID: 21300000, guid: 9d5d111e9bec49b4ab54accdb5e3c921, type: 3}
+  - {fileID: 21300000, guid: d1554e94364ad06479b4e1cc900fbadc, type: 3}
+  _stateRenderer: {fileID: 0}
+  _stateSprites: []

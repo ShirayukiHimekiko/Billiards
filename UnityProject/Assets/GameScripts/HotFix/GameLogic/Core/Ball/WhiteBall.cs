@@ -65,6 +65,38 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 白球用固定像素覆盖层表达趋势和持续效果。
+        /// </summary>
+        protected override bool RequiresStateOverlay
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 状态覆盖层顺序为正常、逆转、冻结、疾变。
+        /// </summary>
+        protected override int StateOverlayIndex
+        {
+            get
+            {
+                if (_simulation.Frozen)
+                {
+                    return 2;
+                }
+
+                if (_simulation.FastChanging)
+                {
+                    return 3;
+                }
+
+                return _simulation.Growing ? 0 : 1;
+            }
+        }
+
+        /// <summary>
         /// 自动获取并缓存白球独有的能力组件。
         /// </summary>
         /// <param name="config">白球的击球和尺寸变化配置。</param>

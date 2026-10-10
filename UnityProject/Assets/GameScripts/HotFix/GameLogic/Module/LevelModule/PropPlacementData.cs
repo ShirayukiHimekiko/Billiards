@@ -55,6 +55,16 @@ namespace GameLogic
         public readonly PropEffectKind Kind;
 
         /// <summary>
+        /// 效果持续的杆数；零表示只作用于触发杆。
+        /// </summary>
+        public readonly int DurationShots;
+
+        /// <summary>
+        /// 配置中的效果倍率或一次性数量参数。
+        /// </summary>
+        public readonly float RateMultiplier;
+
+        /// <summary>
         /// 钥匙效果绑定的球洞明细 ID；非钥匙道具为零。
         /// </summary>
         public readonly int TargetPocketId;
@@ -75,6 +85,19 @@ namespace GameLogic
             UseScope = config.UseScope;
             UseLimit = config.UseLimit;
             Kind = PropKindConverter.ToEffectKind(config.PropKind);
+
+            if (config.EffectParams == null)
+            {
+                throw new ArgumentException($"道具 {Id} 缺少效果参数。");
+            }
+
+            DurationShots = config.EffectParams.DurationShots;
+            RateMultiplier = config.EffectParams.RateMultiplier;
+
+            if (DurationShots < 0 || RateMultiplier < 0)
+            {
+                throw new ArgumentException($"道具 {Id} 的持续杆数或效果倍率无效。");
+            }
 
             if (!MatchesEffectType(config.EffectParams, Kind))
             {

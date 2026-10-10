@@ -9,6 +9,7 @@ namespace GameLogic
         /// 将道具效果应用到传入的球体模拟状态。
         /// </summary>
         /// <param name="ball">效果修改的模拟球，调用方负责作用域及使用次数。</param>
-        void Apply(SimulatedBall ball);
+        /// <param name="rateMultiplier">配置中的变化速率倍率；不使用该参数的效果应忽略它。</param>
+        void Apply(SimulatedBall ball, float rateMultiplier);
     }
 }

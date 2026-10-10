@@ -5,7 +5,7 @@ namespace GameLogic
     /// </summary>
     public sealed class ReversePropEffect : IPropEffect
     {
-        public void Apply(SimulatedBall ball)
+        public void Apply(SimulatedBall ball, float rateMultiplier)
         {
             ball.RadiusDirection = -ball.RadiusDirection;
         }

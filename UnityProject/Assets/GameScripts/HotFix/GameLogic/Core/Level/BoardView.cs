@@ -51,6 +51,12 @@ namespace GameLogic
         private PocketView _pocketTemplate;
 
         /// <summary>
+        /// 由钥匙管理器复制的绑定洞连接线表现。
+        /// </summary>
+        [SerializeField]
+        private KeyLinkView _keyLinks;
+
+        /// <summary>
         /// 将 Unity 帧更新转发给会话的驱动组件。
         /// </summary>
         [SerializeField]
@@ -148,6 +154,7 @@ namespace GameLogic
                 || _predictionDotRenderer == null
                 || _geometryTemplate == null
                 || _pocketTemplate == null
+                    || _keyLinks == null
                 || _runner == null)
             {
                 throw new InvalidOperationException("桌球 Prefab 缺少新版序列化绑定。");
@@ -172,6 +179,7 @@ namespace GameLogic
             properties.SetColor("_Color", color);
             _predictionDotRenderer.SetPropertyBlock(properties);
             _predictionDot.localScale = Vector3.one * data.PredictionStyle.DotDiameter;
+            _keyLinks.Initialize(data);
             HideAim();
         }
 
@@ -352,11 +360,29 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 将钥匙连接线同步到真实世界的拾取与洞状态。
+        /// </summary>
+        /// <param name="world">当前真实物理世界。</param>
+        public void SyncKeyLinks(PhysicsWorld world)
+        {
+            _keyLinks.Sync(world);
+        }
+
+        /// <summary>
+        /// 切换显影道具的图形条件圆显示。
+        /// </summary>
+        public void SetReveal(bool visible)
+        {
+            _geometries?.SetReveal(visible);
+        }
+
+        /// <summary>
         /// 释放会话、表现及配置引用。
         /// </summary>
         public void Release()
         {
             _runner?.Bind(null);
+            _keyLinks?.Release();
             _session = null;
             _geometries = null;
             _predictionReflectionsVisible = false;

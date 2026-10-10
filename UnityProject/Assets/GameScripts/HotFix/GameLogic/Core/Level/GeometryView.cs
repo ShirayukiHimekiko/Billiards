@@ -31,6 +31,11 @@ namespace GameLogic
         private bool _hints = true;
 
         /// <summary>
+        /// 显影道具强制显示条件圆，不参与几何判定。
+        /// </summary>
+        private bool _revealed;
+
+        /// <summary>
         /// 当前图形明细 ID。
         /// </summary>
         private int _geometryId;
@@ -160,6 +165,15 @@ namespace GameLogic
             ApplyCircleVisibility();
         }
 
+        /// <summary>
+        /// 设置显影状态。
+        /// </summary>
+        public void SetRevealed(bool revealed)
+        {
+            _revealed = revealed;
+            ApplyCircleVisibility();
+        }
+
         private void Update()
         {
             if (!_feedbackVisible && !_previewVisible)
@@ -218,7 +232,7 @@ namespace GameLogic
 
         private void ApplyCircleVisibility()
         {
-            _circle.gameObject.SetActive(!_completed && (_hints || _feedbackVisible || _previewVisible));
+            _circle.gameObject.SetActive(!_completed && (_hints || _revealed || _feedbackVisible || _previewVisible));
         }
 
         private void RenderFeedback(float opacity)

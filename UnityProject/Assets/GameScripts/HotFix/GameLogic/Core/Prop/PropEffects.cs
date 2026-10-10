@@ -15,8 +15,10 @@ namespace GameLogic
         private static readonly IPropEffect Freeze = new FreezePropEffect();
         private static readonly IPropEffect Restore = new RestorePropEffect();
         private static readonly IPropEffect FastChange = new FastChangePropEffect();
+        private static readonly IPropEffect Reveal = new RevealPropEffect();
+        private static readonly IPropEffect Preview = new PreviewPropEffect();
+        private static readonly IPropEffect AddShot = new AddShotPropEffect();
         private static readonly IPropEffect Key = new KeyPropEffect();
-        private static readonly IPropEffect Unsupported = new UnsupportedPropEffect();
 
         /// <summary>
         /// 获取道具类型对应的策略。
@@ -37,12 +39,14 @@ namespace GameLogic
                     return Restore;
                 case PropEffectKind.FastChange:
                     return FastChange;
+                case PropEffectKind.Reveal:
+                    return Reveal;
+                case PropEffectKind.Preview:
+                    return Preview;
+                case PropEffectKind.AddShot:
+                    return AddShot;
                 case PropEffectKind.Key:
                     return Key;
-                case PropEffectKind.Reveal:
-                case PropEffectKind.Preview:
-                case PropEffectKind.AddShot:
-                    return Unsupported;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(kind));
             }
@@ -53,9 +57,9 @@ namespace GameLogic
         /// </summary>
         /// <param name="kind">请求的道具策略类型。</param>
         /// <param name="ball">接受效果的模拟球。</param>
-        public static void Apply(PropEffectKind kind, SimulatedBall ball)
+        public static void Apply(PropEffectKind kind, SimulatedBall ball, float rateMultiplier = 1)
         {
-            Get(kind).Apply(ball);
+            Get(kind).Apply(ball, rateMultiplier);
         }
     }
 }

@@ -112,19 +112,13 @@ namespace GameLogic
             CircumscribedCenter = A + new Vector2(v.y * u.sqrMagnitude - u.y * v.sqrMagnitude, u.x * v.sqrMagnitude - v.x * u.sqrMagnitude) / (2 * cross);
             float calculatedCircumscribedRadius = Vector2.Distance(CircumscribedCenter, A);
 
-            if (row.InscribedRadius <= 0 || row.CircumscribedRadius <= 0)
+            if (calculatedInscribedRadius <= 0 || calculatedCircumscribedRadius <= 0)
             {
                 throw new ArgumentException($"图形 {Id} 的双目标半径必须为正数。");
             }
 
-            if (Mathf.Abs(row.InscribedRadius - calculatedInscribedRadius) > .001f
-                || Mathf.Abs(row.CircumscribedRadius - calculatedCircumscribedRadius) > .001f)
-            {
-                throw new ArgumentException($"图形 {Id} 的双目标半径与三角形几何数据不一致。");
-            }
-
-            InscribedRadius = row.InscribedRadius;
-            CircumscribedRadius = row.CircumscribedRadius;
+            InscribedRadius = calculatedInscribedRadius;
+            CircumscribedRadius = calculatedCircumscribedRadius;
 
             UnlocksPocket = row.EffectBinding is UnlockPocket;
             TargetId = UnlocksPocket

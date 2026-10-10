@@ -237,6 +237,33 @@ namespace GameLogic
                 }
             }
 
+            var kinds = new HashSet<PropEffectKind>();
+
+            foreach (var prop in Props)
+            {
+                if (!kinds.Add(prop.Kind) && kinds.Count <= 4)
+                {
+                    continue;
+                }
+
+                if (kinds.Count > 4)
+                {
+                    throw new ArgumentException($"关卡 {Id} 的道具种类不能超过四种。");
+                }
+            }
+
+            bool hasPreview = false;
+
+            foreach (var prop in Props)
+            {
+                hasPreview |= prop.Kind == PropEffectKind.Preview;
+            }
+
+            if (hasPreview && PredictionPropCount <= 0)
+            {
+                throw new ArgumentException($"关卡 {Id} 配置了预演道具但没有预测次数。");
+            }
+
             foreach (var geometry in Geometries)
             {
                 if (geometry.Tolerance < 0 || !Bounds.Contains(geometry.A) || !Bounds.Contains(geometry.B) || !Bounds.Contains(geometry.C))

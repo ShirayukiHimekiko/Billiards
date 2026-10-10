@@ -5,7 +5,7 @@ namespace GameLogic
     /// </summary>
     public sealed class KeyPropEffect : IPropEffect
     {
-        public void Apply(SimulatedBall ball)
+        public void Apply(SimulatedBall ball, float rateMultiplier)
         {
         }
     }
