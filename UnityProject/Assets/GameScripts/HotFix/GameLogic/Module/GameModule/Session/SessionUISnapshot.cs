@@ -215,6 +215,11 @@ namespace GameLogic
         public readonly PreviewUISnapshot Preview;
 
         /// <summary>
+        /// 显影效果是否正在持续。
+        /// </summary>
+        public readonly bool RevealActive;
+
+        /// <summary>
         /// 创建界面状态快照。
         /// </summary>
         /// <param name="state">会话状态。</param>
@@ -230,6 +235,7 @@ namespace GameLogic
         /// <param name="effects">道具使用次数及持续状态。</param>
         /// <param name="pockets">固定六洞状态列表。</param>
         /// <param name="preview">预演状态。</param>
+        /// <param name="revealActive">显影效果是否正在持续。</param>
         public SessionUISnapshot(
             SessionState state,
             int shots,
@@ -243,7 +249,8 @@ namespace GameLogic
             WhiteBallUISnapshot whiteBall,
             IReadOnlyList<EffectUISnapshot> effects,
             IReadOnlyList<PocketUISnapshot> pockets,
-            PreviewUISnapshot preview)
+            PreviewUISnapshot preview,
+            bool revealActive)
         {
             State = state;
             Shots = shots;
@@ -271,6 +278,7 @@ namespace GameLogic
             Effects = effects;
             Pockets = pockets;
             Preview = preview;
+            RevealActive = revealActive;
         }
     }
 }

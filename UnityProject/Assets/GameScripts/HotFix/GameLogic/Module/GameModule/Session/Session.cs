@@ -181,7 +181,8 @@ namespace GameLogic
                     whiteSnapshot,
                     effects,
                     pockets,
-                    preview);
+                    preview,
+                    World.RevealActive);
             }
         }
 
