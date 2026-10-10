@@ -1547,6 +1547,14 @@ namespace GameLogic
             Revision++;
         }
 
+        private static bool IsPersistentEffect(PropPlacementData prop)
+        {
+            return prop.UseScope == UseScope.Level
+                && (prop.Kind == PropEffectKind.Flip
+                    || prop.Kind == PropEffectKind.Reverse
+                    || prop.Kind == PropEffectKind.Reveal);
+        }
+
         /// <summary>
         /// 查询球洞 ID 对应索引。
         /// </summary>
