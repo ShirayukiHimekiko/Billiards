@@ -136,6 +136,17 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 球体表现相对于模拟半径的显示倍率，碰撞半径不随该倍率改变。
+        /// </summary>
+        protected virtual float DisplayScaleMultiplier
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        /// <summary>
         /// 自动获取并缓存球体内部组件，初始化专属能力及出生表现。
         /// </summary>
         /// <param name="data">已经通过关卡配置校验的球体摆放数据。</param>
@@ -152,6 +163,14 @@ namespace GameLogic
                 throw new InvalidOperationException($"球 {data.Id} Prefab 必须绑定 {DISPLAY_RADIUS_STEPS} 档 16BIT 球体 Sprite。");
             }
 
+            for (int i = 0; i < _displaySprites.Length; i++)
+            {
+                if (_displaySprites[i] == null)
+                {
+                    throw new InvalidOperationException($"球 {data.Id} Prefab 的 16BIT 球体 Sprite 档位 {i} 未绑定。");
+                }
+            }
+
             if (_stateRenderer == null && RequiresStateOverlay)
             {
                 throw new InvalidOperationException($"球 {data.Id} Prefab 缺少状态覆盖层 Renderer。");
@@ -160,11 +179,6 @@ namespace GameLogic
             if (RequiresStateOverlay && (_stateSprites == null || _stateSprites.Length != 4))
             {
                 throw new InvalidOperationException($"球 {data.Id} Prefab 必须绑定 4 档状态覆盖层 Sprite。");
-            }
-
-            if (_displaySprites[0] == null || _displaySprites[DISPLAY_RADIUS_STEPS - 1] == null)
-            {
-                throw new InvalidOperationException($"球 {data.Id} Prefab 缺少首尾 16BIT 球体 Sprite。");
             }
 
             _properties = new MaterialPropertyBlock();
@@ -203,7 +217,7 @@ namespace GameLogic
             transform.localPosition = state.Position;
 
             int displayIndex = QuantizeDisplayIndex(state.Radius);
-            float displayRadius = GetDisplayRadius(displayIndex);
+            float displayRadius = GetDisplayRadius(displayIndex) * DisplayScaleMultiplier;
             float diameter = 2 * displayRadius;
             _renderer.sprite = _displaySprites[displayIndex];
             _surface.localScale = Vector3.one;
@@ -261,7 +275,6 @@ namespace GameLogic
         /// <summary>
         /// 将连续模拟半径映射为固定数量的像素表现档位索引。
         /// </summary>
-        /// <returns>当前球体用于渲染的离散档位索引。</returns>
         private int QuantizeDisplayIndex(float radius)
         {
             float min = _data.Config.RadiusMin;
@@ -277,7 +290,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 将档位索引映射回用于阴影和局部尺寸的离散半径。
+        /// 将档位索引映射回用于阴影和状态覆盖层的离散半径。
         /// </summary>
         private float GetDisplayRadius(int index)
         {
