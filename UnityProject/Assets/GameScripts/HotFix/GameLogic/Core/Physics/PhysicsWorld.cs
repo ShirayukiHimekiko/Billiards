@@ -168,6 +168,38 @@ namespace GameLogic
         public readonly bool[] GeometryCompleted;
 
         /// <summary>
+        /// ??????????????????????????
+        /// </summary>
+        public readonly int[] EffectRemaining;
+
+        /// <summary>
+        /// ??????????????
+        /// </summary>
+        public bool RevealActive
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// ??????????????
+        /// </summary>
+        public bool PreviewActive
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// ????????????????
+        /// </summary>
+        public int ShotBonus
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// 与关卡图形顺序对应的几何门失败次数。
         /// </summary>
         public readonly int[] GeometryFailureCounts;
@@ -314,6 +346,7 @@ namespace GameLogic
             {
                 PocketStates[i] = level.Pockets[i].InitialState;
             }
+            EffectRemaining = new int[level.Props.Count];
         }
 
         /// <summary>
@@ -327,7 +360,10 @@ namespace GameLogic
                 _deceleration = _deceleration,
                 _whiteStoppedAtGoal = _whiteStoppedAtGoal,
                 WhiteFoul = WhiteFoul,
-                Revision = Revision
+                Revision = Revision,
+                RevealActive = RevealActive,
+                PreviewActive = PreviewActive,
+                ShotBonus = ShotBonus
             };
 
             for (int i = 0; i < Balls.Length; i++)
@@ -353,6 +389,7 @@ namespace GameLogic
         /// <returns>是否成功开始一杆；白球当前半径超出台面或与其他活动球重叠时返回 false。</returns>
         public bool Shoot(Vector2 direction, float power)
         {
+            Array.Copy(EffectRemaining, copy.EffectRemaining, EffectRemaining.Length);
             var white = Balls[WhiteIndex];
             var config = white.Data.Config;
 
@@ -385,6 +422,8 @@ namespace GameLogic
 
             Array.Clear(_admitted, 0, _admitted.Length);
             Array.Clear(_conditionLatched, 0, _conditionLatched.Length);
+            AdvanceEffectDurations();
+
 
             float speed = Mathf.Lerp(config.SpeedMin, config.SpeedMax, power);
             float distance = Mathf.Lerp(config.DistanceMin, config.DistanceMax, power);
@@ -415,6 +454,7 @@ namespace GameLogic
                 }
 
                 var geometry = _level.Geometries[g];
+            ApplyActiveEffects(white);
 
                 for (int b = 0; b < Balls.Length; b++)
                 {
@@ -422,6 +462,62 @@ namespace GameLogic
 
                     // 仅放行初始穿透；边界外的接近仍由运动中的条件预测决定。
                     Vector2 boundaryNormal;
+        /// <summary>
+        /// ????????????????????
+        /// </summary>
+        private void AdvanceEffectDurations()
+        {
+            RevealActive = false;
+            PreviewActive = false;
+
+            for (int i = 0; i < EffectRemaining.Length; i++)
+            {
+                if (EffectRemaining[i] > 0)
+                {
+                    EffectRemaining[i]--;
+                }
+
+                if (EffectRemaining[i] > 0)
+                {
+                    PropEffectKind kind = _level.Props[i].Kind;
+                    RevealActive |= kind == PropEffectKind.Reveal;
+                    PreviewActive |= kind == PropEffectKind.Preview;
+                }
+            }
+        }
+
+        /// <summary>
+        /// ??????????????????
+        /// </summary>
+        private void ApplyActiveEffects(SimulatedBall white)
+        {
+            for (int i = 0; i < EffectRemaining.Length; i++)
+            {
+                if (EffectRemaining[i] <= 0)
+                {
+                    continue;
+                }
+
+                PropEffectKind kind = _level.Props[i].Kind;
+                if (kind == PropEffectKind.Reveal || kind == PropEffectKind.Preview || kind == PropEffectKind.AddShot || kind == PropEffectKind.Key)
+                {
+                    continue;
+                }
+
+                _propEffects[i].Apply(white, _level.Props[i].RateMultiplier);
+            }
+        }
+
+        /// <summary>
+        /// ????????????????
+        /// </summary>
+        public int ConsumeShotBonus()
+        {
+            int bonus = ShotBonus;
+            ShotBonus = 0;
+            return bonus;
+        }
+
                     if (ball.Active
                         && geometry.MinimumBoundaryDistance(ball.State.Position, out boundaryNormal) < ball.State.Radius)
                     {
@@ -1164,7 +1260,21 @@ namespace GameLogic
             }
             else
             {
-                _propEffects[index].Apply(ball);
+                _propEffects[index].Apply(ball, prop.RateMultiplier);
+                EffectRemaining[index] = prop.DurationShots;
+
+                if (prop.Kind == PropEffectKind.Reveal)
+                {
+                    RevealActive = prop.DurationShots > 0;
+                }
+                else if (prop.Kind == PropEffectKind.Preview)
+                {
+                    PreviewActive = prop.DurationShots > 0;
+                }
+                else if (prop.Kind == PropEffectKind.AddShot)
+                {
+                    ShotBonus += Mathf.Max(1, Mathf.RoundToInt(prop.RateMultiplier));
+                }
             }
 
             PropUses[index]++;
