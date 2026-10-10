@@ -61,6 +61,7 @@ namespace GameLogic
             var pockets = new List<PocketPlacementData>();
             var props = new List<PropPlacementData>();
             var geometries = new List<GeometryData>();
+            var terrains = new List<TerrainPlacementData>();
 
             foreach (var child in tables.TbLevelBall.DataList)
             {
@@ -144,6 +145,14 @@ namespace GameLogic
                 }
             }
 
+            foreach (var child in tables.TbLevelTerrain.DataList)
+            {
+                if (child.LevelId == id)
+                {
+                    terrains.Add(new TerrainPlacementData(child, tables.TbTerrain.Get(child.TerrainConfigId)));
+                }
+            }
+
             Current = new LevelData(
                 row,
                 board,
@@ -151,7 +160,8 @@ namespace GameLogic
                 balls,
                 pockets,
                 props,
-                geometries);
+                geometries,
+                terrains);
 
             return Current;
         }

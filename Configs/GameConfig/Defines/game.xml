@@ -43,6 +43,13 @@
   <enum name="DecelerationModel">
     <var name="ShotDistance" value="0" />
   </enum>
+  <enum name="TerrainKind">
+    <var name="JumpPad" value="0" />
+    <var name="Tunnel" value="1" />
+    <var name="Pit" value="2" />
+    <var name="ReverseBelt" value="3" />
+    <var name="Teleporter" value="4" />
+  </enum>
   <bean name="ShotParams">
     <var name="chargeDuration" type="float" />
     <var name="speedMin" type="float" />
@@ -110,5 +117,13 @@
     <var name="dashLength" type="float" />
     <var name="gapLength" type="float" />
     <var name="dotDiameter" type="float" />
+  </bean>
+  <bean name="TerrainStyle">
+    <var name="terrainKind" type="TerrainKind" />
+    <var name="prefabLocation" type="string" />
+    <var name="defaultDuration" type="float" />
+    <var name="defaultSpeedMultiplier" type="float" />
+    <var name="inheritVelocity" type="bool" />
+    <var name="inheritRotation" type="bool" />
   </bean>
 </module>

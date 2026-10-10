@@ -36,6 +36,11 @@ namespace GameLogic
             Pocket,
 
             /// <summary>
+            /// 球进入地形触发范围。
+            /// </summary>
+            Terrain,
+
+            /// <summary>
             /// 两个活动球首次向内接触。
             /// </summary>
             Ball,
@@ -163,17 +168,22 @@ namespace GameLogic
         public readonly int[] PropUses;
 
         /// <summary>
+        /// 与关卡地形顺序对应的运行状态。
+        /// </summary>
+        public readonly TerrainRuntimeState[] TerrainStates;
+
+        /// <summary>
         /// 与关卡图形顺序对应的效果完成标记。
         /// </summary>
         public readonly bool[] GeometryCompleted;
 
         /// <summary>
-        /// ??????????????????????????
+        /// 各道具效果剩余作用杆数；预测副本与真实世界一起复制。
         /// </summary>
         public readonly int[] EffectRemaining;
 
         /// <summary>
-        /// ??????????????
+        /// 当前会话是否处于显影效果中。
         /// </summary>
         public bool RevealActive
         {
@@ -182,7 +192,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// ??????????????
+        /// 当前会话是否处于预演效果中。
         /// </summary>
         public bool PreviewActive
         {
@@ -191,7 +201,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// ????????????????
+        /// 本次模拟待由会话结算的额外杆数。
         /// </summary>
         public int ShotBonus
         {
@@ -336,6 +346,7 @@ namespace GameLogic
 
             PocketStates = new PocketState[level.Pockets.Count];
             PropUses = new int[level.Props.Count];
+            TerrainStates = new TerrainRuntimeState[level.Terrains.Count];
             GeometryCompleted = new bool[level.Geometries.Count];
             GeometryFailureCounts = new int[level.Geometries.Count];
             _admitted = new bool[level.Geometries.Count * Balls.Length];
@@ -346,6 +357,12 @@ namespace GameLogic
             {
                 PocketStates[i] = level.Pockets[i].InitialState;
             }
+
+            for (int i = 0; i < TerrainStates.Length; i++)
+            {
+                TerrainStates[i] = new TerrainRuntimeState();
+            }
+
             EffectRemaining = new int[level.Props.Count];
         }
 
@@ -373,6 +390,11 @@ namespace GameLogic
 
             Array.Copy(PocketStates, copy.PocketStates, PocketStates.Length);
             Array.Copy(PropUses, copy.PropUses, PropUses.Length);
+            for (int i = 0; i < TerrainStates.Length; i++)
+            {
+                copy.TerrainStates[i] = TerrainStates[i].Copy();
+            }
+            Array.Copy(EffectRemaining, copy.EffectRemaining, EffectRemaining.Length);
             Array.Copy(GeometryCompleted, copy.GeometryCompleted, GeometryCompleted.Length);
             Array.Copy(GeometryFailureCounts, copy.GeometryFailureCounts, GeometryFailureCounts.Length);
             Array.Copy(_admitted, copy._admitted, _admitted.Length);
@@ -389,7 +411,6 @@ namespace GameLogic
         /// <returns>是否成功开始一杆；白球当前半径超出台面或与其他活动球重叠时返回 false。</returns>
         public bool Shoot(Vector2 direction, float power)
         {
-            Array.Copy(EffectRemaining, copy.EffectRemaining, EffectRemaining.Length);
             var white = Balls[WhiteIndex];
             var config = white.Data.Config;
 
@@ -424,7 +445,6 @@ namespace GameLogic
             Array.Clear(_conditionLatched, 0, _conditionLatched.Length);
             AdvanceEffectDurations();
 
-
             float speed = Mathf.Lerp(config.SpeedMin, config.SpeedMax, power);
             float distance = Mathf.Lerp(config.DistanceMin, config.DistanceMax, power);
             // 用无碰撞基准路程推导本杆共用减速度，碰撞后各球的实际路程自行演化。
@@ -434,6 +454,7 @@ namespace GameLogic
             white.RadiusDirection = 1;
             white.RateMultiplier = 1;
             white.GrowRate = Mathf.Lerp(config.GrowRateMin, config.GrowRateMax, power);
+            ApplyActiveEffects(white);
             white.State.Velocity = direction.normalized * speed;
             AdmitOverlappingGeometries();
             Revision++;
@@ -442,28 +463,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 出杆时已与目标圆重叠的球先自然离开，避免启用阻挡时被推到圆外。
-        /// </summary>
-        private void AdmitOverlappingGeometries()
-        {
-            for (int g = 0; g < _level.Geometries.Count; g++)
-            {
-                if (!GeometryAvailable(g))
-                {
-                    continue;
-                }
-
-                var geometry = _level.Geometries[g];
-            ApplyActiveEffects(white);
-
-                for (int b = 0; b < Balls.Length; b++)
-                {
-                    var ball = Balls[b];
-
-                    // 仅放行初始穿透；边界外的接近仍由运动中的条件预测决定。
-                    Vector2 boundaryNormal;
-        /// <summary>
-        /// ????????????????????
+        /// 消耗一杆时推进持续效果，并刷新表现状态。
         /// </summary>
         private void AdvanceEffectDurations()
         {
@@ -487,7 +487,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// ??????????????????
+        /// 将仍在生效的物理道具应用到新杆白球。
         /// </summary>
         private void ApplyActiveEffects(SimulatedBall white)
         {
@@ -509,7 +509,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// ????????????????
+        /// 取出本次物理推进产生的额外杆数。
         /// </summary>
         public int ConsumeShotBonus()
         {
@@ -518,6 +518,26 @@ namespace GameLogic
             return bonus;
         }
 
+        /// <summary>
+        /// 出杆时已与目标圆重叠的球先自然离开，避免启用阻挡时被推到圆外。
+        /// </summary>
+        private void AdmitOverlappingGeometries()
+        {
+            for (int g = 0; g < _level.Geometries.Count; g++)
+            {
+                if (!GeometryAvailable(g))
+                {
+                    continue;
+                }
+
+                var geometry = _level.Geometries[g];
+
+                for (int b = 0; b < Balls.Length; b++)
+                {
+                    var ball = Balls[b];
+
+                    // 仅放行初始穿透；边界外的接近仍由运动中的条件预测决定。
+                    Vector2 boundaryNormal;
                     if (ball.Active
                         && geometry.MinimumBoundaryDistance(ball.State.Position, out boundaryNormal) < ball.State.Radius)
                     {
@@ -544,6 +564,7 @@ namespace GameLogic
         /// <param name="prediction">复用的预测路径结果；正式模拟时为空。</param>
         private void Step(double duration, int trackedBall, PredictionPath prediction)
         {
+            UpdateTerrainTimers((float)duration);
             double remaining = duration;
             int iterations = 0;
 
@@ -804,6 +825,28 @@ namespace GameLogic
                     }
                 }
 
+                for (int t = 0; t < _level.Terrains.Count; t++)
+                {
+                    TerrainPlacementData terrain = _level.Terrains[t];
+                    TerrainRuntimeState terrainState = TerrainStates[t];
+
+                    if (terrainState.EntryLocked
+                        || terrainState.CooldownRemaining > 0
+                        || ball.Terrain.TerrainId == terrain.Id
+                        || ball.Terrain.SuppressesSurfaceContacts && terrain.Kind != TerrainKind.Teleporter)
+                    {
+                        continue;
+                    }
+
+                    Choose(
+                        ref hit,
+                        _contacts.Circle(trajectory, Stationary(terrain.Position, terrain.TriggerRadius, duration), true),
+                        EventKind.Terrain,
+                        i,
+                        t,
+                        Vector2.zero);
+                }
+
                 for (int p = 0; p < _level.Pockets.Count; p++)
                 {
                     var pocket = _level.Pockets[p];
@@ -835,7 +878,7 @@ namespace GameLogic
 
                 for (int g = 0; g < _level.Geometries.Count; g++)
                 {
-                    if (_ignoreGates || g == _ignoredGeometry || !GeometryAvailable(g) || _admitted[g * Balls.Length + i])
+                    if (_ignoreGates || g == _ignoredGeometry || !GeometryAvailable(g) || _admitted[g * Balls.Length + i] || ball.Terrain.Airborne)
                     {
                         continue;
                     }
@@ -1021,6 +1064,9 @@ namespace GameLogic
                 case EventKind.Prop:
                     TriggerProp(hit.Other, ball);
                     break;
+                case EventKind.Terrain:
+                    TriggerTerrain(hit.Other, ball);
+                    break;
                 case EventKind.Pocket:
                     ball.Active = false;
                     ball.State.Velocity = Vector2.zero;
@@ -1127,6 +1173,149 @@ namespace GameLogic
 
                     break;
             }
+        }
+
+        /// <summary>
+        /// 推进地形局部状态并解除已结束的入口锁定。
+        /// </summary>
+        private void UpdateTerrainTimers(float duration)
+        {
+            for (int i = 0; i < TerrainStates.Length; i++)
+            {
+                TerrainRuntimeState state = TerrainStates[i];
+                state.CooldownRemaining = Mathf.Max(0, state.CooldownRemaining - duration);
+
+                if (state.CooldownRemaining <= 0)
+                {
+                    state.EntryLocked = false;
+                }
+            }
+
+            for (int i = 0; i < Balls.Length; i++)
+            {
+                TerrainBallState state = Balls[i].Terrain;
+                state.TeleportCooldown = Mathf.Max(0, state.TeleportCooldown - duration);
+
+                if (state.Remaining > 0)
+                {
+                    state.Remaining = Mathf.Max(0, state.Remaining - duration);
+                    if (state.Remaining <= 0)
+                    {
+                        ClearTerrainBallState(state);
+                    }
+                }
+                else if (state.TeleportCooldown <= 0 && state.TerrainId != 0)
+                {
+                    ClearTerrainBallState(state);
+                }
+            }
+        }
+
+        private void ClearTerrainBallState(TerrainBallState state)
+        {
+            int terrainId = state.TerrainId;
+            state.Clear();
+
+            if (terrainId <= 0)
+            {
+                return;
+            }
+
+            int terrainIndex = TerrainIndex(terrainId);
+
+            for (int i = 0; i < Balls.Length; i++)
+            {
+                if (Balls[i].Terrain.TerrainId == terrainId)
+                {
+                    return;
+                }
+            }
+
+            TerrainStates[terrainIndex].Reset();
+        }
+
+        /// <summary>
+        /// 统一地形策略入口；只改变运动和局部状态，不参与胜负结算。
+        /// </summary>
+        private void TriggerTerrain(int index, SimulatedBall ball)
+        {
+            TerrainPlacementData terrain = _level.Terrains[index];
+            TerrainRuntimeState runtime = TerrainStates[index];
+            runtime.Active = true;
+            runtime.EntryLocked = true;
+            runtime.CooldownRemaining = .05f;
+            ball.Terrain.TerrainId = terrain.Id;
+
+            switch (terrain.Kind)
+            {
+                case TerrainKind.JumpPad:
+                    ball.Terrain.Airborne = true;
+                    ball.Terrain.Remaining = terrain.Duration;
+                    ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
+                    runtime.Airborne = true;
+                    break;
+                case TerrainKind.Tunnel:
+                    ball.Terrain.TunnelActive = true;
+                    ball.Terrain.Remaining = terrain.Duration;
+                    ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
+                    runtime.TunnelActive = true;
+                    break;
+                case TerrainKind.Pit:
+                    ball.Terrain.Submerged = true;
+                    ball.Terrain.Remaining = terrain.Duration;
+                    ball.State.Velocity = Vector2.zero;
+                    runtime.Submerged = true;
+                    break;
+                case TerrainKind.ReverseBelt:
+                    ball.Terrain.ReverseActive = true;
+                    ball.Terrain.Remaining = terrain.Duration;
+                    ball.State.Velocity = -ball.State.Velocity * terrain.SpeedMultiplier;
+                    break;
+                case TerrainKind.Teleporter:
+                    runtime.Active = false;
+                    Teleport(ball, terrain);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            Revision++;
+        }
+
+        /// <summary>
+        /// 将球转移到成对出口并设置冷却，防止同一固定步来回触发。
+        /// </summary>
+        private void Teleport(SimulatedBall ball, TerrainPlacementData entry)
+        {
+            int exitIndex = TerrainIndex(entry.ExitId);
+            TerrainPlacementData exit = _level.Terrains[exitIndex];
+            TerrainRuntimeState exitState = TerrainStates[exitIndex];
+            ball.State.Position = exit.Position;
+            exitState.Active = true;
+
+            if (entry.InheritVelocity)
+            {
+                float speed = ball.State.Velocity.magnitude * entry.SpeedMultiplier;
+                ball.State.Velocity = exit.Direction * speed;
+            }
+
+            ball.Terrain.TeleportCooldown = .08f;
+            ball.Terrain.TerrainId = exit.Id;
+            exitState.EntryLocked = true;
+            exitState.CooldownRemaining = .08f;
+        }
+
+        private int TerrainIndex(int id)
+        {
+            for (int i = 0; i < _level.Terrains.Count; i++)
+            {
+                if (_level.Terrains[i].Id == id)
+                {
+                    return i;
+                }
+            }
+
+            throw new ArgumentException("不存在地形 " + id);
         }
 
         /// <summary>

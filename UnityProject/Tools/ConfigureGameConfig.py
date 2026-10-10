@@ -25,6 +25,7 @@ enum('TriggerMode', ['Contact', 'Geometry'])
 enum('PropKind', ['Flip', 'Reverse', 'Freeze', 'Restore', 'FastChange', 'Reveal', 'Preview', 'AddShot', 'Key'])
 enum('UseScope', ['Shot', 'Level'])
 enum('DecelerationModel', ['ShotDistance'])
+enum('TerrainKind', ['JumpPad', 'Tunnel', 'Pit', 'ReverseBelt', 'Teleporter'])
 bean('ShotParams', [(n, 'float') for n in ['chargeDuration', 'speedMin', 'speedMax', 'radiusMin', 'radiusMax', 'distanceMin', 'distanceMax']])
 bean('SizeChangeParams', [('growRateMin','float'), ('growRateMax','float'), ('shrinkRate','float')])
 bean('Shape')
@@ -44,13 +45,15 @@ bean('GeometryStyle', [('figureColor','vector4'), ('circleColor','vector4'), ('l
                        ('previewFailureThreshold','int'), ('previewFailureInterval','int'),
                        ('previewDuration','float')])
 bean('PredictionStyle', [('color','vector4'), ('lineWidth','float'), ('dashLength','float'), ('gapLength','float'), ('dotDiameter','float')])
+bean('TerrainStyle', [('terrainKind','TerrainKind'), ('prefabLocation','string'), ('defaultDuration','float'),
+                      ('defaultSpeedMultiplier','float'), ('inheritVelocity','bool'), ('inheritRotation','bool')])
 
 tables = load_workbook(root / 'Datas/__tables__.xlsx')
 ws = tables.active
 # 只更新本工具维护的九张表注册，保留其他配置表。
 owned_tables = {'Tb' + name for name in (
     'Level', 'Board', 'Ball', 'Prop', 'Physics',
-    'LevelBall', 'LevelPocket', 'LevelProp', 'LevelGeometry')}
+    'LevelBall', 'LevelPocket', 'LevelProp', 'LevelGeometry', 'Terrain', 'LevelTerrain')}
 for index in range(ws.max_row, 3, -1):
     if ws.cell(index, 2).value in owned_tables:
         ws.delete_rows(index)
@@ -58,7 +61,7 @@ for index in range(ws.max_row, 3, -1):
 def table(name, fields, rows):
     ws.append([None, 'Tb'+name, name, True, name+'.xlsx', 'id', 'map', 'c', name, None, None])
     book = Workbook(); sheet = book.active; sheet.title = name
-    sheet.append(['##var']+[n+('#format=json' if t not in ['int','float','bool','string'] and not t.startswith('int#') and t not in ['BallKind','PocketSlot','PocketState','ConditionKind','TriggerMode','PropKind','UseScope','DecelerationModel'] else '') for n,t in fields])
+    sheet.append(['##var']+[n+('#format=json' if t not in ['int','float','bool','string'] and not t.startswith('int#') and t not in ['BallKind','PocketSlot','PocketState','ConditionKind','TriggerMode','PropKind','UseScope','DecelerationModel','TerrainKind'] else '') for n,t in fields])
     sheet.append(['##type']+[t for n,t in fields])
     sheet.append(['##comment']+[n for n,t in fields])
     sheet.append(['##group']+['c']*len(fields))
@@ -97,6 +100,15 @@ table('LevelBall',[('id','int'),('levelId',ref('Level')),('ballConfigId',ref('Ba
 table('LevelPocket',[('id','int'),('levelId',ref('Level')),('slot','PocketSlot'),('initialState','PocketState')],campaign['pockets'])
 table('LevelProp',[('id','int'),('levelId',ref('Level')),('propConfigId',ref('Prop')),('position','vector2'),('triggerMode','TriggerMode')],campaign['props'])
 table('LevelGeometry',[('id','int'),('levelId',ref('Level')),('shape','Shape'),('position','vector2'),('rotation','float'),('uniformScale','float'),('conditionKind','ConditionKind'),('tolerance','float'),('allowedBallKind','BallKind'),('effectBinding','EffectBinding')],campaign['geometries'])
+terrain_configs = [
+    [1, 'JumpPad', 'BilliardsJumpPad', 0.8, 1.15, True, True],
+    [2, 'Tunnel', 'BilliardsTunnel', 1.0, 1.0, True, True],
+    [3, 'Pit', 'BilliardsPit', 1.2, 1.0, False, False],
+    [4, 'ReverseBelt', 'BilliardsReverseBelt', 1.0, 1.0, True, True],
+    [5, 'Teleporter', 'BilliardsTeleporter', 0.1, 1.0, True, True],
+]
+table('Terrain',[('id','int'),('terrainKind','TerrainKind'),('prefabLocation','string'),('defaultDuration','float'),('defaultSpeedMultiplier','float'),('inheritVelocity','bool'),('inheritRotation','bool')],terrain_configs)
+table('LevelTerrain',[('id','int'),('levelId',ref('Level')),('terrainConfigId',ref('Terrain')),('position','vector2'),('size','vector2'),('direction','vector2'),('triggerRadius','float'),('duration','float'),('exitId','int')],campaign['terrains'])
 tables.save(root / 'Datas/__tables__.xlsx')
 indent(schema)
 (root / 'Defines/game.xml').write_text(tostring(schema,encoding='unicode'),encoding='utf-8')

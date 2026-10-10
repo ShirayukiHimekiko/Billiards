@@ -138,7 +138,7 @@ def cue(origin, target, power, expected):
 
 def create_campaign():
     """构造二十关数据；几何尺寸根据候选路线的半径反向确定。"""
-    balls, pockets, props, geometries, references = [], [], [], [], []
+    balls, pockets, props, geometries, terrains, references = [], [], [], [], [], []
     triangle = {'$type':'Triangle', 'a':vector((0,1.2)),
                 'b':vector((-1.0392305,-.6)), 'c':vector((1.0392305,-.6))}
 
@@ -425,5 +425,14 @@ def create_campaign():
         key_placements.append([placement_id, level, config_id, position, 'Contact'])
 
     props.extend(key_placements)
+    # 五类地形各提供一个可运行的示例；传送口使用同关卡成对出口。
+    terrains.extend([
+        [101, 1, 1, vector((-3.2, 0)), vector((1.2, 1.2)), vector((1, 0)), .6, .8, 0],
+        [201, 2, 2, vector((-2.2, 0)), vector((1.8, .9)), vector((1, 0)), .55, 1.0, 0],
+        [301, 3, 3, vector((0, 0)), vector((1.3, 1.3)), vector((1, 0)), .6, 1.2, 0],
+        [401, 4, 4, vector((2.2, 0)), vector((1.8, .8)), vector((-1, 0)), .55, 1.0, 0],
+        [501, 5, 5, vector((-2.2, 0)), vector((1.0, 1.0)), vector((1, 0)), .5, .1, 502],
+        [502, 5, 5, vector((2.2, 0)), vector((1.0, 1.0)), vector((-1, 0)), .5, .1, 501],
+    ])
     return dict(levels=LEVEL_SPECS, balls=balls, pockets=pockets, props=props,
-                prop_configs=key_configs, geometries=geometries, references=references)
+                prop_configs=key_configs, geometries=geometries, terrains=terrains, references=references)

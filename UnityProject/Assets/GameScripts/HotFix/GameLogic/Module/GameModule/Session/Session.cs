@@ -35,6 +35,11 @@ namespace GameLogic
         private readonly GeometryManager _geometries;
 
         /// <summary>
+        /// 负责地形实例同步与表现状态更新的管理器。
+        /// </summary>
+        private readonly TerrainManager _terrains;
+
+        /// <summary>
         /// 当前关卡的台面表现与输入投影入口。
         /// </summary>
         private readonly BoardView _board;
@@ -244,6 +249,7 @@ namespace GameLogic
         /// <param name="props">已初始化的道具管理器及效果策略。</param>
         /// <param name="pockets">本关球洞表现管理器。</param>
         /// <param name="geometries">本关图形表现管理器。</param>
+        /// <param name="terrains">本关地形表现管理器。</param>
         /// <param name="board">会话绑定的台面及输入入口。</param>
         public Session(
             LevelData level,
@@ -251,6 +257,7 @@ namespace GameLogic
             PropManager props,
             PocketManager pockets,
             GeometryManager geometries,
+            TerrainManager terrains,
             BoardView board)
         {
             _level = level;
@@ -258,6 +265,7 @@ namespace GameLogic
             _props = props;
             _pockets = pockets;
             _geometries = geometries;
+            _terrains = terrains;
             _board = board;
             _white = balls.WhiteBall;
             _white.Shoot.SetSession(this, board);
@@ -473,6 +481,7 @@ namespace GameLogic
             _props.Sync(World);
             _pockets.Sync(World);
             _geometries.Sync(World);
+            _terrains.Sync(World);
             _board.SyncKeyLinks(World);
 
             _board.SetReveal(World.RevealActive);

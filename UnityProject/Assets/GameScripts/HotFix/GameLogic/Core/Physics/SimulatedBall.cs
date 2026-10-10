@@ -41,6 +41,11 @@ namespace GameLogic
         public float RateMultiplier = 1;
 
         /// <summary>
+        /// 当前球的地形局部状态；预测副本必须独立复制。
+        /// </summary>
+        public TerrainBallState Terrain = new TerrainBallState();
+
+        /// <summary>
         /// 当前尺寸变化是否处于增大趋势，保留为旧 UI 和翻转道具的兼容入口。
         /// </summary>
         public bool Growing
@@ -84,7 +89,8 @@ namespace GameLogic
                 RadiusDirection = RadiusDirection,
                 BaseRadius = BaseRadius,
                 GrowRate = GrowRate,
-                RateMultiplier = RateMultiplier
+                RateMultiplier = RateMultiplier,
+                Terrain = Terrain.Copy()
             };
         }
     }

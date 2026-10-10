@@ -13,69 +13,259 @@ namespace GameConfig
 {
 public partial class Tables
 {
+    #region The Tables
+
     /// <summary>
     /// Level
     /// </summary>
-    public TbLevel TbLevel {get; }
+    private TbLevel m_TbLevel;
+    public TbLevel TbLevel 
+    {
+        get
+        {
+            if (m_TbLevel == null)
+            {
+                m_TbLevel = new TbLevel(defaultLoader("tblevel"));
+                m_TbLevel.ResolveRef(this);
+            }
+            return m_TbLevel;
+        }
+        set
+        {
+            m_TbLevel = value;
+            m_TbLevel.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// Board
     /// </summary>
-    public TbBoard TbBoard {get; }
+    private TbBoard m_TbBoard;
+    public TbBoard TbBoard 
+    {
+        get
+        {
+            if (m_TbBoard == null)
+            {
+                m_TbBoard = new TbBoard(defaultLoader("tbboard"));
+                m_TbBoard.ResolveRef(this);
+            }
+            return m_TbBoard;
+        }
+        set
+        {
+            m_TbBoard = value;
+            m_TbBoard.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// Ball
     /// </summary>
-    public TbBall TbBall {get; }
+    private TbBall m_TbBall;
+    public TbBall TbBall 
+    {
+        get
+        {
+            if (m_TbBall == null)
+            {
+                m_TbBall = new TbBall(defaultLoader("tbball"));
+                m_TbBall.ResolveRef(this);
+            }
+            return m_TbBall;
+        }
+        set
+        {
+            m_TbBall = value;
+            m_TbBall.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// Prop
     /// </summary>
-    public TbProp TbProp {get; }
+    private TbProp m_TbProp;
+    public TbProp TbProp 
+    {
+        get
+        {
+            if (m_TbProp == null)
+            {
+                m_TbProp = new TbProp(defaultLoader("tbprop"));
+                m_TbProp.ResolveRef(this);
+            }
+            return m_TbProp;
+        }
+        set
+        {
+            m_TbProp = value;
+            m_TbProp.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// Physics
     /// </summary>
-    public TbPhysics TbPhysics {get; }
+    private TbPhysics m_TbPhysics;
+    public TbPhysics TbPhysics 
+    {
+        get
+        {
+            if (m_TbPhysics == null)
+            {
+                m_TbPhysics = new TbPhysics(defaultLoader("tbphysics"));
+                m_TbPhysics.ResolveRef(this);
+            }
+            return m_TbPhysics;
+        }
+        set
+        {
+            m_TbPhysics = value;
+            m_TbPhysics.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// LevelBall
     /// </summary>
-    public TbLevelBall TbLevelBall {get; }
+    private TbLevelBall m_TbLevelBall;
+    public TbLevelBall TbLevelBall 
+    {
+        get
+        {
+            if (m_TbLevelBall == null)
+            {
+                m_TbLevelBall = new TbLevelBall(defaultLoader("tblevelball"));
+                m_TbLevelBall.ResolveRef(this);
+            }
+            return m_TbLevelBall;
+        }
+        set
+        {
+            m_TbLevelBall = value;
+            m_TbLevelBall.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// LevelPocket
     /// </summary>
-    public TbLevelPocket TbLevelPocket {get; }
+    private TbLevelPocket m_TbLevelPocket;
+    public TbLevelPocket TbLevelPocket 
+    {
+        get
+        {
+            if (m_TbLevelPocket == null)
+            {
+                m_TbLevelPocket = new TbLevelPocket(defaultLoader("tblevelpocket"));
+                m_TbLevelPocket.ResolveRef(this);
+            }
+            return m_TbLevelPocket;
+        }
+        set
+        {
+            m_TbLevelPocket = value;
+            m_TbLevelPocket.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// LevelProp
     /// </summary>
-    public TbLevelProp TbLevelProp {get; }
+    private TbLevelProp m_TbLevelProp;
+    public TbLevelProp TbLevelProp 
+    {
+        get
+        {
+            if (m_TbLevelProp == null)
+            {
+                m_TbLevelProp = new TbLevelProp(defaultLoader("tblevelprop"));
+                m_TbLevelProp.ResolveRef(this);
+            }
+            return m_TbLevelProp;
+        }
+        set
+        {
+            m_TbLevelProp = value;
+            m_TbLevelProp.ResolveRef(this);
+        }
+    }
     /// <summary>
     /// LevelGeometry
     /// </summary>
-    public TbLevelGeometry TbLevelGeometry {get; }
+    private TbLevelGeometry m_TbLevelGeometry;
+    public TbLevelGeometry TbLevelGeometry 
+    {
+        get
+        {
+            if (m_TbLevelGeometry == null)
+            {
+                m_TbLevelGeometry = new TbLevelGeometry(defaultLoader("tblevelgeometry"));
+                m_TbLevelGeometry.ResolveRef(this);
+            }
+            return m_TbLevelGeometry;
+        }
+        set
+        {
+            m_TbLevelGeometry = value;
+            m_TbLevelGeometry.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// Terrain
+    /// </summary>
+    private TbTerrain m_TbTerrain;
+    public TbTerrain TbTerrain 
+    {
+        get
+        {
+            if (m_TbTerrain == null)
+            {
+                m_TbTerrain = new TbTerrain(defaultLoader("tbterrain"));
+                m_TbTerrain.ResolveRef(this);
+            }
+            return m_TbTerrain;
+        }
+        set
+        {
+            m_TbTerrain = value;
+            m_TbTerrain.ResolveRef(this);
+        }
+    }
+    /// <summary>
+    /// LevelTerrain
+    /// </summary>
+    private TbLevelTerrain m_TbLevelTerrain;
+    public TbLevelTerrain TbLevelTerrain 
+    {
+        get
+        {
+            if (m_TbLevelTerrain == null)
+            {
+                m_TbLevelTerrain = new TbLevelTerrain(defaultLoader("tblevelterrain"));
+                m_TbLevelTerrain.ResolveRef(this);
+            }
+            return m_TbLevelTerrain;
+        }
+        set
+        {
+            m_TbLevelTerrain = value;
+            m_TbLevelTerrain.ResolveRef(this);
+        }
+    }
+
+    #endregion
+
+    System.Func<string, ByteBuf> defaultLoader;
 
     public Tables(System.Func<string, ByteBuf> loader)
     {
-        TbLevel = new TbLevel(loader("tblevel"));
-        TbBoard = new TbBoard(loader("tbboard"));
-        TbBall = new TbBall(loader("tbball"));
-        TbProp = new TbProp(loader("tbprop"));
-        TbPhysics = new TbPhysics(loader("tbphysics"));
-        TbLevelBall = new TbLevelBall(loader("tblevelball"));
-        TbLevelPocket = new TbLevelPocket(loader("tblevelpocket"));
-        TbLevelProp = new TbLevelProp(loader("tblevelprop"));
-        TbLevelGeometry = new TbLevelGeometry(loader("tblevelgeometry"));
-        ResolveRef();
+        SetDefaultLoader(loader);
+        Init();
     }
     
-    private void ResolveRef()
+    public void SetDefaultLoader(System.Func<string, ByteBuf> loader)
     {
-        TbLevel.ResolveRef(this);
-        TbBoard.ResolveRef(this);
-        TbBall.ResolveRef(this);
-        TbProp.ResolveRef(this);
-        TbPhysics.ResolveRef(this);
-        TbLevelBall.ResolveRef(this);
-        TbLevelPocket.ResolveRef(this);
-        TbLevelProp.ResolveRef(this);
-        TbLevelGeometry.ResolveRef(this);
+        defaultLoader = null;
+        defaultLoader = loader;
     }
+
+    //public partial void Init();
+
+    public void Init(){}
 }
 
 }

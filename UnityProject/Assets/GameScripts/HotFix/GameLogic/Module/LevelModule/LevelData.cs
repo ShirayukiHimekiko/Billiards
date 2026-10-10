@@ -82,6 +82,11 @@ namespace GameLogic
         public readonly ReadOnlyCollection<GeometryData> Geometries;
 
         /// <summary>
+        /// 本关已校验的地形摆放快照。
+        /// </summary>
+        public readonly ReadOnlyCollection<TerrainPlacementData> Terrains;
+
+        /// <summary>
         /// 三角形与条件圆的显示样式。
         /// </summary>
         public readonly GeometryStyle GeometryStyle;
@@ -116,6 +121,7 @@ namespace GameLogic
         /// <param name="pockets">本关六洞摆放数据。</param>
         /// <param name="props">本关道具摆放及作用域参数。</param>
         /// <param name="geometries">本关图形条件及效果绑定。</param>
+        /// <param name="terrains">本关地形摆放及效果参数。</param>
         public LevelData(
             Level row,
             Board board,
@@ -123,7 +129,8 @@ namespace GameLogic
             List<BallPlacementData> balls,
             List<PocketPlacementData> pockets,
             List<PropPlacementData> props,
-            List<GeometryData> geometries)
+            List<GeometryData> geometries,
+            List<TerrainPlacementData> terrains)
         {
             Id = row.Id;
             Name = row.Name;
@@ -138,6 +145,7 @@ namespace GameLogic
             Pockets = pockets.AsReadOnly();
             Props = props.AsReadOnly();
             Geometries = geometries.AsReadOnly();
+            Terrains = terrains.AsReadOnly();
             GeometryStyle = board.GeometryStyle;
             PredictionStyle = board.PredictionStyle;
             PocketStyles = board.PocketStyles.AsReadOnly();
@@ -317,6 +325,75 @@ namespace GameLogic
             {
                 throw new ArgumentException($"关卡 {Id} 黑球数量超过可用洞数量。");
             }
+
+            ValidateTerrains();
+        }
+
+        /// <summary>
+        /// 校验地形种类、范围和传送出口引用，失败在关卡准备阶段暴露。
+        /// </summary>
+        private void ValidateTerrains()
+        {
+            var kinds = new HashSet<TerrainKind>();
+            var ids = new HashSet<int>();
+
+            foreach (var terrain in Terrains)
+            {
+                if (!ids.Add(terrain.Id))
+                {
+                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                }
+
+                if (!kinds.Contains(terrain.Kind))
+                {
+                    if (kinds.Count >= 2)
+                    {
+                        throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                    }
+
+                    kinds.Add(terrain.Kind);
+                }
+
+                if (!ContainsCircle(terrain.Position, terrain.TriggerRadius)
+                    || terrain.Size.x <= 0
+                    || terrain.Size.y <= 0)
+                {
+                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                }
+            }
+
+            foreach (var terrain in Terrains)
+            {
+                if (terrain.Kind != TerrainKind.Teleporter)
+                {
+                    if (terrain.ExitId != 0)
+                    {
+                        throw new ArgumentException($"非传送口地形 {terrain.Id} 不应配置出口。");
+                    }
+
+                    continue;
+                }
+
+                if (terrain.ExitId <= 0
+                    || terrain.ExitId == terrain.Id
+                    || !HasTeleporterExit(terrain.ExitId))
+                {
+                    throw new ArgumentException($"传送口地形 {terrain.Id} 必须成对配置且出口存在。");
+                }
+            }
+        }
+
+        private bool HasTeleporterExit(int id)
+        {
+            foreach (var terrain in Terrains)
+            {
+                if (terrain.Id == id && terrain.Kind == TerrainKind.Teleporter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

@@ -43,6 +43,11 @@ namespace GameLogic
         private readonly GeometryManager _geometries = new GeometryManager();
 
         /// <summary>
+        /// 负责地形实例加载、同步与释放的管理器。
+        /// </summary>
+        private readonly TerrainManager _terrains = new TerrainManager();
+
+        /// <summary>
         /// 当前选择或正在运行的关卡 ID。
         /// </summary>
         private int _levelId = INITIAL_LEVEL_ID;
@@ -276,11 +281,12 @@ namespace GameLogic
             _board.Prepare(level);
             await _balls.InitializeAsync(level, _board, token);
             await _props.InitializeAsync(level, _board, token);
+            await _terrains.InitializeAsync(level, _board, token);
             _pockets.Initialize(level, _board);
             _geometries.Initialize(level, _board);
             token.ThrowIfCancellationRequested();
             main.ConfigureLevel(level, _board);
-            Session = new Session(level, _balls, _props, _pockets, _geometries, _board);
+            Session = new Session(level, _balls, _props, _pockets, _geometries, _terrains, _board);
             _board.Runner.Bind(Session);
         }
 
@@ -357,6 +363,7 @@ namespace GameLogic
             Session?.Release();
             Session = null;
             _geometries.Release();
+            _terrains.Release();
             _pockets.Release();
             _props.Release();
             _balls.Release();
