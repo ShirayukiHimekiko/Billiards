@@ -414,6 +414,11 @@ namespace GameLogic
             var white = Balls[WhiteIndex];
             var config = white.Data.Config;
 
+            if (!TryReleasePit(white, power, config))
+            {
+                return false;
+            }
+
             if (!CanPlace(white.State.Position, white.State.Radius, WhiteIndex))
             {
                 return false;
@@ -1196,6 +1201,14 @@ namespace GameLogic
                 TerrainBallState state = Balls[i].Terrain;
                 state.TeleportCooldown = Mathf.Max(0, state.TeleportCooldown - duration);
 
+                if ((state.Submerged || state.TunnelBlocked)
+                    && Balls[i].State.Velocity.sqrMagnitude > _level.Physics.StopSpeed * _level.Physics.StopSpeed)
+                {
+                    ClearTerrainBallState(state);
+
+                    continue;
+                }
+
                 if (state.Remaining > 0)
                 {
                     state.Remaining = Mathf.Max(0, state.Remaining - duration);
@@ -1251,25 +1264,25 @@ namespace GameLogic
                 case TerrainKind.JumpPad:
                     ball.Terrain.Airborne = true;
                     ball.Terrain.Remaining = terrain.Duration;
-                    ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
+                    Vector2 jumpDirection = ball.State.Velocity.sqrMagnitude > .000001f
+                        ? ball.State.Velocity.normalized
+                        : terrain.Direction;
+                    ball.State.Velocity = jumpDirection * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
                     runtime.Airborne = true;
                     break;
                 case TerrainKind.Tunnel:
-                    ball.Terrain.TunnelActive = true;
-                    ball.Terrain.Remaining = terrain.Duration;
-                    ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
-                    runtime.TunnelActive = true;
+                    ResolveTunnel(terrain, runtime, ball);
                     break;
                 case TerrainKind.Pit:
                     ball.Terrain.Submerged = true;
-                    ball.Terrain.Remaining = terrain.Duration;
+                    ball.Terrain.Remaining = float.PositiveInfinity;
                     ball.State.Velocity = Vector2.zero;
                     runtime.Submerged = true;
                     break;
                 case TerrainKind.ReverseBelt:
                     ball.Terrain.ReverseActive = true;
                     ball.Terrain.Remaining = terrain.Duration;
-                    ball.State.Velocity = -ball.State.Velocity * terrain.SpeedMultiplier;
+                    ball.State.Velocity = -ball.State.Velocity;
                     break;
                 case TerrainKind.Teleporter:
                     runtime.Active = false;
@@ -1293,16 +1306,76 @@ namespace GameLogic
             ball.State.Position = exit.Position;
             exitState.Active = true;
 
-            if (entry.InheritVelocity)
-            {
-                float speed = ball.State.Velocity.magnitude * entry.SpeedMultiplier;
-                ball.State.Velocity = exit.Direction * speed;
-            }
+            float incomingSpeed = ball.State.Velocity.magnitude;
+            float outgoingSpeed = entry.InheritVelocity
+                ? incomingSpeed
+                : incomingSpeed * entry.SpeedMultiplier;
+            Vector2 outgoingDirection = entry.InheritVelocity
+                && entry.InheritRotation
+                && ball.State.Velocity.sqrMagnitude > .000001f
+                ? ball.State.Velocity.normalized
+                : exit.Direction;
+            ball.State.Velocity = outgoingDirection * outgoingSpeed;
 
             ball.Terrain.TeleportCooldown = .08f;
             ball.Terrain.TerrainId = exit.Id;
             exitState.EntryLocked = true;
             exitState.CooldownRemaining = .08f;
+        }
+
+        private void ResolveTunnel(TerrainPlacementData terrain, TerrainRuntimeState runtime, SimulatedBall ball)
+        {
+            float difference = ball.State.Radius - terrain.OpeningRadius;
+
+            if (difference > _level.Physics.ContactTolerance)
+            {
+                ball.State.Velocity = Vector2.Reflect(ball.State.Velocity, terrain.Direction);
+                ball.Terrain.Clear();
+                runtime.Active = false;
+
+                return;
+            }
+
+            ball.Terrain.TunnelActive = true;
+            runtime.TunnelActive = true;
+
+            if (Mathf.Abs(difference) <= _level.Physics.ContactTolerance)
+            {
+                ball.Terrain.TunnelBlocked = true;
+                ball.Terrain.Remaining = float.PositiveInfinity;
+                ball.State.Velocity = Vector2.zero;
+
+                return;
+            }
+
+            ball.Terrain.Remaining = terrain.Duration;
+            ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
+        }
+
+        private bool TryReleasePit(SimulatedBall ball, float power, BallConfigData config)
+        {
+            if (!ball.Terrain.Submerged)
+            {
+                return true;
+            }
+
+            TerrainPlacementData terrain = _level.Terrains[TerrainIndex(ball.Terrain.TerrainId)];
+
+            if (terrain.Kind != TerrainKind.Pit)
+            {
+                return true;
+            }
+
+            float speed = Mathf.Lerp(config.SpeedMin, config.SpeedMax, power);
+
+            if (speed < config.SpeedMax - _level.Physics.ContactTolerance)
+            {
+                return false;
+            }
+
+            ClearTerrainBallState(ball.Terrain);
+
+            return true;
         }
 
         private int TerrainIndex(int id)

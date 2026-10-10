@@ -18,6 +18,7 @@ namespace GameLogic
         public readonly Vector2 Size;
         public readonly Vector2 Direction;
         public readonly float TriggerRadius;
+        public readonly float OpeningRadius;
         public readonly float Duration;
         public readonly float SpeedMultiplier;
         public readonly int ExitId;
@@ -44,6 +45,7 @@ namespace GameLogic
 
             Direction = row.Direction.normalized;
             TriggerRadius = row.TriggerRadius;
+            OpeningRadius = Mathf.Min(Size.x, Size.y) * .5f;
             Duration = row.Duration > 0 ? row.Duration : config.DefaultDuration;
             SpeedMultiplier = config.DefaultSpeedMultiplier;
             ExitId = row.ExitId;
@@ -55,6 +57,7 @@ namespace GameLogic
                 || Size.x <= 0
                 || Size.y <= 0
                 || TriggerRadius <= 0
+                || OpeningRadius <= 0
                 || Duration <= 0
                 || SpeedMultiplier <= 0
                 || !IsFinite(Position)

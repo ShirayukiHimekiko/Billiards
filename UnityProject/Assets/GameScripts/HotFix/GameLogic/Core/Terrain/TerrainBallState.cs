@@ -7,6 +7,7 @@ namespace GameLogic
     {
         public bool Airborne;
         public bool TunnelActive;
+        public bool TunnelBlocked;
         public bool Submerged;
         public bool ReverseActive;
         public float Remaining;
@@ -21,6 +22,7 @@ namespace GameLogic
             {
                 Airborne = Airborne,
                 TunnelActive = TunnelActive,
+                TunnelBlocked = TunnelBlocked,
                 Submerged = Submerged,
                 ReverseActive = ReverseActive,
                 Remaining = Remaining,
@@ -33,6 +35,7 @@ namespace GameLogic
         {
             Airborne = false;
             TunnelActive = false;
+            TunnelBlocked = false;
             Submerged = false;
             ReverseActive = false;
             Remaining = 0;
