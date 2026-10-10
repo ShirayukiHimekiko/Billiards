@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
 
@@ -62,6 +63,16 @@ namespace GameLogic
         /// 会话是否已释放，用于阻止后续输入与帧推进。
         /// </summary>
         private bool _released;
+
+        /// <summary>
+        /// 上一次同步到台面的预演状态，避免每次同步都使预测缓存失效。
+        /// </summary>
+        private bool _lastPreviewActive;
+
+        /// <summary>
+        /// 本次发布周期内已拾取的钥匙绑定洞，用于生成一次性反馈文案。
+        /// </summary>
+        private readonly List<int> _keyFeedbacks = new List<int>();
 
         /// <summary>
         /// 真实模拟世界。
@@ -137,17 +148,93 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 界面快照包含黑球进度。
+        /// 界面快照包含所有 HUD 所需的只读会话数据。
         /// </summary>
-        public SessionUISnapshot Snapshot => new SessionUISnapshot(
-            State,
-            ShotsLeft,
-            World.Balls[World.WhiteIndex].Growing,
-            ItemUsed,
-            Message,
-            World.RemainingBlack,
-            PredictionPropRemaining,
-            PredictionPropArmed);
+        public SessionUISnapshot Snapshot
+        {
+            get
+            {
+                SimulatedBall white = World.Balls[World.WhiteIndex];
+                WhiteBallUISnapshot whiteSnapshot = BuildWhiteBallSnapshot(white);
+                IReadOnlyList<EffectUISnapshot> effects = BuildEffectSnapshots();
+                IReadOnlyList<PocketUISnapshot> pockets = BuildPocketSnapshots();
+                PreviewUISnapshot preview = new PreviewUISnapshot(
+                    PredictionPropRemaining,
+                    PredictionPropArmed,
+                    World.PreviewActive);
+
+                return new SessionUISnapshot(
+                    State,
+                    ShotsLeft,
+                    white.Growing,
+                    ItemUsed,
+                    Message,
+                    World.RemainingBlack,
+                    PredictionPropRemaining,
+                    PredictionPropArmed,
+                    _props.GetKeyStates(World),
+                    whiteSnapshot,
+                    effects,
+                    pockets,
+                    preview);
+            }
+        }
+
+        private WhiteBallUISnapshot BuildWhiteBallSnapshot(SimulatedBall white)
+        {
+            float progress = Mathf.InverseLerp(white.Data.Config.RadiusMin, white.Data.Config.RadiusMax, white.State.Radius);
+            int band = Mathf.Clamp(Mathf.FloorToInt(progress * 24f) + 1, 1, 24);
+            SessionUIRadiusTrend trend;
+
+            if (Mathf.Approximately(white.RateMultiplier, 0))
+            {
+                trend = SessionUIRadiusTrend.Frozen;
+            }
+            else if (white.RateMultiplier > 1)
+            {
+                trend = white.Growing ? SessionUIRadiusTrend.FastGrowing : SessionUIRadiusTrend.FastShrinking;
+            }
+            else
+            {
+                trend = white.Growing ? SessionUIRadiusTrend.Growing : SessionUIRadiusTrend.Shrinking;
+            }
+
+            return new WhiteBallUISnapshot(band, progress, trend);
+        }
+
+        private IReadOnlyList<EffectUISnapshot> BuildEffectSnapshots()
+        {
+            var effects = new List<EffectUISnapshot>(_level.Props.Count);
+
+            for (int i = 0; i < _level.Props.Count; i++)
+            {
+                PropPlacementData prop = _level.Props[i];
+                effects.Add(new EffectUISnapshot(
+                    prop.Id,
+                    prop.Kind,
+                    World.PropUses[i],
+                    prop.UseLimit,
+                    prop.DurationShots,
+                    World.EffectRemaining[i],
+                    prop.RateMultiplier,
+                    prop.TargetPocketId));
+            }
+
+            return effects.AsReadOnly();
+        }
+
+        private IReadOnlyList<PocketUISnapshot> BuildPocketSnapshots()
+        {
+            var pockets = new List<PocketUISnapshot>(_level.Pockets.Count);
+
+            for (int i = 0; i < _level.Pockets.Count; i++)
+            {
+                PocketPlacementData pocket = _level.Pockets[i];
+                pockets.Add(new PocketUISnapshot(pocket.Id, pocket.Slot, World.PocketStates[i]));
+            }
+
+            return pockets.AsReadOnly();
+        }
 
         /// <summary>
         /// 创建会话并绑定管理器及输入。
@@ -202,6 +289,8 @@ namespace GameLogic
             // 只有世界接受本次出杆后才扣除机会，尺寸放不下的尝试不计次数。
             ShotsLeft--;
 
+            ApplyShotBonus();
+
             if (PredictionPropArmed)
             {
                 PredictionPropRemaining--;
@@ -234,6 +323,8 @@ namespace GameLogic
             {
                 World.Step(_level.Physics.Step);
                 _accumulator -= _level.Physics.Step;
+
+                ApplyShotBonus();
 
                 if (!World.Moving)
                 {
@@ -298,6 +389,7 @@ namespace GameLogic
             ShotsLeft = _level.MaxShots;
             PredictionPropRemaining = _level.PredictionPropCount;
             SetPredictionPropArmed(false);
+            _lastPreviewActive = false;
             _accumulator = 0;
             State = SessionState.Ready;
             Message = $"{_level.Name}：{_level.Objective}";
@@ -381,6 +473,31 @@ namespace GameLogic
             _props.Sync(World);
             _pockets.Sync(World);
             _geometries.Sync(World);
+            _board.SyncKeyLinks(World);
+
+            _board.SetReveal(World.RevealActive);
+
+            if (_lastPreviewActive != World.PreviewActive)
+            {
+                _lastPreviewActive = World.PreviewActive;
+                _board.SetPredictionReflectionsVisible(PredictionPropArmed || World.PreviewActive);
+            }
+        }
+
+        /// <summary>
+        /// 将物理世界产生的加杆事件统一结算到会话杆数。
+        /// </summary>
+        private void ApplyShotBonus()
+        {
+            int bonus = World.ConsumeShotBonus();
+
+            if (bonus <= 0)
+            {
+                return;
+            }
+
+            ShotsLeft += bonus;
+            Message = $"获得额外击球次数 +{bonus}";
         }
 
         /// <summary>
@@ -388,6 +505,20 @@ namespace GameLogic
         /// </summary>
         private void Publish()
         {
+            _keyFeedbacks.Clear();
+
+            if (_props.ConsumeKeyPickupFeedbacks(_keyFeedbacks))
+            {
+                if (_keyFeedbacks.Count == 1)
+                {
+                    Message = $"钥匙已拾取，已解锁 { _keyFeedbacks[0] } 号洞";
+                }
+                else
+                {
+                    Message = "钥匙已拾取，绑定球洞已解锁";
+                }
+            }
+
             GameEvent.Send(SessionEvents.StateChanged, Snapshot);
         }
 

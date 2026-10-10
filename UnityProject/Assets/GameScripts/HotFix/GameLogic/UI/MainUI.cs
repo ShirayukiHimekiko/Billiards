@@ -1,4 +1,6 @@
+using System.Text;
 using Cysharp.Threading.Tasks;
+using GameConfig;
 using UnityEngine;
 
 namespace GameLogic
@@ -30,6 +32,11 @@ namespace GameLogic
         private bool _hasProps;
 
         /// <summary>
+        /// 本关是否包含钥匙，包含时在趋势文本中显示绑定洞状态。
+        /// </summary>
+        private bool _hasKeys;
+
+        /// <summary>
         /// 最近显示的整数力度百分比，避免重复刷新。
         /// </summary>
         private int _lastPower = -1;
@@ -55,6 +62,17 @@ namespace GameLogic
             _hintsVisible = level.ShowHints;
             _hasGeometry = level.Geometries.Count > 0;
             _hasProps = level.Props.Count > 0;
+            _hasKeys = false;
+
+            for (int i = 0; i < level.Props.Count; i++)
+            {
+                if (level.Props[i].Kind == PropEffectKind.Key)
+                {
+                    _hasKeys = true;
+                    break;
+                }
+            }
+
             m_btn_Hints.gameObject.SetActive(_hasGeometry);
         }
 
@@ -83,19 +101,162 @@ namespace GameLogic
         /// <param name="snapshot">当前会话状态。</param>
         private void OnStateChanged(SessionUISnapshot snapshot)
         {
-            m_text_Status.text = snapshot.Message;
             m_text_Shots.text = $"剩余机会  {snapshot.Shots} / {_maxShots}";
-            m_text_Trend.text = $"剩余黑球：{snapshot.RemainingBlack}\n大小趋势：" + (snapshot.Growing ? "变大" : "变小");
-
-            if (_hasProps)
-            {
-                m_text_Trend.text += "\n道具：" + (snapshot.ItemUsed ? "已触发" : "等待触发");
-            }
+            m_text_Trend.text = BuildTrendText(snapshot);
+            m_text_Status.text = BuildStatusText(snapshot);
 
             m_btn_Restart.interactable = true;
             m_btn_Pause.interactable = snapshot.State != SessionState.Lost;
             m_text_Pause.text = snapshot.State == SessionState.Won ? "下一关" : snapshot.State == SessionState.Paused ? "继续" : "暂停";
             m_text_Status.color = snapshot.State == SessionState.Won ? new Color(0.5f, 1, 0.7f) : new Color(0.94f, 0.9f, 0.78f);
+        }
+
+        private string BuildTrendText(SessionUISnapshot snapshot)
+        {
+            var text = new StringBuilder(256);
+            text.Append("黑球 ").Append(snapshot.RemainingBlack)
+                .Append(" | 白球 ").Append(GetTrendLabel(snapshot.WhiteBall.Trend))
+                .Append("\n尺寸档位 ").Append(snapshot.WhiteBall.RadiusBand).Append("/24");
+
+            if (_hasProps)
+            {
+                text.Append("\n效果 ");
+                bool hasActiveEffect = false;
+
+                for (int i = 0; i < snapshot.Effects.Count; i++)
+                {
+                    EffectUISnapshot effect = snapshot.Effects[i];
+                    if (!effect.Active)
+                    {
+                        continue;
+                    }
+
+                    if (hasActiveEffect)
+                    {
+                        text.Append(' ');
+                    }
+
+                    text.Append(GetEffectLabel(effect.Kind)).Append('(').Append(effect.RemainingShots).Append(')');
+                    hasActiveEffect = true;
+                }
+
+                if (!hasActiveEffect)
+                {
+                    text.Append(snapshot.ItemUsed ? "已触发" : "等待触发");
+                }
+            }
+
+            text.Append("\n洞 ");
+            for (int i = 0; i < snapshot.Pockets.Count; i++)
+            {
+                PocketUISnapshot pocket = snapshot.Pockets[i];
+                text.Append(GetPocketStateLabel(pocket.State, true));
+                if (i + 1 < snapshot.Pockets.Count)
+                {
+                    text.Append(' ');
+                }
+            }
+
+            text.Append(" | 钥匙 ").Append(snapshot.CollectedKeyCount).Append('/').Append(snapshot.KeyCount);
+            return text.ToString();
+        }
+
+        private string BuildStatusText(SessionUISnapshot snapshot)
+        {
+            var text = new StringBuilder(snapshot.Message.Length + 48);
+            text.Append(snapshot.Message).Append("\n预演 ");
+
+            if (snapshot.Preview.EffectActive)
+            {
+                text.Append("已生效·轨迹/接触/半径");
+            }
+            else if (snapshot.Preview.Armed)
+            {
+                text.Append("下一杆·轨迹/接触/半径");
+            }
+            else if (snapshot.Preview.RemainingUses <= 0)
+            {
+                text.Append("不可用");
+            }
+            else
+            {
+                text.Append("未启用 ×").Append(snapshot.Preview.RemainingUses);
+            }
+
+            if (snapshot.RevealActive)
+            {
+                text.Append(" | 显影·持续");
+            }
+
+            if (_hasKeys)
+            {
+                text.Append("\n绑定");
+                for (int i = 0; i < snapshot.Keys.Count; i++)
+                {
+                    KeyUISnapshot key = snapshot.Keys[i];
+                    text.Append(' ').Append(key.PropId).Append("→洞").Append(key.TargetPocketId)
+                        .Append(GetPocketStateLabel(key.PocketState, true));
+                }
+            }
+
+            return text.ToString();
+        }
+
+        private static string GetTrendLabel(SessionUIRadiusTrend trend)
+        {
+            switch (trend)
+            {
+                case SessionUIRadiusTrend.Growing:
+                    return "变大";
+                case SessionUIRadiusTrend.Shrinking:
+                    return "变小";
+                case SessionUIRadiusTrend.Frozen:
+                    return "冻结";
+                case SessionUIRadiusTrend.FastGrowing:
+                    return "疾变↑";
+                case SessionUIRadiusTrend.FastShrinking:
+                    return "疾变↓";
+                default:
+                    return "未知";
+            }
+        }
+
+        private static string GetEffectLabel(PropEffectKind kind)
+        {
+            switch (kind)
+            {
+                case PropEffectKind.Reverse:
+                    return "逆转";
+                case PropEffectKind.Freeze:
+                    return "冻结";
+                case PropEffectKind.FastChange:
+                    return "疾变";
+                case PropEffectKind.Reveal:
+                    return "显影";
+                case PropEffectKind.Preview:
+                    return "预演";
+                case PropEffectKind.AddShot:
+                    return "加杆";
+                default:
+                    return "道具";
+            }
+        }
+
+        private static string GetPocketStateLabel(PocketState state, bool compact)
+        {
+            switch (state)
+            {
+                case PocketState.Disabled:
+                    return compact ? "禁" : "禁用";
+                case PocketState.Locked:
+                    return compact ? "锁" : "锁定";
+                case PocketState.Unlocked:
+                    return compact ? "开" : "已解锁";
+                case PocketState.Occupied:
+                    return compact ? "占" : "已占用";
+                default:
+                    return compact ? "?" : "未知";
+            }
         }
 
         /// <summary>
