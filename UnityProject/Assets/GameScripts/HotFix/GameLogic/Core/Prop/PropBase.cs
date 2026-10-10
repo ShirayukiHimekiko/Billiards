@@ -34,7 +34,7 @@ namespace GameLogic
         /// 显示道具是否还可触发。
         /// </summary>
         /// <param name="available">道具是否仍有可用次数；不可用时降低颜色与透明度。</param>
-        public void SetAvailable(bool available)
+        public virtual void SetAvailable(bool available)
         {
             _renderer.color = available ? Color.white : new Color(.5f, .5f, .5f, .35f);
         }
