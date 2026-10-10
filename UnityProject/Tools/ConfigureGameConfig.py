@@ -92,6 +92,20 @@ prop_rows = [
      {'$type': 'FlipEffect', 'durationShots': 1, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Shot', 1],
     [2, 'Flip', 'BilliardsFlipProp', .468, .234,
      {'$type': 'FlipEffect', 'durationShots': 1, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Level', 1],
+    [3, 'Reverse', 'BilliardsReverseProp', .468, .234,
+     {'$type': 'ReverseEffect', 'durationShots': 0, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Level', 1],
+    [4, 'Freeze', 'BilliardsFreezeProp', .468, .234,
+     {'$type': 'FreezeEffect', 'durationShots': 1, 'rateMultiplier': 0, 'targetPocketId': 0}, 'Shot', 1],
+    [5, 'Restore', 'BilliardsRestoreProp', .468, .234,
+     {'$type': 'RestoreEffect', 'durationShots': 0, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Shot', 1],
+    [6, 'FastChange', 'BilliardsFastChangeProp', .468, .234,
+     {'$type': 'FastChangeEffect', 'durationShots': 1, 'rateMultiplier': 2, 'targetPocketId': 0}, 'Shot', 1],
+    [7, 'Reveal', 'BilliardsRevealProp', .468, .234,
+     {'$type': 'RevealEffect', 'durationShots': 0, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Level', 1],
+    [8, 'Preview', 'BilliardsPreviewProp', .468, .234,
+     {'$type': 'PreviewEffect', 'durationShots': 1, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Shot', 1],
+    [9, 'AddShot', 'BilliardsAddShotProp', .468, .234,
+     {'$type': 'AddShotEffect', 'durationShots': 0, 'rateMultiplier': 1, 'targetPocketId': 0}, 'Level', 1],
 ]
 prop_rows.extend(campaign['prop_configs'])
 table('Prop',[('id','int'),('propKind','PropKind'),('prefabLocation','string'),('visualDiameter','float'),('triggerRadius','float'),('effectParams','PropEffect'),('useScope','UseScope'),('useLimit','int')],prop_rows)

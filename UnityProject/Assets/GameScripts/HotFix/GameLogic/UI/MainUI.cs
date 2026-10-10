@@ -136,7 +136,9 @@ namespace GameLogic
                         text.Append(' ');
                     }
 
-                    text.Append(GetEffectLabel(effect.Kind)).Append('(').Append(effect.RemainingShots).Append(')');
+                    text.Append(GetEffectLabel(effect.Kind)).Append('(');
+                    text.Append(effect.RemainingShots < 0 ? "本关" : effect.RemainingShots.ToString());
+                    text.Append(')');
                     hasActiveEffect = true;
                 }
 

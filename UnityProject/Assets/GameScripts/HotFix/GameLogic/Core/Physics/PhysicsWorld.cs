@@ -477,7 +477,7 @@ namespace GameLogic
                     EffectRemaining[i]--;
                 }
 
-                if (EffectRemaining[i] > 0)
+                if (EffectRemaining[i] != 0)
                 {
                     PropEffectKind kind = _level.Props[i].Kind;
                     RevealActive |= kind == PropEffectKind.Reveal;
@@ -493,7 +493,7 @@ namespace GameLogic
         {
             for (int i = 0; i < EffectRemaining.Length; i++)
             {
-                if (EffectRemaining[i] <= 0)
+                if (EffectRemaining[i] == 0)
                 {
                     continue;
                 }
@@ -1450,15 +1450,19 @@ namespace GameLogic
             else
             {
                 _propEffects[index].Apply(ball, prop.RateMultiplier);
-                EffectRemaining[index] = prop.DurationShots;
+                EffectRemaining[index] = IsPersistentEffect(prop)
+                    ? -1
+                    : prop.Kind == PropEffectKind.Preview && prop.UseScope == UseScope.Shot
+                    ? Mathf.Max(1, prop.DurationShots) + 1
+                    : Mathf.Max(0, prop.DurationShots);
 
                 if (prop.Kind == PropEffectKind.Reveal)
                 {
-                    RevealActive = prop.DurationShots > 0;
+                    RevealActive = EffectRemaining[index] != 0;
                 }
                 else if (prop.Kind == PropEffectKind.Preview)
                 {
-                    PreviewActive = prop.DurationShots > 0;
+                    PreviewActive = EffectRemaining[index] != 0;
                 }
                 else if (prop.Kind == PropEffectKind.AddShot)
                 {

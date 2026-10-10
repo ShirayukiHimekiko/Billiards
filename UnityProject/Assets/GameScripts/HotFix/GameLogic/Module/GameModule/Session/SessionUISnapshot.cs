@@ -50,7 +50,7 @@ namespace GameLogic
         {
             get
             {
-                return RemainingShots > 0;
+                return RemainingShots != 0;
             }
         }
 
