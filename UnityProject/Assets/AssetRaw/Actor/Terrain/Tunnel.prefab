@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6827247582328755262}
   - component: {fileID: 5687576108763322767}
-  - component: {fileID: 2252340997441680262}
   m_Layer: 0
   m_Name: Tunnel
   m_TagString: Untagged
@@ -30,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8363265265761854998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5687576108763322767
@@ -45,15 +45,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b183007d4a94114cba317fc6fef3bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameLogic::GameLogic.TerrainBase
-  _renderer: {fileID: 2252340997441680262}
---- !u!212 &2252340997441680262
+--- !u!1 &3409247159146597559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8363265265761854998}
+  - component: {fileID: 5748580952245401168}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8363265265761854998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409247159146597559}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6827247582328755262}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &5748580952245401168
 SpriteRenderer:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523383253174935821}
+  m_GameObject: {fileID: 3409247159146597559}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

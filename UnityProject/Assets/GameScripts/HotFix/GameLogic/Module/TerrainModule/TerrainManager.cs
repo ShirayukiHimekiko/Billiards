@@ -11,7 +11,7 @@ namespace GameLogic
     /// </summary>
     public sealed class TerrainManager : Singleton<TerrainManager>
     {
-        private readonly List<Terrain> _views = new List<Terrain>();
+        private readonly List<TerrainObject> _views = new List<TerrainObject>();
         private readonly List<GameObject> _objects = new List<GameObject>();
         private readonly List<TerrainRuntimeState> _states = new List<TerrainRuntimeState>();
         private LevelData _level;
@@ -36,10 +36,10 @@ namespace GameLogic
                 }
 
                 instance.transform.SetParent(board.transform, false);
-                Terrain view = instance.GetComponent<Terrain>();
+                TerrainObject view = instance.GetComponent<TerrainObject>();
                 if (view == null)
                 {
-                    throw new InvalidOperationException($"地形 {data.Id} Prefab 缺少 TerrainBase。");
+                    throw new InvalidOperationException($"地形 {data.Id} Prefab 缺少 Terrain。");
                 }
 
                 view.Initialize(data);
