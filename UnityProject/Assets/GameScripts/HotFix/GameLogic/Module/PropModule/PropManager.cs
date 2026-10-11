@@ -9,12 +9,12 @@ namespace GameLogic
     /// <summary>
     /// 管理配置道具实例及表现，不持有几何判定职责。
     /// </summary>
-    public sealed class PropManager
+    public sealed class PropManager : Singleton<PropManager>
     {
         /// <summary>
         /// 与关卡道具配置保持同序的表现组件。
         /// </summary>
-        private readonly List<PropBase> _views = new List<PropBase>();
+        private readonly List<PropObject> _views = new List<PropObject>();
 
         /// <summary>
         /// 已加载的道具资源实例，供失败或取消时统一回收。
@@ -24,7 +24,7 @@ namespace GameLogic
         /// <summary>
         /// 由配置数据生成、供世界模拟及预测使用的效果策略。
         /// </summary>
-        private readonly List<IPropEffect> _effects = new List<IPropEffect>();
+        private readonly List<PropEffectSpec> _effects = new List<PropEffectSpec>();
 
         /// <summary>
         /// 由真实世界推进产生、等待会话发布的一次性钥匙拾取反馈。
@@ -42,9 +42,9 @@ namespace GameLogic
         private LevelData _level;
 
         /// <summary>
-        /// 具体道具基类提供的无场景依赖效果策略。
+        /// Prefab 功能组件提供的无场景依赖效果规格。
         /// </summary>
-        public IReadOnlyList<IPropEffect> Effects => _effects;
+        public IReadOnlyList<PropEffectSpec> Effects => _effects;
 
         /// <summary>
         /// 加载并配置本关道具。
@@ -75,16 +75,32 @@ namespace GameLogic
 
                 instance.transform.SetParent(board.transform, false);
 
-                var view = instance.GetComponent<PropBase>();
+                var view = instance.GetComponent<PropObject>();
 
                 if (view == null)
                 {
-                    throw new InvalidOperationException($"道具 {data.Id} 缺少 PropBase。");
+                    throw new InvalidOperationException($"道具 {data.Id} 的 Prefab {data.PrefabLocation} 缺少 PropObject。");
                 }
 
                 view.Initialize(data);
+                IPropSimulationProvider provider = view.GetFeature<IPropSimulationProvider>();
+
+                if (provider == null)
+                {
+                    throw new InvalidOperationException(
+                        $"道具 {data.Id} 的 Prefab {data.PrefabLocation} 缺少玩法功能组件。");
+                }
+
+                PropEffectSpec effect = provider.CreateEffect(data);
+
+                if (effect == null || effect.Kind != data.Kind)
+                {
+                    throw new InvalidOperationException(
+                        $"道具 {data.Id} 的 Prefab {data.PrefabLocation} 缺少匹配 {data.Kind} 的功能组件。");
+                }
+
                 _views.Add(view);
-                _effects.Add(PropEffects.Get(data.Kind));
+                _effects.Add(effect);
             }
 
             _lastUses = new int[level.Props.Count];
@@ -168,7 +184,7 @@ namespace GameLogic
         /// <summary>
         /// 销毁资源实例。
         /// </summary>
-        public void Release()
+        public void ClearLevel()
         {
             foreach (var instance in _objects)
             {
@@ -184,6 +200,14 @@ namespace GameLogic
             _pendingKeyPockets.Clear();
             _lastUses = Array.Empty<int>();
             _level = null;
+        }
+
+        /// <summary>
+        /// 释放单例前清理当前关卡道具。
+        /// </summary>
+        protected override void OnRelease()
+        {
+            ClearLevel();
         }
 
         private int FindPocketIndex(int pocketId)

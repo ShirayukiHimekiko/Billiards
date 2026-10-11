@@ -20,32 +20,32 @@ namespace GameLogic
         /// <summary>
         /// 负责配置聚合和关卡目录查询的管理器。
         /// </summary>
-        private readonly LevelManager _levels = new LevelManager();
+        private readonly LevelManager _levels = LevelManager.Instance;
 
         /// <summary>
         /// 负责球体加载、同步与回收的管理器。
         /// </summary>
-        private readonly BallManager _balls = new BallManager();
+        private readonly BallManager _balls = BallManager.Instance;
 
         /// <summary>
         /// 负责道具加载、效果策略与表现同步的管理器。
         /// </summary>
-        private readonly PropManager _props = new PropManager();
+        private readonly PropManager _props = PropManager.Instance;
 
         /// <summary>
         /// 负责六洞状态表现的管理器。
         /// </summary>
-        private readonly PocketManager _pockets = new PocketManager();
+        private readonly PocketManager _pockets = PocketManager.Instance;
 
         /// <summary>
         /// 负责图形进度表现与提示显示的管理器。
         /// </summary>
-        private readonly GeometryManager _geometries = new GeometryManager();
+        private readonly GeometryManager _geometries = GeometryManager.Instance;
 
         /// <summary>
         /// 负责地形实例加载、同步与释放的管理器。
         /// </summary>
-        private readonly TerrainManager _terrains = new TerrainManager();
+        private readonly TerrainManager _terrains = TerrainManager.Instance;
 
         /// <summary>
         /// 当前选择或正在运行的关卡 ID。
@@ -362,11 +362,11 @@ namespace GameLogic
 
             Session?.Release();
             Session = null;
-            _geometries.Release();
-            _terrains.Release();
-            _pockets.Release();
-            _props.Release();
-            _balls.Release();
+            _geometries.ClearLevel();
+            _terrains.ClearLevel();
+            _pockets.ClearLevel();
+            _props.ClearLevel();
+            _balls.ClearLevel();
             _levels.UnloadLevel(_board);
             _board = null;
 

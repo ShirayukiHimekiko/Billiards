@@ -7,7 +7,7 @@ namespace GameLogic
     /// <summary>
     /// 统一读取九表并组成关卡快照。
     /// </summary>
-    public sealed class LevelManager
+    public sealed class LevelManager : Singleton<LevelManager>
     {
         /// <summary>
         /// 首次查询后缓存的只读关卡目录，按 Order 和 Id 排序。
@@ -202,6 +202,15 @@ namespace GameLogic
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 释放单例持有的关卡状态与目录缓存。
+        /// </summary>
+        protected override void OnRelease()
+        {
+            UnloadLevel(null);
+            _catalogue = null;
         }
     }
 }

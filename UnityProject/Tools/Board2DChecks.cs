@@ -103,7 +103,7 @@ public static class Board2DChecks
     public static object Prefabs()
     {
         var passed=new List<string>();
-        foreach(string path in new[]{"Assets/AssetRaw/Actor/Billiards/BilliardsTable.prefab","Assets/AssetRaw/UI/GameMainUI.prefab"})
+        foreach(string path in new[]{"Assets/AssetRaw/Actor/Table/Table.prefab","Assets/AssetRaw/UI/GameMainUI.prefab"})
         {
             var root=PrefabUtility.LoadPrefabContents(path);
             try

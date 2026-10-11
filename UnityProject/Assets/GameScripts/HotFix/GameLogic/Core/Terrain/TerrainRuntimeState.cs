@@ -1,38 +1,21 @@
 namespace GameLogic
 {
     /// <summary>
-    /// 地形实例的可变状态；与球状态分离，便于会话重置和表现同步。
+    /// 地形实例的派生表现状态；由球阶段聚合得到，不参与模拟，也不随预测副本复制。
     /// </summary>
     public sealed class TerrainRuntimeState
     {
-        public bool Active;
-        public bool EntryLocked;
-        public float CooldownRemaining;
-        public bool Airborne;
-        public bool TunnelActive;
-        public bool Submerged;
+        /// <summary>
+        /// 该地形当前是否有球处于持续地形阶段，用于表现高亮。
+        /// </summary>
+        public bool Highlighted;
 
-        public TerrainRuntimeState Copy()
-        {
-            return new TerrainRuntimeState
-            {
-                Active = Active,
-                EntryLocked = EntryLocked,
-                CooldownRemaining = CooldownRemaining,
-                Airborne = Airborne,
-                TunnelActive = TunnelActive,
-                Submerged = Submerged
-            };
-        }
-
+        /// <summary>
+        /// 重置为未高亮。
+        /// </summary>
         public void Reset()
         {
-            Active = false;
-            EntryLocked = false;
-            CooldownRemaining = 0;
-            Airborne = false;
-            TunnelActive = false;
-            Submerged = false;
+            Highlighted = false;
         }
     }
 }

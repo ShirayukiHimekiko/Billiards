@@ -40,13 +40,7 @@ namespace GameLogic
                 return 0;
             }
 
-            _coefficients[0] = p.sqrMagnitude - radius * radius;
-            _coefficients[1] = 2 * (Vector2.Dot(p, v) - radius * rate);
-            _coefficients[2] = v.sqrMagnitude + 2 * Vector2.Dot(p, h) - rate * rate;
-            _coefficients[3] = 2 * Vector2.Dot(v, h);
-            _coefficients[4] = h.sqrMagnitude;
-
-            int count = _roots.Find(_coefficients, 4, 0, Math.Min(a.Duration, b.Duration));
+            int count = BuildCircleRoots(p, v, h, radius, rate, Math.Min(a.Duration, b.Duration));
 
             for (int i = 0; i < count; i++)
             {
@@ -62,6 +56,149 @@ namespace GameLogic
             }
 
             return double.PositiveInfinity;
+        }
+
+        /// <summary>
+        /// 求球心首次由外向内进入静态触发圆的时间；已在边界时只接受继续向内，避免零时刻重复进入。
+        /// </summary>
+        /// <param name="a">运动球的连续轨迹。</param>
+        /// <param name="center">台面局部坐标中的静态圆心。</param>
+        /// <param name="radius">静态触发圆半径。</param>
+        /// <returns>轨迹区间内首次向内进入的秒数；未找到时为正无穷。</returns>
+        public double CircleEnter(BallTrajectory a, Vector2 center, float radius)
+        {
+            Vector2 p = a.Position - center;
+            Vector2 v = a.Velocity;
+            Vector2 h = a.Acceleration * .5f;
+            double gap = p.magnitude - radius;
+
+            if (gap < -.00001)
+            {
+                return 0;
+            }
+
+            if (gap <= .00001)
+            {
+                return Vector2.Dot(p.normalized, v) < -.000001 ? 0 : double.PositiveInfinity;
+            }
+
+            int count = BuildCircleRoots(p, v, h, radius, 0, a.Duration);
+
+            for (int i = 0; i < count; i++)
+            {
+                double t = _roots.Root(i);
+                Vector2 delta = p + v * (float)t + h * (float)(t * t);
+                Vector2 velocity = v + 2 * h * (float)t;
+
+                // 只接受向内穿越的根，排除球体离开触发圆的时刻。
+                if (Vector2.Dot(delta.normalized, velocity) < -.000001)
+                {
+                    return t;
+                }
+            }
+
+            return double.PositiveInfinity;
+        }
+
+        /// <summary>
+        /// 求轨迹球心首次向外穿越静态触发圆的时间，用于解除每球每地形的进入锁。
+        /// </summary>
+        /// <param name="a">运动球的连续轨迹。</param>
+        /// <param name="center">台面局部坐标中的静态圆心。</param>
+        /// <param name="radius">静态触发圆半径。</param>
+        /// <returns>轨迹区间内首次向外穿越的秒数；未找到时为正无穷。</returns>
+        public double CircleExit(BallTrajectory a, Vector2 center, float radius)
+        {
+            Vector2 p = a.Position - center;
+            Vector2 v = a.Velocity;
+            Vector2 h = a.Acceleration * .5f;
+            double gap = p.magnitude - radius;
+
+            if (gap > .00001)
+            {
+                return double.PositiveInfinity;
+            }
+
+            if (gap >= -.00001 && Vector2.Dot(p.normalized, v) > .000001f)
+            {
+                return 0;
+            }
+
+            int count = BuildCircleRoots(p, v, h, radius, 0, a.Duration);
+
+            for (int i = 0; i < count; i++)
+            {
+                double t = _roots.Root(i);
+                Vector2 delta = p + v * (float)t + h * (float)(t * t);
+                Vector2 velocity = v + 2 * h * (float)t;
+
+                // 只接受向外穿越的根，排除球体回到接触面的时刻。
+                if (Vector2.Dot(delta.normalized, velocity) > .000001f)
+                {
+                    return t;
+                }
+            }
+
+            return double.PositiveInfinity;
+        }
+
+        /// <summary>
+        /// 求球心首次向外穿越静态平面边界的时间，用于隧道出口端面等无半径修正的几何出口。
+        /// </summary>
+        /// <param name="a">运动球的连续轨迹。</param>
+        /// <param name="normal">指向允许活动区域的单位法线。</param>
+        /// <param name="offset">边界平面在法线方向的投影偏移。</param>
+        /// <returns>轨迹区间内首次向外穿越的秒数；未找到时为正无穷。</returns>
+        public double PlaneExit(BallTrajectory a, Vector2 normal, float offset)
+        {
+            double gap = Vector2.Dot(normal, a.Position) - offset;
+
+            if (gap >= -.00001)
+            {
+                return Vector2.Dot(normal, a.Velocity) > .000001f ? 0 : double.PositiveInfinity;
+            }
+
+            double v = Vector2.Dot(normal, a.Velocity);
+            double h = .5 * Vector2.Dot(normal, a.Acceleration);
+
+            _coefficients[0] = gap;
+            _coefficients[1] = v;
+            _coefficients[2] = h;
+
+            int count = _roots.Find(_coefficients, 2, 0, a.Duration);
+
+            for (int i = 0; i < count; i++)
+            {
+                double t = _roots.Root(i);
+
+                if (v + 2 * h * t > .000001f)
+                {
+                    return t;
+                }
+            }
+
+            return double.PositiveInfinity;
+        }
+
+        /// <summary>
+        /// 构造球心相对圆心的四次接触方程并求根，供向内与向外查询共用。
+        /// </summary>
+        /// <param name="p">轨迹起点球心相对圆心的位移。</param>
+        /// <param name="v">相对速度。</param>
+        /// <param name="h">相对加速度的一半。</param>
+        /// <param name="radius">目标圆半径。</param>
+        /// <param name="rate">半径变化率，静态查询传零。</param>
+        /// <param name="duration">有效轨迹时长。</param>
+        /// <returns>区间内的实根数量。</returns>
+        private int BuildCircleRoots(Vector2 p, Vector2 v, Vector2 h, double radius, double rate, double duration)
+        {
+            _coefficients[0] = p.sqrMagnitude - radius * radius;
+            _coefficients[1] = 2 * (Vector2.Dot(p, v) - radius * rate);
+            _coefficients[2] = v.sqrMagnitude + 2 * Vector2.Dot(p, h) - rate * rate;
+            _coefficients[3] = 2 * Vector2.Dot(v, h);
+            _coefficients[4] = h.sqrMagnitude;
+
+            return _roots.Find(_coefficients, 4, 0, duration);
         }
 
         /// <summary>

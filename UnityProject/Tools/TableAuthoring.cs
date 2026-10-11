@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 public static class TableAuthoring
 {
     private const string Art = "Assets/AssetArt/UIRaw/Raw/";
-    private const string Content = "Assets/AssetRaw/Actor/Billiards/";
+    private const string Content = "Assets/AssetRaw/Actor/Table/";
     /// <summary>保存由实体 Prefab 引用的网格，不作为独立加载入口。</summary>
     private const string MeshContent = "Assets/AssetArt/Meshes/Primitives/";
     /// <summary>保存由 Renderer 引用的材质。</summary>
@@ -25,9 +25,9 @@ public static class TableAuthoring
         Scene scene = SceneManager.GetActiveScene();
         if (scene.path != "Assets/Scenes/main.unity" || scene.isDirty ||
             PrefabStageUtility.GetCurrentPrefabStage() != null) throw new Exception("main 场景需已保存且没有 Prefab Stage。");
-        if (AssetDatabase.LoadAssetAtPath<GameObject>(Content + "BilliardsTable.prefab") != null)
+        if (AssetDatabase.LoadAssetAtPath<GameObject>(Content + "Table.prefab") != null)
             throw new Exception("桌球 Prefab 已存在，不能重复制作。");
-        Folder("Assets/AssetRaw/Actor", "Billiards");
+        Folder("Assets/AssetRaw/Actor", "Table");
         Folder("Assets/AssetArt", "Meshes");
         Folder("Assets/AssetArt/Meshes", "Primitives");
         Folder("Assets/AssetArt", "Materials");
@@ -52,7 +52,7 @@ public static class TableAuthoring
         {
             GameObject table = BuildTable();
             SceneManager.MoveGameObjectToScene(table, preview);
-            PrefabUtility.SaveAsPrefabAsset(table, Content + "BilliardsTable.prefab", out bool success);
+            PrefabUtility.SaveAsPrefabAsset(table, Content + "Table.prefab", out bool success);
             Object.DestroyImmediate(table);
             if (!success) throw new Exception("桌球 Prefab 保存失败。");
             UpdateHud();
@@ -67,7 +67,7 @@ public static class TableAuthoring
         EditorUtility.SetDirty(camera); EditorSceneManager.MarkSceneDirty(scene);
         if (!EditorSceneManager.SaveScene(scene)) throw new Exception("main 场景保存失败。");
         AssetDatabase.SaveAssets();
-        return new { table = Content + "BilliardsTable.prefab", hud = "Assets/AssetRaw/UI/GameMainUI.prefab", scene = scene.path };
+        return new { table = Content + "Table.prefab", hud = "Assets/AssetRaw/UI/GameMainUI.prefab", scene = scene.path };
     }
 
     private static void Folder(string parent, string name)
@@ -165,7 +165,7 @@ public static class TableAuthoring
     }
     private static GameObject BuildTable()
     {
-        var root = Node("BilliardsTable",null,new Vector3(-2.8f,0,0));
+        var root = Node("Table",null,new Vector3(-2.8f,0,0));
         var board = Undo.AddComponent<BoardView>(root);
         Shape("TableShadow",root.transform,new Vector2(.12f,-.24f),new Vector2(17.7f,9.7f),new Color(0,0,0,.45f),0);
         Shape("WoodFrame",root.transform,Vector2.zero,new Vector2(17.3f,9.3f),new Color(.27f,.14f,.075f),1);

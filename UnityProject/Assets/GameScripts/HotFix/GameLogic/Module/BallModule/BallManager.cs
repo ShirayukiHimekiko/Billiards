@@ -9,7 +9,7 @@ namespace GameLogic
     /// <summary>
     /// 按球明细加载白球及黑球，负责实例资源的回收。
     /// </summary>
-    public sealed class BallManager
+    public sealed class BallManager : Singleton<BallManager>
     {
         /// <summary>
         /// 与世界球数组保持同序的球体表现列表。
@@ -105,7 +105,7 @@ namespace GameLogic
         /// <summary>
         /// 解绑并销毁所有球实例，Destroy 释放资源系统实例句柄。
         /// </summary>
-        public void Release()
+        public void ClearLevel()
         {
             foreach (var view in _views)
             {
@@ -126,6 +126,14 @@ namespace GameLogic
             _views.Clear();
             _objects.Clear();
             WhiteBall = null;
+        }
+
+        /// <summary>
+        /// 释放单例前清理当前关卡球体。
+        /// </summary>
+        protected override void OnRelease()
+        {
+            ClearLevel();
         }
     }
 }

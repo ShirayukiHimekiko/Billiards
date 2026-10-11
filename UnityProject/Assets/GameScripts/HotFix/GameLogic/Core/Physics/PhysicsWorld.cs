@@ -41,6 +41,11 @@ namespace GameLogic
             Terrain,
 
             /// <summary>
+            /// 地形持续阶段结束或离开触发区，同刻晚于地形进入。
+            /// </summary>
+            TerrainPhase,
+
+            /// <summary>
             /// 两个活动球首次向内接触。
             /// </summary>
             Ball,
@@ -85,6 +90,16 @@ namespace GameLogic
             /// 库边事件使用的内法线。
             /// </summary>
             public Vector2 Normal;
+
+            /// <summary>
+            /// 地形事件类型；非地形事件为 None。
+            /// </summary>
+            public TerrainEventKind TerrainKind;
+
+            /// <summary>
+            /// 阶段结束原因；非阶段结束事件为 None。
+            /// </summary>
+            public TerrainPhaseEndReason TerrainReason;
         }
 
         /// <summary>
@@ -95,7 +110,7 @@ namespace GameLogic
         /// <summary>
         /// 与道具配置顺序对应的无场景依赖效果策略。
         /// </summary>
-        private readonly IReadOnlyList<IPropEffect> _propEffects;
+        private readonly IReadOnlyList<PropEffectSpec> _propEffects;
 
         /// <summary>
         /// 计算球、库边及圆形障碍接触时间的求解器。
@@ -111,6 +126,16 @@ namespace GameLogic
         /// 本次连续时间片段内所有球的轨迹缓存。
         /// </summary>
         private readonly BallTrajectory[] _trajectories;
+
+        /// <summary>
+        /// 地形模拟协调器，统一管理候选接触、阶段事件与每球接触记录。
+        /// </summary>
+        private readonly TerrainSystem _terrain;
+
+        /// <summary>
+        /// 推进前各球位置，用于按实际位移扣除腾空飞行路程。
+        /// </summary>
+        private readonly Vector2[] _previousPositions;
 
         /// <summary>
         /// 图形索引乘球数再加球索引得到的本次接近或出杆初始重叠放行标记。
@@ -166,11 +191,6 @@ namespace GameLogic
         /// 与关卡道具顺序对应的使用次数，按各自作用域重置。
         /// </summary>
         public readonly int[] PropUses;
-
-        /// <summary>
-        /// 与关卡地形顺序对应的运行状态。
-        /// </summary>
-        public readonly TerrainRuntimeState[] TerrainStates;
 
         /// <summary>
         /// 与关卡图形顺序对应的效果完成标记。
@@ -311,26 +331,17 @@ namespace GameLogic
         /// 创建本关模拟世界。
         /// </summary>
         /// <param name="level">已完成布局校验的关卡快照。</param>
-        /// <param name="propEffects">与道具配置顺序对应的策略；为空时按本关道具类型创建。</param>
-        public PhysicsWorld(LevelData level, IReadOnlyList<IPropEffect> propEffects = null)
+        /// <param name="propEffects">与道具配置顺序对应的只读效果规格。</param>
+        public PhysicsWorld(LevelData level, IReadOnlyList<PropEffectSpec> propEffects)
         {
             _level = level;
 
-            if (propEffects == null)
+            if (propEffects == null || propEffects.Count != level.Props.Count)
             {
-                var effects = new IPropEffect[level.Props.Count];
-
-                for (int i = 0; i < effects.Length; i++)
-                {
-                    effects[i] = PropEffects.Get(level.Props[i].Kind);
-                }
-
-                _propEffects = effects;
+                throw new ArgumentException("道具效果规格必须与关卡道具顺序和数量一致。", nameof(propEffects));
             }
-            else
-            {
-                _propEffects = propEffects;
-            }
+
+            _propEffects = propEffects;
 
             Balls = new SimulatedBall[level.Balls.Count];
 
@@ -346,21 +357,17 @@ namespace GameLogic
 
             PocketStates = new PocketState[level.Pockets.Count];
             PropUses = new int[level.Props.Count];
-            TerrainStates = new TerrainRuntimeState[level.Terrains.Count];
             GeometryCompleted = new bool[level.Geometries.Count];
             GeometryFailureCounts = new int[level.Geometries.Count];
             _admitted = new bool[level.Geometries.Count * Balls.Length];
             _conditionLatched = new bool[_admitted.Length];
             _trajectories = new BallTrajectory[Balls.Length];
+            _previousPositions = new Vector2[Balls.Length];
+            _terrain = new TerrainSystem(level, Balls, level.Physics, CanPlace);
 
             for (int i = 0; i < PocketStates.Length; i++)
             {
                 PocketStates[i] = level.Pockets[i].InitialState;
-            }
-
-            for (int i = 0; i < TerrainStates.Length; i++)
-            {
-                TerrainStates[i] = new TerrainRuntimeState();
             }
 
             EffectRemaining = new int[level.Props.Count];
@@ -390,15 +397,12 @@ namespace GameLogic
 
             Array.Copy(PocketStates, copy.PocketStates, PocketStates.Length);
             Array.Copy(PropUses, copy.PropUses, PropUses.Length);
-            for (int i = 0; i < TerrainStates.Length; i++)
-            {
-                copy.TerrainStates[i] = TerrainStates[i].Copy();
-            }
             Array.Copy(EffectRemaining, copy.EffectRemaining, EffectRemaining.Length);
             Array.Copy(GeometryCompleted, copy.GeometryCompleted, GeometryCompleted.Length);
             Array.Copy(GeometryFailureCounts, copy.GeometryFailureCounts, GeometryFailureCounts.Length);
             Array.Copy(_admitted, copy._admitted, _admitted.Length);
             Array.Copy(_conditionLatched, copy._conditionLatched, _conditionLatched.Length);
+            copy._terrain.CopyFrom(_terrain);
 
             return copy;
         }
@@ -414,7 +418,9 @@ namespace GameLogic
             var white = Balls[WhiteIndex];
             var config = white.Data.Config;
 
-            if (!TryReleasePit(white, power, config))
+            // 陷在地陷的白球必须先达到脱出力度阈值，否则整杆不成立。
+            if (white.Terrain.Phase == TerrainPhase.TrappedInPit
+                && power < _terrain.PitEscapePower(WhiteIndex))
             {
                 return false;
             }
@@ -422,6 +428,12 @@ namespace GameLogic
             if (!CanPlace(white.State.Position, white.State.Radius, WhiteIndex))
             {
                 return false;
+            }
+
+            // 通过全部拒绝条件后才解除陷住，沿用原出杆的力度、半径和速度计算。
+            if (white.Terrain.Phase == TerrainPhase.TrappedInPit)
+            {
+                _terrain.ReleaseFromPit(WhiteIndex);
             }
 
             WhiteFoul = false;
@@ -483,9 +495,9 @@ namespace GameLogic
 
                 if (EffectRemaining[i] != 0)
                 {
-                    PropEffectKind kind = _level.Props[i].Kind;
-                    RevealActive |= kind == PropEffectKind.Reveal;
-                    PreviewActive |= kind == PropEffectKind.Preview;
+                    PropVisibility visibility = _propEffects[i].Visibility;
+                    RevealActive |= (visibility & PropVisibility.Reveal) != 0;
+                    PreviewActive |= (visibility & PropVisibility.Preview) != 0;
                 }
             }
         }
@@ -502,13 +514,10 @@ namespace GameLogic
                     continue;
                 }
 
-                PropEffectKind kind = _level.Props[i].Kind;
-                if (kind == PropEffectKind.Reveal || kind == PropEffectKind.Preview || kind == PropEffectKind.AddShot || kind == PropEffectKind.Key)
+                if (_propEffects[i].Effect is IPropShotEffect shotEffect)
                 {
-                    continue;
+                    shotEffect.ApplyToShot(white, _level.Props[i]);
                 }
-
-                _propEffects[i].Apply(white, _level.Props[i].RateMultiplier);
             }
         }
 
@@ -568,11 +577,11 @@ namespace GameLogic
         /// <param name="prediction">复用的预测路径结果；正式模拟时为空。</param>
         private void Step(double duration, int trackedBall, PredictionPath prediction)
         {
-            UpdateTerrainTimers((float)duration);
             double remaining = duration;
             int iterations = 0;
 
-            while (remaining > 1e-9 && Moving && !_approachEnded)
+            // 除运动球外，仍需在持续地形阶段可立即结束时继续推进，避免停球后阶段滞留。
+            while (remaining > 1e-9 && !_approachEnded && (Moving || HasTerrainPhase()))
             {
                 if (++iterations > _level.Physics.MaxEventIterations)
                 {
@@ -586,9 +595,21 @@ namespace GameLogic
                     && !prediction.EndedByBallContact
                     && Balls[trackedBall].Active
                     && Balls[trackedBall].State.Velocity.sqrMagnitude > 0;
+
+                for (int i = 0; i < Balls.Length; i++)
+                {
+                    _previousPositions[i] = Balls[i].State.Position;
+                }
+
                 // 全部球先推进到同一事件时刻，再响应接触，保持共享时间轴。
                 Advance(advance);
                 remaining -= advance;
+
+                // 腾空球按本段实际位移扣除剩余飞行路程。
+                for (int i = 0; i < Balls.Length; i++)
+                {
+                    _terrain.OnBallAdvanced(i, Vector2.Distance(_previousPositions[i], Balls[i].State.Position));
+                }
 
                 if (trackingMovement)
                 {
@@ -677,7 +698,9 @@ namespace GameLogic
                 return false;
             }
 
-            return (hit.Kind == EventKind.Rail || hit.Kind == EventKind.Gate) && hit.Ball == trackedBall;
+            // 库边、几何门与地形入口都会改变方向或位置，预测线在此另起分段。
+            return (hit.Kind == EventKind.Rail || hit.Kind == EventKind.Gate || hit.Kind == EventKind.Terrain)
+                && hit.Ball == trackedBall;
         }
 
         /// <summary>
@@ -817,11 +840,14 @@ namespace GameLogic
                 {
                     var prop = _level.Props[p];
 
-                    if (ball.Data.Config.Kind == BallKind.White && prop.TriggerMode == TriggerMode.Contact && PropUses[p] < prop.UseLimit)
+                    if (!ball.Terrain.SkipsGroundObjects
+                        && ball.Data.Config.Kind == BallKind.White
+                        && prop.TriggerMode == TriggerMode.Contact
+                        && PropUses[p] < prop.UseLimit)
                     {
                         Choose(
                             ref hit,
-                            _contacts.Circle(trajectory, Stationary(prop.Position, prop.TriggerRadius, duration)),
+                            _contacts.Circle(trajectory, BallTrajectory.Stationary(prop.Position, prop.TriggerRadius, duration)),
                             EventKind.Prop,
                             i,
                             p,
@@ -829,37 +855,19 @@ namespace GameLogic
                     }
                 }
 
-                for (int t = 0; t < _level.Terrains.Count; t++)
-                {
-                    TerrainPlacementData terrain = _level.Terrains[t];
-                    TerrainRuntimeState terrainState = TerrainStates[t];
-
-                    if (terrainState.EntryLocked
-                        || terrainState.CooldownRemaining > 0
-                        || ball.Terrain.TerrainId == terrain.Id
-                        || ball.Terrain.SuppressesSurfaceContacts && terrain.Kind != TerrainKind.Teleporter)
-                    {
-                        continue;
-                    }
-
-                    Choose(
-                        ref hit,
-                        _contacts.Circle(trajectory, Stationary(terrain.Position, terrain.TriggerRadius, duration), true),
-                        EventKind.Terrain,
-                        i,
-                        t,
-                        Vector2.zero);
-                }
+                MergeTerrain(ref hit, _terrain.FindNext(i, trajectory), i);
 
                 for (int p = 0; p < _level.Pockets.Count; p++)
                 {
                     var pocket = _level.Pockets[p];
 
-                    if (PocketStates[p] == PocketState.Unlocked && ball.State.Radius <= pocket.CaptureRadius)
+                    if (!ball.Terrain.SkipsGroundObjects
+                        && PocketStates[p] == PocketState.Unlocked
+                        && ball.State.Radius <= pocket.CaptureRadius)
                     {
                         Choose(
                             ref hit,
-                            _contacts.Circle(trajectory, Stationary(pocket.Position, pocket.CaptureRadius, duration), true),
+                            _contacts.Circle(trajectory, BallTrajectory.Stationary(pocket.Position, pocket.CaptureRadius, duration), true),
                             EventKind.Pocket,
                             i,
                             p,
@@ -867,11 +875,14 @@ namespace GameLogic
                     }
                 }
 
-                for (int j = i + 1; j < Balls.Length; j++)
+                if (!ball.Terrain.SkipsGroundObjects)
                 {
-                    if (Balls[j].Active)
+                    for (int j = i + 1; j < Balls.Length; j++)
                     {
-                        Choose(ref hit, _contacts.Circle(trajectory, _trajectories[j]), EventKind.Ball, i, j, Vector2.zero);
+                        if (Balls[j].Active)
+                        {
+                            Choose(ref hit, _contacts.Circle(trajectory, _trajectories[j]), EventKind.Ball, i, j, Vector2.zero);
+                        }
                     }
                 }
 
@@ -882,7 +893,7 @@ namespace GameLogic
 
                 for (int g = 0; g < _level.Geometries.Count; g++)
                 {
-                    if (_ignoreGates || g == _ignoredGeometry || !GeometryAvailable(g) || _admitted[g * Balls.Length + i] || ball.Terrain.Airborne)
+                    if (_ignoreGates || g == _ignoredGeometry || !GeometryAvailable(g) || _admitted[g * Balls.Length + i] || ball.Terrain.SkipsGroundObjects)
                     {
                         continue;
                     }
@@ -980,23 +991,50 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 构造静态圆轨迹。
+        /// 把地形候选事件并入当前最早事件，同刻按事件类型顺序比较。
         /// </summary>
-        /// <param name="center">台面局部坐标中的静态圆心。</param>
-        /// <param name="radius">静态圆半径。</param>
-        /// <param name="duration">轨迹有效时长，单位为秒。</param>
-        /// <returns>位置及半径均不随时间变化的轨迹。</returns>
-        private static BallTrajectory Stationary(Vector2 center, float radius, double duration)
+        /// <param name="hit">当前最早事件。</param>
+        /// <param name="terrainEvent">地形候选事件。</param>
+        /// <param name="ball">候选事件涉及的球索引。</param>
+        private static void MergeTerrain(ref Contact hit, in TerrainEvent terrainEvent, int ball)
         {
-            return new BallTrajectory(
-                new BallState
+            if (terrainEvent.Kind == TerrainEventKind.None || double.IsPositiveInfinity(terrainEvent.Time))
+            {
+                return;
+            }
+
+            EventKind kind = terrainEvent.Kind == TerrainEventKind.Enter ? EventKind.Terrain : EventKind.TerrainPhase;
+            double time = terrainEvent.Time;
+
+            if (time < hit.Time - 1e-8 || Math.Abs(time - hit.Time) <= 1e-8 && (hit.Kind == EventKind.None || kind < hit.Kind))
+            {
+                hit = new Contact
                 {
-                    Position = center,
-                    Radius = radius
-                },
-                Vector2.zero,
-                0,
-                duration);
+                    Time = time,
+                    Kind = kind,
+                    Ball = ball,
+                    Other = terrainEvent.TerrainIndex,
+                    TerrainKind = terrainEvent.Kind,
+                    TerrainReason = terrainEvent.Reason
+                };
+            }
+        }
+
+        /// <summary>
+        /// 当前是否有球处于需要继续推进的持续地形阶段。
+        /// </summary>
+        /// <returns>存在处于非普通阶段的球时为 true。</returns>
+        private bool HasTerrainPhase()
+        {
+            foreach (var ball in Balls)
+            {
+                if (ball.Active && ball.Terrain.Phase != TerrainPhase.Normal)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -1069,7 +1107,18 @@ namespace GameLogic
                     TriggerProp(hit.Other, ball);
                     break;
                 case EventKind.Terrain:
-                    TriggerTerrain(hit.Other, ball);
+                    _terrain.ApplyEnter(hit.Ball, hit.Other);
+                    break;
+                case EventKind.TerrainPhase:
+                    if (hit.TerrainKind == TerrainEventKind.RegionExit)
+                    {
+                        _terrain.ApplyRegionExit(hit.Ball, hit.Other);
+                    }
+                    else
+                    {
+                        _terrain.ApplyPhaseEnd(hit.Ball, hit.Other, hit.TerrainReason);
+                    }
+
                     break;
                 case EventKind.Pocket:
                     ball.Active = false;
@@ -1107,10 +1156,11 @@ namespace GameLogic
                     else
                     {
                         float inward = Vector2.Dot(ball.State.Velocity - other.State.Velocity, normal);
+                        float impulse = 0;
 
                         if (inward < 0)
                         {
-                            float impulse = -(1 + _level.Physics.BallRestitution) * inward / (1 / ball.Data.Config.Mass + 1 / other.Data.Config.Mass);
+                            impulse = -(1 + _level.Physics.BallRestitution) * inward / (1 / ball.Data.Config.Mass + 1 / other.Data.Config.Mass);
                             ball.State.Velocity += normal * (impulse / ball.Data.Config.Mass);
                             other.State.Velocity -= normal * (impulse / other.Data.Config.Mass);
                         }
@@ -1118,6 +1168,10 @@ namespace GameLogic
                         // 分离接触面并保留最小间隙，避免下一次查询重复命中零时刻接触。
                         ball.State.Position += normal * (separation * .5f);
                         other.State.Position -= normal * (separation * .5f);
+
+                        // 陷住或卡住的球按本次有效冲量决定脱出或吸收速度。
+                        _terrain.OnBallImpulse(hit.Ball, impulse);
+                        _terrain.OnBallImpulse(hit.Other, impulse);
                     }
 
                     break;
@@ -1177,217 +1231,6 @@ namespace GameLogic
 
                     break;
             }
-        }
-
-        /// <summary>
-        /// 推进地形局部状态并解除已结束的入口锁定。
-        /// </summary>
-        private void UpdateTerrainTimers(float duration)
-        {
-            for (int i = 0; i < TerrainStates.Length; i++)
-            {
-                TerrainRuntimeState state = TerrainStates[i];
-                state.CooldownRemaining = Mathf.Max(0, state.CooldownRemaining - duration);
-
-                if (state.CooldownRemaining <= 0)
-                {
-                    state.EntryLocked = false;
-                }
-            }
-
-            for (int i = 0; i < Balls.Length; i++)
-            {
-                TerrainBallState state = Balls[i].Terrain;
-                state.TeleportCooldown = Mathf.Max(0, state.TeleportCooldown - duration);
-
-                if ((state.Submerged || state.TunnelBlocked)
-                    && Balls[i].State.Velocity.sqrMagnitude > _level.Physics.StopSpeed * _level.Physics.StopSpeed)
-                {
-                    ClearTerrainBallState(state);
-
-                    continue;
-                }
-
-                if (state.Remaining > 0)
-                {
-                    state.Remaining = Mathf.Max(0, state.Remaining - duration);
-                    if (state.Remaining <= 0)
-                    {
-                        ClearTerrainBallState(state);
-                    }
-                }
-                else if (state.TeleportCooldown <= 0 && state.TerrainId != 0)
-                {
-                    ClearTerrainBallState(state);
-                }
-            }
-        }
-
-        private void ClearTerrainBallState(TerrainBallState state)
-        {
-            int terrainId = state.TerrainId;
-            state.Clear();
-
-            if (terrainId <= 0)
-            {
-                return;
-            }
-
-            int terrainIndex = TerrainIndex(terrainId);
-
-            for (int i = 0; i < Balls.Length; i++)
-            {
-                if (Balls[i].Terrain.TerrainId == terrainId)
-                {
-                    return;
-                }
-            }
-
-            TerrainStates[terrainIndex].Reset();
-        }
-
-        /// <summary>
-        /// 统一地形策略入口；只改变运动和局部状态，不参与胜负结算。
-        /// </summary>
-        private void TriggerTerrain(int index, SimulatedBall ball)
-        {
-            TerrainPlacementData terrain = _level.Terrains[index];
-            TerrainRuntimeState runtime = TerrainStates[index];
-            runtime.Active = true;
-            runtime.EntryLocked = true;
-            runtime.CooldownRemaining = .05f;
-            ball.Terrain.TerrainId = terrain.Id;
-
-            switch (terrain.Kind)
-            {
-                case TerrainKind.JumpPad:
-                    ball.Terrain.Airborne = true;
-                    ball.Terrain.Remaining = terrain.Duration;
-                    Vector2 jumpDirection = ball.State.Velocity.sqrMagnitude > .000001f
-                        ? ball.State.Velocity.normalized
-                        : terrain.Direction;
-                    ball.State.Velocity = jumpDirection * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
-                    runtime.Airborne = true;
-                    break;
-                case TerrainKind.Tunnel:
-                    ResolveTunnel(terrain, runtime, ball);
-                    break;
-                case TerrainKind.Pit:
-                    ball.Terrain.Submerged = true;
-                    ball.Terrain.Remaining = float.PositiveInfinity;
-                    ball.State.Velocity = Vector2.zero;
-                    runtime.Submerged = true;
-                    break;
-                case TerrainKind.ReverseBelt:
-                    ball.Terrain.ReverseActive = true;
-                    ball.Terrain.Remaining = terrain.Duration;
-                    ball.State.Velocity = -ball.State.Velocity;
-                    break;
-                case TerrainKind.Teleporter:
-                    runtime.Active = false;
-                    Teleport(ball, terrain);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            Revision++;
-        }
-
-        /// <summary>
-        /// 将球转移到成对出口并设置冷却，防止同一固定步来回触发。
-        /// </summary>
-        private void Teleport(SimulatedBall ball, TerrainPlacementData entry)
-        {
-            int exitIndex = TerrainIndex(entry.ExitId);
-            TerrainPlacementData exit = _level.Terrains[exitIndex];
-            TerrainRuntimeState exitState = TerrainStates[exitIndex];
-            ball.State.Position = exit.Position;
-            exitState.Active = true;
-
-            float incomingSpeed = ball.State.Velocity.magnitude;
-            float outgoingSpeed = entry.InheritVelocity
-                ? incomingSpeed
-                : incomingSpeed * entry.SpeedMultiplier;
-            Vector2 outgoingDirection = entry.InheritVelocity
-                && entry.InheritRotation
-                && ball.State.Velocity.sqrMagnitude > .000001f
-                ? ball.State.Velocity.normalized
-                : exit.Direction;
-            ball.State.Velocity = outgoingDirection * outgoingSpeed;
-
-            ball.Terrain.TeleportCooldown = .08f;
-            ball.Terrain.TerrainId = exit.Id;
-            exitState.EntryLocked = true;
-            exitState.CooldownRemaining = .08f;
-        }
-
-        private void ResolveTunnel(TerrainPlacementData terrain, TerrainRuntimeState runtime, SimulatedBall ball)
-        {
-            float difference = ball.State.Radius - terrain.OpeningRadius;
-
-            if (difference > _level.Physics.ContactTolerance)
-            {
-                ball.State.Velocity = Vector2.Reflect(ball.State.Velocity, terrain.Direction);
-                ball.Terrain.Clear();
-                runtime.Active = false;
-
-                return;
-            }
-
-            ball.Terrain.TunnelActive = true;
-            runtime.TunnelActive = true;
-
-            if (Mathf.Abs(difference) <= _level.Physics.ContactTolerance)
-            {
-                ball.Terrain.TunnelBlocked = true;
-                ball.Terrain.Remaining = float.PositiveInfinity;
-                ball.State.Velocity = Vector2.zero;
-
-                return;
-            }
-
-            ball.Terrain.Remaining = terrain.Duration;
-            ball.State.Velocity = terrain.Direction * (ball.State.Velocity.magnitude * terrain.SpeedMultiplier);
-        }
-
-        private bool TryReleasePit(SimulatedBall ball, float power, BallConfigData config)
-        {
-            if (!ball.Terrain.Submerged)
-            {
-                return true;
-            }
-
-            TerrainPlacementData terrain = _level.Terrains[TerrainIndex(ball.Terrain.TerrainId)];
-
-            if (terrain.Kind != TerrainKind.Pit)
-            {
-                return true;
-            }
-
-            float speed = Mathf.Lerp(config.SpeedMin, config.SpeedMax, power);
-
-            if (speed < config.SpeedMax - _level.Physics.ContactTolerance)
-            {
-                return false;
-            }
-
-            ClearTerrainBallState(ball.Terrain);
-
-            return true;
-        }
-
-        private int TerrainIndex(int id)
-        {
-            for (int i = 0; i < _level.Terrains.Count; i++)
-            {
-                if (_level.Terrains[i].Id == id)
-                {
-                    return i;
-                }
-            }
-
-            throw new ArgumentException("不存在地形 " + id);
         }
 
         /// <summary>
@@ -1500,7 +1343,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 执行翻转策略并记录作用域次数。
+        /// 执行道具效果并记录作用域次数。
         /// </summary>
         /// <param name="index">关卡道具数组索引。</param>
         /// <param name="ball">接受策略效果的模拟球。</param>
@@ -1508,50 +1351,50 @@ namespace GameLogic
         {
             var prop = _level.Props[index];
 
-            if (prop.Kind == PropEffectKind.Key)
+            PropEffectSpec spec = _propEffects[index];
+            PropEffectResult result = spec.Effect.Trigger(ball, prop);
+
+            if (result.UnlockPocketId > 0)
             {
-                int pocket = PocketIndex(prop.TargetPocketId);
+                int pocket = PocketIndex(result.UnlockPocketId);
 
                 if (PocketStates[pocket] != PocketState.Locked)
                 {
-                    throw new InvalidOperationException($"钥匙道具 {prop.Id} 触发时绑定洞 {prop.TargetPocketId} 不是上锁状态。");
+                    throw new InvalidOperationException($"钥匙道具 {prop.Id} 触发时绑定洞 {result.UnlockPocketId} 不是上锁状态。");
                 }
 
                 PocketStates[pocket] = PocketState.Unlocked;
             }
-            else
-            {
-                _propEffects[index].Apply(ball, prop.RateMultiplier);
-                EffectRemaining[index] = IsPersistentEffect(prop)
-                    ? -1
-                    : prop.Kind == PropEffectKind.Preview && prop.UseScope == UseScope.Shot
-                    ? Mathf.Max(1, prop.DurationShots) + 1
-                    : Mathf.Max(0, prop.DurationShots);
 
-                if (prop.Kind == PropEffectKind.Reveal)
-                {
-                    RevealActive = EffectRemaining[index] != 0;
-                }
-                else if (prop.Kind == PropEffectKind.Preview)
-                {
-                    PreviewActive = EffectRemaining[index] != 0;
-                }
-                else if (prop.Kind == PropEffectKind.AddShot)
-                {
-                    ShotBonus += Mathf.Max(1, Mathf.RoundToInt(prop.RateMultiplier));
-                }
+            if (spec.DurationMode != PropEffectDurationMode.None)
+            {
+                EffectRemaining[index] = GetEffectDuration(prop, spec.DurationMode);
             }
+
+            RevealActive |= (result.Visibility & PropVisibility.Reveal) != 0 && EffectRemaining[index] != 0;
+            PreviewActive |= (result.Visibility & PropVisibility.Preview) != 0 && EffectRemaining[index] != 0;
+            ShotBonus += result.ShotBonus;
 
             PropUses[index]++;
             Revision++;
         }
 
-        private static bool IsPersistentEffect(PropPlacementData prop)
+        /// <summary>
+        /// 计算道具效果在当前作用域内的剩余杆数。
+        /// </summary>
+        private static int GetEffectDuration(PropPlacementData prop, PropEffectDurationMode mode)
         {
-            return prop.UseScope == UseScope.Level
-                && (prop.Kind == PropEffectKind.Flip
-                    || prop.Kind == PropEffectKind.Reverse
-                    || prop.Kind == PropEffectKind.Reveal);
+            if (mode == PropEffectDurationMode.PersistentInLevel && prop.UseScope == UseScope.Level)
+            {
+                return -1;
+            }
+
+            if (mode == PropEffectDurationMode.PreviewNextShot && prop.UseScope == UseScope.Shot)
+            {
+                return Mathf.Max(1, prop.DurationShots) + 1;
+            }
+
+            return Mathf.Max(0, prop.DurationShots);
         }
 
         /// <summary>

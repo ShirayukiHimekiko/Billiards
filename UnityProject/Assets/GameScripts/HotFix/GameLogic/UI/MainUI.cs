@@ -37,9 +37,9 @@ namespace GameLogic
         private bool _hasKeys;
 
         /// <summary>
-        /// 最近显示的整数力度百分比，避免重复刷新。
+        /// 显示本关折射预测道具的剩余次数及启用状态。
         /// </summary>
-        private int _lastPower = -1;
+        private PredictionPropWidget _predictionPropWidget;
 
         /// <summary>
         /// 获取当前界面关联的世界台面。
@@ -74,6 +74,7 @@ namespace GameLogic
             }
 
             m_btn_Hints.gameObject.SetActive(_hasGeometry);
+            _predictionPropWidget.gameObject.SetActive(level.PredictionPropCount > 0);
         }
 
         /// <summary>
@@ -90,9 +91,9 @@ namespace GameLogic
         protected override void OnCreate()
         {
             m_text_Status.text = "正在准备关卡…";
-            m_slider_Power.interactable = false;
             m_btn_Restart.interactable = false;
             m_btn_Pause.interactable = false;
+            _predictionPropWidget = CreateWidget<PredictionPropWidget>("m_item_PredictionPropWidget", false);
         }
 
         /// <summary>
@@ -101,6 +102,11 @@ namespace GameLogic
         /// <param name="snapshot">当前会话状态。</param>
         private void OnStateChanged(SessionUISnapshot snapshot)
         {
+            _predictionPropWidget.SetState(
+                snapshot.PredictionPropRemaining,
+                snapshot.PredictionPropArmed,
+                snapshot.State == SessionState.Ready);
+
             m_text_Shots.text = $"剩余机会  {snapshot.Shots} / {_maxShots}";
             m_text_Trend.text = BuildTrendText(snapshot);
             m_text_Status.text = BuildStatusText(snapshot);
@@ -262,37 +268,6 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 在蓄力百分比变化时刷新力量显示。
-        /// </summary>
-        protected override void OnUpdate()
-        {
-            if (GameManager.Instance.Session == null || Board == null)
-            {
-                return;
-            }
-
-            int power = Mathf.RoundToInt(Board.Ball.Shoot.Power * 100);
-
-            if (power == _lastPower)
-            {
-                return;
-            }
-
-            _lastPower = power;
-            m_slider_Power.SetValueWithoutNotify(power / 100f);
-            m_text_Power.text = $"力量  {power}%";
-        }
-
-        /// <summary>
-        /// 保留只读力量条的生成回调，蓄力由球体输入控制。
-        /// </summary>
-        /// <param name="value">力量条显示值。</param>
-        private partial void OnSlider_PowerChange(float value)
-        {
-            // 力量条只用于显示；OnUpdate 使用 SetValueWithoutNotify 刷新。
-        }
-
-        /// <summary>
         /// 重置当前关卡。
         /// </summary>
         private partial void OnClick_RestartBtn()
@@ -355,8 +330,7 @@ namespace GameLogic
             {
                 return;
             }
-
-            m_slider_Power.onValueChanged.RemoveListener(OnSlider_PowerChange);
+            
             m_btn_Restart.onClick.RemoveListener(OnClick_RestartBtn);
             m_btn_Pause.onClick.RemoveListener(OnClick_PauseBtn);
             m_btn_Menu.onClick.RemoveListener(OnClick_MenuBtn);

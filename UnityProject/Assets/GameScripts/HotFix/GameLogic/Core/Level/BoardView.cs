@@ -21,6 +21,12 @@ namespace GameLogic
         private LineRenderer _cue;
 
         /// <summary>
+        /// 显示白球前方的分段蓄力进度。
+        /// </summary>
+        [SerializeField]
+        private ChargeGaugeView _chargeGauge;
+
+        /// <summary>
         /// 绘制模拟预测轨迹的虚线组件。
         /// </summary>
         [SerializeField]
@@ -149,6 +155,7 @@ namespace GameLogic
         {
             if (_felt == null
                 || _cue == null
+                || _chargeGauge == null
                 || _prediction == null
                 || _predictionDot == null
                 || _predictionDotRenderer == null
@@ -174,6 +181,7 @@ namespace GameLogic
             Vector4 c = data.PredictionStyle.Color;
             var color = new Color(c.x, c.y, c.z, c.w);
             _prediction.SetStyle(color, data.PredictionStyle.LineWidth);
+            _chargeGauge.SetStyle(color);
 
             var properties = new MaterialPropertyBlock();
             properties.SetColor("_Color", color);
@@ -287,6 +295,7 @@ namespace GameLogic
 
             _prediction.gameObject.SetActive(true);
             _cue.gameObject.SetActive(true);
+            _chargeGauge.Show(position, direction, radius, power, _data.Bounds);
 
             int revision = _session.World.Revision;
 
@@ -348,6 +357,7 @@ namespace GameLogic
             _prediction.gameObject.SetActive(false);
             _predictionDot.gameObject.SetActive(false);
             _cue.gameObject.SetActive(false);
+            _chargeGauge.Hide();
         }
 
         /// <summary>

@@ -330,7 +330,7 @@ namespace GameLogic
         }
 
         /// <summary>
-        /// 校验地形种类、范围和传送出口引用，失败在关卡准备阶段暴露。
+        /// 校验地形种类、数量、按类型专属参数与传送配对关系，失败在关卡准备阶段暴露。
         /// </summary>
         private void ValidateTerrains()
         {
@@ -341,14 +341,14 @@ namespace GameLogic
             {
                 if (!ids.Add(terrain.Id))
                 {
-                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的 ID 重复。");
                 }
 
                 if (!kinds.Contains(terrain.Kind))
                 {
                     if (kinds.Count >= 2)
                     {
-                        throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                        throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类超过两种。");
                     }
 
                     kinds.Add(terrain.Kind);
@@ -358,8 +358,10 @@ namespace GameLogic
                     || terrain.Size.x <= 0
                     || terrain.Size.y <= 0)
                 {
-                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的种类、范围或摆放无效；每关最多两种地形。");
+                    throw new ArgumentException($"关卡 {Id} 地形 {terrain.Id} 的范围或摆放无效。");
                 }
+
+                ValidateTerrainParameters(terrain);
             }
 
             foreach (var terrain in Terrains)
@@ -376,11 +378,85 @@ namespace GameLogic
 
                 if (terrain.ExitId <= 0
                     || terrain.ExitId == terrain.Id
-                    || !HasTeleporterExit(terrain.ExitId))
+                    || !HasTeleporterExit(terrain.ExitId)
+                    || ExitIdOf(terrain.ExitId) != terrain.Id)
                 {
-                    throw new ArgumentException($"传送口地形 {terrain.Id} 必须成对配置且出口存在。");
+                    throw new ArgumentException($"传送口地形 {terrain.Id} 必须与出口互指配对。");
+                }
+
+                TerrainPlacementData exit = FindTerrain(terrain.ExitId);
+
+                if (!ContainsCircle(exit.Position, exit.TriggerRadius))
+                {
+                    throw new ArgumentException($"传送口地形 {terrain.Id} 的出口触发区超出台面。");
                 }
             }
+        }
+
+        /// <summary>
+        /// 按地形类型校验各自专属参数区间。
+        /// </summary>
+        /// <param name="terrain">待校验的地形摆放。</param>
+        private void ValidateTerrainParameters(TerrainPlacementData terrain)
+        {
+            switch (terrain.Kind)
+            {
+                case TerrainKind.JumpPad:
+                    if (terrain.JumpFlightTime <= 0
+                        || terrain.JumpMinDistance < 0
+                        || terrain.JumpMaxDistance < terrain.JumpMinDistance)
+                    {
+                        throw new ArgumentException($"关卡 {Id} 跳台地形 {terrain.Id} 的飞行参数无效。");
+                    }
+
+                    break;
+                case TerrainKind.Tunnel:
+                    if (terrain.TunnelInnerRadius <= 0 || terrain.TunnelHalfLength <= 0)
+                    {
+                        throw new ArgumentException($"关卡 {Id} 隧道地形 {terrain.Id} 的内径或长度无效。");
+                    }
+
+                    break;
+                case TerrainKind.Pit:
+                    if (terrain.PitEscapePowerThreshold <= 0
+                        || terrain.PitEscapePowerThreshold > 1
+                        || terrain.PitEscapeImpulseThreshold < 0)
+                    {
+                        throw new ArgumentException($"关卡 {Id} 地陷地形 {terrain.Id} 的脱出阈值无效。");
+                    }
+
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 查询地形 ID 对应记录的出口 ID。
+        /// </summary>
+        /// <param name="id">地形明细 ID。</param>
+        /// <returns>该地形的出口 ID；不存在时为零。</returns>
+        private int ExitIdOf(int id)
+        {
+            TerrainPlacementData terrain = FindTerrain(id);
+
+            return terrain == null ? 0 : terrain.ExitId;
+        }
+
+        /// <summary>
+        /// 按 ID 查询本关地形摆放。
+        /// </summary>
+        /// <param name="id">地形明细 ID。</param>
+        /// <returns>对应地形；不存在时为空。</returns>
+        private TerrainPlacementData FindTerrain(int id)
+        {
+            foreach (var terrain in Terrains)
+            {
+                if (terrain.Id == id)
+                {
+                    return terrain;
+                }
+            }
+
+            return null;
         }
 
         private bool HasTeleporterExit(int id)

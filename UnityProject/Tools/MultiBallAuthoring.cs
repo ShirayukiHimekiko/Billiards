@@ -11,7 +11,9 @@ using Object=UnityEngine.Object;
 /// <summary>通过 Pipeline run_script 迁移桌球 Prefab，保留已有台面美术和 UI 绑定。</summary>
 public static class MultiBallAuthoring
 {
-    private const string Content="Assets/AssetRaw/Actor/Billiards/";
+    private const string TableContent="Assets/AssetRaw/Actor/Table/";
+    private const string BallContent="Assets/AssetRaw/Actor/Ball/";
+    private const string PropContent="Assets/AssetRaw/Actor/Prop/";
     /// <summary>实体 Prefab 引用的网格目录。</summary>
     private const string MeshContent="Assets/AssetArt/Meshes/Primitives/";
     /// <summary>保存按用途分类的制作期材质。</summary>
@@ -79,15 +81,15 @@ public static class MultiBallAuthoring
     /// <summary>读取保存结果的关键绑定，不进入 Play Mode 或修改场景。</summary>
     public static object Inspect()
     {
-        var table=AssetDatabase.LoadAssetAtPath<GameObject>(Content+"BilliardsTable.prefab");
+        var table=AssetDatabase.LoadAssetAtPath<GameObject>(TableContent+"Table.prefab");
         var board=table.GetComponent<BoardView>();
         var serialized=new SerializedObject(board);
         string[] names={"_felt","_cue","_prediction","_predictionDot","_predictionDotRenderer","_geometryTemplate","_pocketTemplate","_runner"};
         foreach(string field in names)
             if(serialized.FindProperty(field).objectReferenceValue==null) throw new InvalidOperationException("桌面绑定未保存："+field);
-        var white=AssetDatabase.LoadAssetAtPath<GameObject>(Content+"BilliardsWhiteBall.prefab");
-        var black=AssetDatabase.LoadAssetAtPath<GameObject>(Content+"BilliardsBlackBall.prefab");
-        var prop=AssetDatabase.LoadAssetAtPath<GameObject>(Content+"BilliardsFlipProp.prefab");
+        var white=AssetDatabase.LoadAssetAtPath<GameObject>(BallContent+"WhiteBall.prefab");
+        var black=AssetDatabase.LoadAssetAtPath<GameObject>(BallContent+"BlackBall.prefab");
+        var prop=AssetDatabase.LoadAssetAtPath<GameObject>(PropContent+"FlipProp.prefab");
         if(white.GetComponent<WhiteBall>()==null || white.GetComponent<BallShootComponent>()==null || black.GetComponent<BlackBall>()==null ||
             black.GetComponent<BallShootComponent>()!=null || prop.GetComponent<FlipProp>()==null)
             throw new InvalidOperationException("实体类型或白球专属输入组件未保存。");
@@ -99,18 +101,20 @@ public static class MultiBallAuthoring
     {
         if(EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("制作要求编辑模式。");
         if(UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()!=null) throw new InvalidOperationException("请先关闭用户正在编辑的 Prefab Stage。");
+        if(!AssetDatabase.IsValidFolder(BallContent.TrimEnd('/'))) AssetDatabase.CreateFolder("Assets/AssetRaw/Actor","Ball");
+        if(!AssetDatabase.IsValidFolder(PropContent.TrimEnd('/'))) AssetDatabase.CreateFolder("Assets/AssetRaw/Actor","Prop");
         _tint=AssetDatabase.LoadAssetAtPath<Material>(MaterialContent+"Common/WorldTint.mat");
         foreach(string category in new[]{"Table","Aiming"})
             if(!AssetDatabase.IsValidFolder(MaterialContent+category))
                 AssetDatabase.CreateFolder(MaterialContent.TrimEnd('/'),category);
         _disk=AssetDatabase.LoadAssetAtPath<Mesh>(MeshContent+"TableDisk.asset");
         _quad=AssetDatabase.LoadAssetAtPath<Mesh>(MeshContent+"TableQuad.asset");
-        var root=PrefabUtility.LoadPrefabContents(Content+"BilliardsTable.prefab");
+        var root=PrefabUtility.LoadPrefabContents(TableContent+"Table.prefab");
         try
         {
             var source=root.GetComponentInChildren<WhiteBall>(true);
             if(source!=null) BuildEntities(source,root.transform.Find("FlipItem"));
-            else if(AssetDatabase.LoadAssetAtPath<GameObject>(Content+"BilliardsWhiteBall.prefab")==null)
+            else if(AssetDatabase.LoadAssetAtPath<GameObject>(BallContent+"WhiteBall.prefab")==null)
                 throw new InvalidOperationException("缺少旧白球来源或新版球 Prefab。");
             foreach(string name in new[]{"Target","InnerHint","OuterHint","TargetPoint","FlipItem","WhiteBall","Aim","GeometryTemplate","PocketTemplate","Prediction","PredictionDot"})
             {
@@ -133,13 +137,13 @@ public static class MultiBallAuthoring
             Bind(board,"_geometryTemplate",geometry); Bind(board,"_pocketTemplate",pocket);
             Bind(board,"_prediction",prediction); Bind(board,"_predictionDot",dot.transform); Bind(board,"_predictionDotRenderer",dot);
             prediction.gameObject.SetActive(false); dot.gameObject.SetActive(false);
-            PrefabUtility.SaveAsPrefabAsset(root,Content+"BilliardsTable.prefab",out bool saved);
+            PrefabUtility.SaveAsPrefabAsset(root,TableContent+"Table.prefab",out bool saved);
             if(!saved) throw new InvalidOperationException("新版桌球台保存失败。");
         }
         finally { PrefabUtility.UnloadPrefabContents(root); }
         UpdateInstructions(); AssetDatabase.SaveAssets();
         RestoreCleanSceneMarker();
-        return new { table=Content+"BilliardsTable.prefab",white=Content+"BilliardsWhiteBall.prefab",black=Content+"BilliardsBlackBall.prefab",prop=Content+"BilliardsFlipProp.prefab" };
+        return new { table=TableContent+"Table.prefab",white=BallContent+"WhiteBall.prefab",black=BallContent+"BlackBall.prefab",prop=PropContent+"FlipProp.prefab" };
     }
     /// <summary>将旧台面上的白球和道具迁移为资源系统独立加载的 Prefab。</summary>
     private static void BuildEntities(WhiteBall source,Transform sourceItem)
@@ -148,22 +152,22 @@ public static class MultiBallAuthoring
         GameObject black=null,prop=null;
         try
         {
-            white.name="BilliardsWhiteBall"; white.transform.SetParent(null); white.transform.localPosition=Vector3.zero;
-            Save(white,"BilliardsWhiteBall");
-            black=Object.Instantiate(white); black.name="BilliardsBlackBall";
+            white.name="WhiteBall"; white.transform.SetParent(null); white.transform.localPosition=Vector3.zero;
+            Save(white,BallContent+"WhiteBall.prefab");
+            black=Object.Instantiate(white); black.name="BlackBall";
             var original=black.GetComponent<WhiteBall>();
             // 先移除声明组件依赖的白球，再移除白球独有的能力组件。
             Object.DestroyImmediate(original); Object.DestroyImmediate(black.GetComponent<BallShootComponent>());
             Object.DestroyImmediate(black.GetComponent<BallSimulationComponent>());
             black.AddComponent<BlackBall>();
             black.transform.Find("Surface").GetComponent<SpriteRenderer>().color=new Color(.075f,.085f,.095f);
-            Save(black,"BilliardsBlackBall");
+            Save(black,BallContent+"BlackBall.prefab");
             if(sourceItem==null) throw new InvalidOperationException("旧桌面缺少翻转道具来源。");
-            prop=Object.Instantiate(sourceItem.gameObject); prop.name="BilliardsFlipProp";
+            prop=Object.Instantiate(sourceItem.gameObject); prop.name="FlipProp";
             prop.transform.SetParent(null); prop.transform.localPosition=Vector3.zero;
             var flip=prop.AddComponent<FlipProp>(); var sprite=prop.GetComponent<SpriteRenderer>();
             prop.transform.localScale=Vector3.one*(.468f/sprite.sprite.bounds.size.x); Bind(flip,"_renderer",sprite);
-            Save(prop,"BilliardsFlipProp");
+            Save(prop,PropContent+"FlipProp.prefab");
         }
         finally { Object.DestroyImmediate(white); if(black!=null) Object.DestroyImmediate(black); if(prop!=null) Object.DestroyImmediate(prop); }
     }
@@ -179,8 +183,8 @@ public static class MultiBallAuthoring
         if (UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() != null)
             throw new InvalidOperationException("球组件迁移前请先关闭正在编辑的 Prefab Stage。");
 
-        string whitePath = Content + "BilliardsWhiteBall.prefab";
-        string blackPath = Content + "BilliardsBlackBall.prefab";
+        string whitePath = BallContent + "WhiteBall.prefab";
+        string blackPath = BallContent + "BlackBall.prefab";
         GameObject white = null, black = null;
         try
         {
@@ -199,8 +203,8 @@ public static class MultiBallAuthoring
                 Object.DestroyImmediate(component);
 
             // Unity 按当前脚本字段重新序列化，清理已取消序列化的内部组件引用。
-            Save(white, "BilliardsWhiteBall");
-            Save(black, "BilliardsBlackBall");
+            Save(white, whitePath);
+            Save(black, blackPath);
             return new { white = whitePath, black = blackPath };
         }
         finally
@@ -227,10 +231,10 @@ public static class MultiBallAuthoring
     }
 
     /// <summary>保存一个明确目标的 Prefab。</summary>
-    private static void Save(GameObject root,string name)
+    private static void Save(GameObject root,string path)
     {
-        PrefabUtility.SaveAsPrefabAsset(root,Content+name+".prefab",out bool saved);
-        if(!saved) throw new InvalidOperationException(name+" 保存失败。");
+        PrefabUtility.SaveAsPrefabAsset(root,path,out bool saved);
+        if(!saved) throw new InvalidOperationException(path+" 保存失败。");
     }
     /// <summary>创建制作期节点。</summary>
     private static GameObject Node(string name,Transform parent)

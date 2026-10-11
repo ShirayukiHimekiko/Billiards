@@ -6,7 +6,7 @@ namespace GameLogic
     /// <summary>
     /// 管理本关固定六洞表现，物理状态保存在模拟世界。
     /// </summary>
-    public sealed class PocketManager
+    public sealed class PocketManager : Singleton<PocketManager>
     {
         /// <summary>
         /// 与关卡球洞配置保持同序的模板实例。
@@ -45,7 +45,7 @@ namespace GameLogic
         /// <summary>
         /// 释放所有模板实例。
         /// </summary>
-        public void Release()
+        public void ClearLevel()
         {
             foreach (var view in _views)
             {
@@ -56,6 +56,14 @@ namespace GameLogic
             }
 
             _views.Clear();
+        }
+
+        /// <summary>
+        /// 释放单例前清理当前关卡球洞。
+        /// </summary>
+        protected override void OnRelease()
+        {
+            ClearLevel();
         }
     }
 }

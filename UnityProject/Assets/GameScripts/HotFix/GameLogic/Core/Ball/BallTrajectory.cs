@@ -59,6 +59,26 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 创建位置与半径均不随时间变化的静态圆轨迹，用于圆形触发区与球洞查询。
+        /// </summary>
+        /// <param name="center">台面局部坐标中的静态圆心。</param>
+        /// <param name="radius">静态圆半径。</param>
+        /// <param name="duration">轨迹有效时长，单位为秒。</param>
+        /// <returns>位置及半径均不随时间变化的轨迹。</returns>
+        public static BallTrajectory Stationary(Vector2 center, float radius, double duration)
+        {
+            return new BallTrajectory(
+                new BallState
+                {
+                    Position = center,
+                    Radius = radius
+                },
+                Vector2.zero,
+                0,
+                duration);
+        }
+
+        /// <summary>
         /// 计算轨迹中指定时间的球状态。
         /// </summary>
         /// <param name="time">距轨迹起点的秒数。</param>

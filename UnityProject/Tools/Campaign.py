@@ -410,7 +410,7 @@ def create_campaign():
         key_configs.append([
             config_id,
             'Key',
-            'BilliardsKeyProp',
+            'KeyProp',
             .468,
             .234,
             {

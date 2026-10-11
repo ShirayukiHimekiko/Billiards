@@ -6,7 +6,7 @@ namespace GameLogic
     /// <summary>
     /// 管理独立图形实例的表现及进度，碰撞判定统一在模拟世界。
     /// </summary>
-    public sealed class GeometryManager
+    public sealed class GeometryManager : Singleton<GeometryManager>
     {
         /// <summary>
         /// 与关卡图形配置保持同序的模板实例。
@@ -81,7 +81,7 @@ namespace GameLogic
         /// <summary>
         /// 释放本关图形。
         /// </summary>
-        public void Release()
+        public void ClearLevel()
         {
             foreach (var view in _views)
             {
@@ -92,6 +92,14 @@ namespace GameLogic
             }
 
             _views.Clear();
+        }
+
+        /// <summary>
+        /// 释放单例前清理当前关卡图形。
+        /// </summary>
+        protected override void OnRelease()
+        {
+            ClearLevel();
         }
     }
 }

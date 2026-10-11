@@ -19,9 +19,8 @@ namespace GameLogic
 		private UIBindComponent m_bindComponent;
 		private Text m_text_Shots = null!;
 		private Text m_text_Trend = null!;
-		private Text m_text_Power = null!;
-		private Slider m_slider_Power = null!;
 		private Text m_text_Status = null!;
+		private GameObject m_item_PredictionPropWidget = null!;
 		private Button m_btn_Hints = null!;
 		private Button m_btn_Pause = null!;
 		private Text m_text_Pause = null!;
@@ -39,17 +38,14 @@ namespace GameLogic
 			}
 			m_text_Shots = m_bindComponent.GetComponent<Text>(0);
 			m_text_Trend = m_bindComponent.GetComponent<Text>(1);
-			m_text_Power = m_bindComponent.GetComponent<Text>(2);
-			m_slider_Power = m_bindComponent.GetComponent<Slider>(3);
-			m_text_Status = m_bindComponent.GetComponent<Text>(4);
-			m_btn_Hints = m_bindComponent.GetComponent<Button>(5);
-			m_btn_Pause = m_bindComponent.GetComponent<Button>(6);
-			m_text_Pause = m_bindComponent.GetComponent<Text>(7);
-			m_btn_Restart = m_bindComponent.GetComponent<Button>(8);
-			m_btn_Menu = m_bindComponent.GetComponent<Button>(9);
-			m_btn_Exit = m_bindComponent.GetComponent<Button>(10);
-			m_slider_Power.onValueChanged.RemoveAllListeners();
-			m_slider_Power.onValueChanged.AddListener(OnSlider_PowerChange);
+			m_text_Status = m_bindComponent.GetComponent<Text>(2);
+			m_item_PredictionPropWidget = m_bindComponent.GetComponent<RectTransform>(3).gameObject;
+			m_btn_Hints = m_bindComponent.GetComponent<Button>(4);
+			m_btn_Pause = m_bindComponent.GetComponent<Button>(5);
+			m_text_Pause = m_bindComponent.GetComponent<Text>(6);
+			m_btn_Restart = m_bindComponent.GetComponent<Button>(7);
+			m_btn_Menu = m_bindComponent.GetComponent<Button>(8);
+			m_btn_Exit = m_bindComponent.GetComponent<Button>(9);
 			m_btn_Hints.onClick.RemoveAllListeners();
 			m_btn_Hints.onClick.AddListener(OnClick_HintsBtn);
 			m_btn_Pause.onClick.RemoveAllListeners();
@@ -65,8 +61,6 @@ namespace GameLogic
 		#endregion
 
 		#region 事件
-
-		private partial void OnSlider_PowerChange(float value);
 
 		private partial void OnClick_HintsBtn();
 
